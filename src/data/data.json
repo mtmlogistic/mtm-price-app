@@ -1,6 +1,6 @@
 {
-  "version": 21,
-  "price_usd": 64.2,
+  "version": 28,
+   "price_usd": 64.3,
   "vehicles": [
     { "id": 1, "name": "TOYOTA COROLLA", "year": 2005, "price_afn": 104593 },
     { "id": 2, "name": "TOYOTA COROLLA", "year": 2006, "price_afn": 113207 },
@@ -5125,9 +5125,9 @@
       "state": "CALIFORNIA (CA)",
       "branch": "SANTA CLARITA",
       "city": "SANTA CLARITA",
-      "source": "OTHER",
-      "lat": 34.3917,
-      "lng": -118.5426,
+      "source": "IAAI",
+      "lat": 34.433295802035175,
+      "lng": -118.38914102883616,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5238,7 +5238,7 @@
       "id": 252,
       "state": "CALIFORNIA (CA)",
       "branch": "NORTH HOLLYWOOD",
-      "city": "HOLLYWOOD",
+      "city": "Los Angeles",
       "source": "IAAI",
       "lat": 34.203075419868235,
       "lng": -118.39766096931534,
@@ -5258,9 +5258,9 @@
       "state": "CALIFORNIA (CA)",
       "branch": "LOS ANGELES SOUTH",
       "city": "LOS ANGELES SOUTH",
-      "source": "COPART",
-      "lat": 33.8314,
-      "lng": -118.2615,
+      "source": "IAAI",
+      "lat": 33.79641724761164,
+      "lng": -118.2471618,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5277,9 +5277,9 @@
       "state": "CALIFORNIA (CA)",
       "branch": "HIGH DESERT",
       "city": "HESPERIA",
-      "source": "COPART",
-      "lat": 34.4264,
-      "lng": -117.3009,
+      "source": "IAAI",
+      "lat": 34.4572944,
+      "lng": -117.27906342883614,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5294,11 +5294,11 @@
     {
       "id": 255,
       "state": "CALIFORNIA (CA)",
-      "branch": "SAN MARTIN",
+      "branch": "SAN JOSE - SUBLOT",
       "city": "SAN MARTIN",
       "source": "COPART",
-      "lat": 37.0849,
-      "lng": -121.6102,
+      "lat": 37.07667035490425,
+      "lng": -121.6031357080281,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5315,9 +5315,9 @@
       "state": "CALIFORNIA (CA)",
       "branch": "RIVERSIDE",
       "city": "RIVERSIDE",
-      "source": "COPART",
-      "lat": 33.9806,
-      "lng": -117.3755,
+      "source": "IAAI",
+      "lat": 38.55977863702724,
+      "lng": -121.2523623,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5334,9 +5334,9 @@
       "state": "CALIFORNIA (CA)",
       "branch": "FREMONT",
       "city": "FREMONT",
-      "source": "COPART",
-      "lat": 37.5485,
-      "lng": -121.9886,
+      "source": "IAAI",
+      "lat": 37.50951842814119,
+      "lng": -121.99420477301686,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5351,11 +5351,11 @@
     {
       "id": 258,
       "state": "CALIFORNIA (CA)",
-      "branch": "CARSON",
+      "branch": "ACE - Carson",
       "city": "GARDENA",
-      "source": "COPART",
-      "lat": 33.8883,
-      "lng": -118.309,
+      "source": "IAAI",
+      "lat": 33.87752891482536,
+      "lng": -118.28188800000001,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5372,9 +5372,9 @@
       "state": "CALIFORNIA (CA)",
       "branch": "RANCHO CUCAMONGA",
       "city": "PERRIS",
-      "source": "COPART",
-      "lat": 33.7825,
-      "lng": -117.2286,
+      "source": "IAAI",
+      "lat": 33.85645291922393,
+      "lng": -117.23813122883615,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5391,9 +5391,9 @@
       "state": "CALIFORNIA (CA)",
       "branch": "FONTANA",
       "city": "FONTANA",
-      "source": "COPART",
-      "lat": 34.0922,
-      "lng": -117.435,
+      "source": "IAAI",
+      "lat": 34.07346188690893,
+      "lng": -117.49654344232772,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5410,7 +5410,7 @@
       "state": "CALIFORNIA (CA)",
       "branch": "FONTANA",
       "city": "CALABASH",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 34.0922,
       "lng": -117.435,
       "ports": [
@@ -5429,7 +5429,7 @@
       "state": "CALIFORNIA (CA)",
       "branch": "RIVERSIDE",
       "city": "RIVERSIDE",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 33.9806,
       "lng": -117.3755,
       "ports": [
@@ -5468,8 +5468,8 @@
       "branch": "SAN DIEGO",
       "city": "SAN DIEGO",
       "source": "COPART",
-      "lat": 32.7157,
-      "lng": -117.1611,
+      "lat": 32.5596619,
+      "lng": -116.97256469999999,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5486,7 +5486,7 @@
       "state": "CALIFORNIA (CA)",
       "branch": "SANTA PAULA",
       "city": "SANTA PAULA",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 34.3542,
       "lng": -119.0593,
       "ports": [
@@ -5505,7 +5505,7 @@
       "state": "CALIFORNIA (CA)",
       "branch": "SOUTHERN CALIFORNIA",
       "city": "FONTANA",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 34.0922,
       "lng": -117.435,
       "ports": [
@@ -5525,8 +5525,8 @@
       "branch": "VALLEJO",
       "city": "VALLEJO",
       "source": "COPART",
-      "lat": 38.1041,
-      "lng": -122.2566,
+      "lat": 38.09450440000001,
+      "lng": -122.24518304232772,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5544,8 +5544,8 @@
       "branch": "MENTONE",
       "city": "MENTONE",
       "source": "COPART",
-      "lat": 34.0667,
-      "lng": -117.1831,
+      "lat": 34.06449349999999,
+      "lng": -117.13326637116387,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5562,7 +5562,7 @@
       "state": "CALIFORNIA (CA)",
       "branch": "LANCASTER",
       "city": "LANCASTER",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 34.6868,
       "lng": -118.1542,
       "ports": [
@@ -5582,8 +5582,8 @@
       "branch": "VAN NUYS",
       "city": "VAN NUYS",
       "source": "COPART",
-      "lat": 34.1867,
-      "lng": -118.449,
+      "lat": 34.20740874566559,
+      "lng": -118.43321984232772,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5620,8 +5620,8 @@
       "branch": "RANCHO CUCAMONGA",
       "city": "RANCHO CUCAMONGA",
       "source": "COPART",
-      "lat": 34.1064,
-      "lng": -117.5931,
+      "lat": 34.096606884480074,
+      "lng": -117.5385317,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5638,7 +5638,7 @@
       "state": "CALIFORNIA (CA)",
       "branch": "TRACY",
       "city": "TRACY",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 37.7397,
       "lng": -121.4252,
       "ports": [
@@ -5655,11 +5655,11 @@
     {
       "id": 274,
       "state": "CALIFORNIA (CA)",
-      "branch": "FONTANA",
+      "branch": "Riverside Off Site",
       "city": "JURUPA VALLEY",
-      "source": "COPART",
-      "lat": 33.9975,
-      "lng": -117.4856,
+      "source": "IAAI",
+      "lat": 34.02059676981045,
+      "lng": -117.46050562883615,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5676,9 +5676,9 @@
       "state": "CALIFORNIA (CA)",
       "branch": "ANAHEIM",
       "city": "ANAHEIM",
-      "source": "COPART",
-      "lat": 33.8366,
-      "lng": -117.9143,
+      "source": "IAAI",
+      "lat": 33.86086692745577,
+      "lng": -117.86713160000002,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5695,9 +5695,9 @@
       "state": "CALIFORNIA (CA)",
       "branch": "STOCKTON",
       "city": "STOCKTON",
-      "source": "COPART",
-      "lat": 37.9577,
-      "lng": -121.2908,
+      "source": "IAAI",
+      "lat": 37.990990910955006,
+      "lng": -121.26032199999999,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5714,7 +5714,7 @@
       "state": "CALIFORNIA (CA)",
       "branch": "LOS ANGELES",
       "city": "LOS ANGELES",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 34.0522,
       "lng": -118.2437,
       "ports": [
@@ -5732,10 +5732,10 @@
       "id": 278,
       "state": "CALIFORNIA (CA)",
       "branch": "REDDING",
-      "city": "REDDING",
+      "city": "Anderson",
       "source": "COPART",
-      "lat": 40.5865,
-      "lng": -122.3917,
+      "lat": 40.42236236770541,
+      "lng": -122.27190385767229,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5790,7 +5790,7 @@
       "state": "CALIFORNIA (CA)",
       "branch": "EAST BAY",
       "city": "PITTSBURG",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 38.027,
       "lng": -121.8847,
       "ports": [
@@ -5829,8 +5829,8 @@
       "branch": "MARTINEZ",
       "city": "MARTINEZ",
       "source": "COPART",
-      "lat": 38.0194,
-      "lng": -122.1341,
+      "lat": 38.0282932023524,
+      "lng": -122.09729152883615,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5847,9 +5847,9 @@
       "state": "CALIFORNIA (CA)",
       "branch": "FRESNO",
       "city": "FRESNO",
-      "source": "COPART",
-      "lat": 36.67702720938073,
-      "lng": -119.76742618650677,
+      "source": "IAAI",
+      "lat": 36.76703229461246,
+      "lng": -119.83822775767229,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5866,9 +5866,9 @@
       "state": "CALIFORNIA (CA)",
       "branch": "SACRAMENTO",
       "city": "SACRAMENTO",
-      "source": "COPART",
-      "lat": 38.5816,
-      "lng": -121.4944,
+      "source": "IAAI",
+      "lat": 38.559803805527636,
+      "lng": -121.25240521534458,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5886,8 +5886,8 @@
       "branch": "SOUTH SACRAMENTO",
       "city": "SACRAMENTO",
       "source": "COPART",
-      "lat": 38.5816,
-      "lng": -121.4944,
+      "lat": 38.50034669287004,
+      "lng": -121.38253139999998,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5905,8 +5905,8 @@
       "branch": "NAPA",
       "city": "AMERICAN CANYON",
       "source": "COPART",
-      "lat": 38.1749,
-      "lng": -122.2608,
+      "lat": 38.19783919999999,
+      "lng": -122.283404,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5924,8 +5924,8 @@
       "branch": "SAN JOSE",
       "city": "SAN MARTIN",
       "source": "COPART",
-      "lat": 37.0849,
-      "lng": -121.6102,
+      "lat": 37.09368914952532,
+      "lng": -121.61360728085464,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -5942,7 +5942,7 @@
       "state": "COLORADO (CO)",
       "branch": "LITTLETON",
       "city": "LITTLETON",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 39.6133,
       "lng": -105.0166,
       "ports": [
@@ -5961,7 +5961,7 @@
       "state": "COLORADO (CO)",
       "branch": "MACK",
       "city": "MACK",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 39.1022,
       "lng": -108.6604,
       "ports": [
@@ -5980,7 +5980,7 @@
       "state": "COLORADO (CO)",
       "branch": "NUNN",
       "city": "NUNN",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 40.7058,
       "lng": -104.7808,
       "ports": [
@@ -5995,51 +5995,13 @@
       ]
     },
     {
-      "id": 294,
-      "state": "COLORADO (CO)",
-      "branch": "DENVER EAST",
-      "city": "DENVER EAST",
-      "source": "COPART",
-      "lat": 39.7392,
-      "lng": -104.9903,
-      "ports": [
-        {
-          "name": "CALIFORNIA, USA",
-          "ship": 2335,
-          "lat": 33.7701,
-          "lng": -118.1937,
-          "herat": 1900,
-          "total": 4235
-        }
-      ]
-    },
-    {
-      "id": 295,
-      "state": "COLORADO (CO)",
-      "branch": "DENVER SOUTH",
-      "city": "COMMERCE CITY",
-      "source": "COPART",
-      "lat": 39.8083,
-      "lng": -104.9339,
-      "ports": [
-        {
-          "name": "CALIFORNIA, USA",
-          "ship": 2335,
-          "lat": 33.7701,
-          "lng": -118.1937,
-          "herat": 1900,
-          "total": 4235
-        }
-      ]
-    },
-    {
       "id": 298,
       "state": "MONTANA (MT)",
-      "branch": "BILLING",
-      "city": "BILLING",
+      "branch": "BILLINGS",
+      "city": "BILLINGS",
       "source": "COPART",
-      "lat": 45.7833,
-      "lng": -108.5007,
+      "lat": 45.80296975874456,
+      "lng": -108.45853572883614,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6056,9 +6018,9 @@
       "state": "MONTANA (MT)",
       "branch": "MISSOULA",
       "city": "MISSOULA",
-      "source": "COPART",
-      "lat": 46.8721,
-      "lng": -113.994,
+      "source": "IAAI",
+      "lat": 46.94080905030332,
+      "lng": -114.13820272883612,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6076,8 +6038,8 @@
       "branch": "HELENA",
       "city": "HELENA",
       "source": "COPART",
-      "lat": 46.5891,
-      "lng": -112.0391,
+      "lat": 46.5980796,
+      "lng": -111.97266514232771,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6094,9 +6056,9 @@
       "state": "NEVADA (NV)",
       "branch": "LAS VEGAS",
       "city": "LAS VEGAS",
-      "source": "COPART",
-      "lat": 36.1699,
-      "lng": -115.1398,
+      "source": "IAAI",
+      "lat": 36.055204052540944,
+      "lng": -115.0012182,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6114,8 +6076,8 @@
       "branch": "LAS VEGAS WEST",
       "city": "LAS VEGAS WEST",
       "source": "COPART",
-      "lat": 36.1699,
-      "lng": -115.1398,
+      "lat": 36.22270194476711,
+      "lng": -115.17116150000001,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6133,8 +6095,8 @@
       "branch": "NEVADA",
       "city": "LAS VEGAS",
       "source": "COPART",
-      "lat": 36.1699,
-      "lng": -115.1398,
+      "lat": 36.24809810484665,
+      "lng": -115.07906980000004,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6151,7 +6113,7 @@
       "state": "NEVADA (NV)",
       "branch": "LAS VEGAS NORTH",
       "city": "LAS VEGAS",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 36.1699,
       "lng": -115.1398,
       "ports": [
@@ -6189,9 +6151,9 @@
       "state": "NEVADA (NV)",
       "branch": "LAS VEGAS",
       "city": "HENDERSON",
-      "source": "COPART",
-      "lat": 36.0395,
-      "lng": -114.9817,
+      "source": "OTHER",
+      "lat": 36.28747129612379,
+      "lng": -115.02169015767227,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6273,9 +6235,9 @@
       "state": "OREGON (OR)",
       "branch": "WOOD VILLAGE",
       "city": "WOOD VILLAGE",
-      "source": "COPART",
-      "lat": 45.5343,
-      "lng": -122.4187,
+      "source": "OTHER",
+      "lat": 45.57776544021755,
+      "lng": -122.5561973,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6293,8 +6255,8 @@
       "branch": "PORTLAND SOUTH",
       "city": "PORTLAND SOUTH",
       "source": "COPART",
-      "lat": 45.4354,
-      "lng": -122.5659,
+      "lat": 45.158318,
+      "lng": -122.82894227116384,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6312,8 +6274,8 @@
       "branch": "PORTLAND NORTH",
       "city": "PORTLAND NORTH",
       "source": "COPART",
-      "lat": 45.5907,
-      "lng": -122.5931,
+      "lat": 45.57397342011079,
+      "lng": -122.5921973,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6331,8 +6293,8 @@
       "branch": "EUGENE",
       "city": "EUGENE",
       "source": "COPART",
-      "lat": 44.0521,
-      "lng": -123.0868,
+      "lat": 44.11749200476082,
+      "lng": -123.17360878650845,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6349,7 +6311,7 @@
       "state": "UTAH (UT)",
       "branch": "SALT LAKE CITY",
       "city": "SALT LAKE CITY",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 40.7608,
       "lng": -111.891,
       "ports": [
@@ -6368,9 +6330,9 @@
       "state": "UTAH (UT)",
       "branch": "SALT LAKE CITY",
       "city": "OGDEN",
-      "source": "COPART",
-      "lat": 41.223,
-      "lng": -111.9738,
+      "source": "IAAI",
+      "lat": 41.23437919512189,
+      "lng": -112.00696775767229,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6387,7 +6349,7 @@
       "state": "UTAH (UT)",
       "branch": "UTAH",
       "city": "WOODS CROSS",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 40.8716,
       "lng": -111.8927,
       "ports": [
@@ -6407,8 +6369,8 @@
       "branch": "OGDEN",
       "city": "FARR WEST",
       "source": "COPART",
-      "lat": 41.2972,
-      "lng": -112.0277,
+      "lat": 41.32165299999999,
+      "lng": -112.0296123,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6426,8 +6388,8 @@
       "branch": "SALT LAKE CITY",
       "city": "MAGNA",
       "source": "COPART",
-      "lat": 40.7091,
-      "lng": -112.1016,
+      "lat": 40.72615286141106,
+      "lng": -112.06577399444097,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6444,7 +6406,7 @@
       "state": "UTAH (UT)",
       "branch": "SALT LAKE CITY",
       "city": "TOOELE",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 40.5308,
       "lng": -112.2983,
       "ports": [
@@ -6463,9 +6425,9 @@
       "state": "UTAH (UT)",
       "branch": "PROVO",
       "city": "NEPHI",
-      "source": "COPART",
-      "lat": 39.7102,
-      "lng": -111.8377,
+      "source": "IAAI",
+      "lat": 39.61900119332945,
+      "lng": -111.868426,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6482,7 +6444,7 @@
       "state": "WASHINGTON (WA)",
       "branch": "SEATTLE",
       "city": "SEATTLE",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 47.6062,
       "lng": -122.3321,
       "ports": [
@@ -6501,9 +6463,9 @@
       "state": "WASHINGTON (WA)",
       "branch": "SEATTLE",
       "city": "PUYALLUP",
-      "source": "COPART",
-      "lat": 47.1854,
-      "lng": -122.2929,
+      "source": "IAAI",
+      "lat": 47.112326168802355,
+      "lng": -122.2809813576723,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6521,8 +6483,8 @@
       "branch": "SPOKANE",
       "city": "AIRWAY HEIGHTS",
       "source": "COPART",
-      "lat": 47.6446,
-      "lng": -117.5933,
+      "lat": 47.62742453068708,
+      "lng": -117.56382035767228,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6540,8 +6502,8 @@
       "branch": "PASCO",
       "city": "PASCO",
       "source": "COPART",
-      "lat": 46.2396,
-      "lng": -119.1006,
+      "lat": 46.25951385353373,
+      "lng": -119.09211687116384,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6559,8 +6521,8 @@
       "branch": "NORTH SEATTLE",
       "city": "ARLINGTON",
       "source": "COPART",
-      "lat": 48.1987,
-      "lng": -122.1251,
+      "lat": 48.14778021681,
+      "lng": -122.1600122,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6577,7 +6539,7 @@
       "state": "WASHINGTON (WA)",
       "branch": "GRAHAM",
       "city": "GRAHAM",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 47.0529,
       "lng": -122.2943,
       "ports": [
@@ -6596,7 +6558,7 @@
       "state": "WASHINGTON (WA)",
       "branch": "NORTH SEATTLE",
       "city": "NORTH SEATTLE",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 47.6062,
       "lng": -122.3321,
       "ports": [
@@ -6616,8 +6578,8 @@
       "branch": "SPANAWAY",
       "city": "SPANAWAY",
       "source": "COPART",
-      "lat": 47.1039,
-      "lng": -122.4346,
+      "lat": 47.088835404874295,
+      "lng": -122.43310785767228,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6634,7 +6596,7 @@
       "state": "WASHINGTON (WA)",
       "branch": "VANCOUVER",
       "city": "VANCOUVER",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 45.6387,
       "lng": -122.6615,
       "ports": [
@@ -6653,7 +6615,7 @@
       "state": "WYOMING (WY)",
       "branch": "SUNDANCE",
       "city": "SUNDANCE",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 44.4064,
       "lng": -104.375,
       "ports": [
@@ -6673,8 +6635,8 @@
       "branch": "CASPER",
       "city": "CASPER",
       "source": "COPART",
-      "lat": 42.8501,
-      "lng": -106.3252,
+      "lat": 42.88439930661654,
+      "lng": -106.35350062883614,
       "ports": [
         {
           "name": "CALIFORNIA, USA",
@@ -6691,7 +6653,7 @@
       "state": "WYOMING (WY)",
       "branch": "CASPER WEST",
       "city": "CASPER WEST",
-      "source": "COPART",
+      "source": "OTHER",
       "lat": 42.8501,
       "lng": -106.3252,
       "ports": [
@@ -6935,6 +6897,14 @@
           "lng": -95.3698,
           "herat": 1900,
           "total": 3470
+        },
+        {
+          "name": "CALIFORNIA, USA",
+          "ship": 2335,
+          "lat": 33.7701,
+          "lng": -118.1937,
+          "herat": 1900,
+          "total": 4235
         }
       ]
     },
@@ -9534,25 +9504,6 @@
       ]
     },
     {
-      "id": 543,
-      "state": "LOUISIANA (LA)",
-      "branch": "VINTON",
-      "city": "Shreveport",
-      "source": "IAAI",
-      "lat": 32.46530536049834,
-      "lng": -93.836651428835,
-      "ports": [
-        {
-          "name": "TEXAS, USA",
-          "ship": 1365,
-          "lat": 29.7604,
-          "lng": -95.3698,
-          "herat": 1900,
-          "total": 3265
-        }
-      ]
-    },
-    {
       "id": 544,
       "state": "TEXAS (TX)",
       "branch": "Austin",
@@ -9627,6 +9578,1299 @@
           "total": 3225
         }
       ]
+    },
+    {
+      "id": 548,
+      "state": "OREGON (OR)",
+      "branch": "EUGENE",
+      "city": "EUGENE",
+      "source": "IAAI",
+      "lat": 44.07177797506381,
+      "lng": -123.13880150000001,
+      "ports": [
+        {
+          "name": "CALIFORNIA, USA",
+          "ship": 2415,
+          "lat": 33.7701,
+          "lng": -118.1937,
+          "herat": 1900,
+          "total": 4315
+        }
+      ]
+    },
+    {
+      "id": 549,
+      "state": "OREGON (OR)",
+      "branch": "PORTLAND SOUTH",
+      "city": "PORTLAND SOUTH",
+      "source": "IAAI",
+      "lat": 45.555285312553615,
+      "lng": -122.50196585767229,
+      "ports": [
+        {
+          "name": "CALIFORNIA, USA",
+          "ship": 2420,
+          "lat": 33.7701,
+          "lng": -118.1937,
+          "herat": 1900,
+          "total": 4320
+        }
+      ]
+    },
+    {
+      "id": 550,
+      "state": "WYOMING (WY)",
+      "branch": "CASPER",
+      "city": "CASPER",
+      "source": "IAAI",
+      "lat": 42.879127861993034,
+      "lng": -106.35015107116386,
+      "ports": [
+        {
+          "name": "CALIFORNIA, USA",
+          "ship": 3195,
+          "lat": 33.7701,
+          "lng": -118.1937,
+          "herat": 1900,
+          "total": 5095
+        }
+      ]
+    },
+    {
+      "id": 551,
+      "state": "WASHINGTON (WA)",
+      "branch": "SPOKANE",
+      "city": "Spokane Valley",
+      "source": "IAAI",
+      "lat": 47.689511088381444,
+      "lng": -117.16934557116383,
+      "ports": [
+        {
+          "name": "CALIFORNIA, USA",
+          "ship": 2720,
+          "lat": 33.7701,
+          "lng": -118.1937,
+          "herat": 1900,
+          "total": 4620
+        }
+      ]
+    },
+    {
+      "id": 552,
+      "state": "CALIFORNIA (CA)",
+      "branch": "SAN DIEGO",
+      "city": "SAN DIEGO",
+      "source": "IAAI",
+      "lat": 32.55595325786366,
+      "lng": -116.98053822883614,
+      "ports": [
+        {
+          "name": "CALIFORNIA, USA",
+          "ship": 2020,
+          "lat": 33.7701,
+          "lng": -118.1937,
+          "herat": 1900,
+          "total": 3920
+        }
+      ]
+    },
+    {
+      "id": 553,
+      "state": "CALIFORNIA (CA)",
+      "branch": "Sacramento West",
+      "city": "Dixon",
+      "source": "IAAI",
+      "lat": 38.412734,
+      "lng": -121.81465345767228,
+      "ports": [
+        {
+          "name": "CALIFORNIA, USA",
+          "ship": 2155,
+          "lat": 33.7701,
+          "lng": -118.1937,
+          "herat": 1900,
+          "total": 4055
+        }
+      ]
+    },
+    {
+      "id": 554,
+      "state": "CALIFORNIA (CA)",
+      "branch": "Sacrament",
+      "city": "Rancho Cordova",
+      "source": "IAAI",
+      "lat": 38.55977863702724,
+      "lng": -121.2523623,
+      "ports": [
+        {
+          "name": "CALIFORNIA, USA",
+          "ship": 2255,
+          "lat": 33.7701,
+          "lng": -118.1937,
+          "herat": 1900,
+          "total": 4155
+        }
+      ]
+    },
+    {
+      "id": 555,
+      "state": "HAWAII (HI)",
+      "branch": "HONOLULU",
+      "city": "KAPOLEI",
+      "source": "COPART",
+      "lat": 21.317251399676405,
+      "lng": -158.11527657787636,
+      "ports": [
+        {
+          "name": "CALIFORNIA, USA",
+          "ship": 2255,
+          "lat": 33.7701,
+          "lng": -118.1937,
+          "herat": 1900,
+          "total": 4155,
+          "avill": "false"
+        }
+      ]
+    },
+    {
+      "id": 556,
+      "state": "HAWAII (HI)",
+      "branch": "HONOLULU",
+      "city": "KAPOLEI",
+      "source": "IAAI",
+      "lat": 21.313216757960166,
+      "lng": -158.10785855976496,
+      "ports": [
+        {
+          "name": "CALIFORNIA, USA",
+          "ship": 2255,
+          "lat": 33.7701,
+          "lng": -118.1937,
+          "herat": 1900,
+          "total": 4155,
+          "avill": "false"
+        }
+      ]
+    },{
+  "id": 557,
+  "state": "ALASKA (AK)",
+  "branch": "Anchorage",
+  "city": "Wasilla",
+  "source": "IAAI",
+  "lat": 61.59079700184681,
+  "lng": -149.4878440915997,
+  "ports": [
+    {
+      "name": "TACOMA, WA, USA",
+      "ship": 2255,
+      "lat": 47.2529,
+      "lng": -122.4443,
+      "herat": 1900,
+      "total": 4155,
+      "avill": "false"
     }
+  ]
+},
+{
+  "id": 558,
+  "state": "ALASKA (AK)",
+  "branch": "Anchorage",
+  "city": "ANCHORAGE",
+  "source": "COPART",
+  "lat": 61.21932735841116,
+  "lng": -149.83144822883614,
+  "ports": [
+    {
+      "name": "TACOMA, WA, USA",
+      "ship": 2255,
+      "lat": 47.2529,
+      "lng": -122.4443,
+      "herat": 1900,
+      "total": 4155,
+      "avill": "false"
+    }
+  ]
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  {
+    "id": 600,
+    "state": "MANITOBA (MB)",
+    "branch": "MPI MANITOBA",
+    "city": "Winnipeg",
+    "source": "IAAI",
+    "lat": 49.8951,
+    "lng": -97.1384,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 3515,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 4335,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 601,
+    "state": "MANITOBA (MB)",
+    "branch": "MPI WINNIPEG",
+    "city": "Winnipeg",
+    "source": "IAAI",
+    "lat": 49.8951,
+    "lng": -97.1384,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 3515,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 4335,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 602,
+    "state": "ONTARIO (ON)",
+    "branch": "TORONTO",
+    "city": "Bowmanville",
+    "source": "Copart",
+    "lat": 43.9168,
+    "lng": -78.6886,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 2720,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 3540,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 603,
+    "state": "ONTARIO (ON)",
+    "branch": "TORONTO WEST",
+    "city": "Caledon East",
+    "source": "IAAI",
+    "lat": 43.8645,
+    "lng": -79.8689,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 2720,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 3540,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 604,
+    "state": "ONTARIO (ON)",
+    "branch": "CALEDON WEST",
+    "city": "Caledon West",
+    "source": "Any",
+    "lat": 43.8464,
+    "lng": -79.9959,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 2720,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 3540,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 605,
+    "state": "ONTARIO (ON)",
+    "branch": "COOKSTOWN",
+    "city": "Cookstown",
+    "source": "Any",
+    "lat": 44.1989,
+    "lng": -79.6946,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 2840,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 3660,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 606,
+    "state": "ONTARIO (ON)",
+    "branch": "SUDBURY",
+    "city": "Garson",
+    "source": "IAAI",
+    "lat": 46.5497,
+    "lng": -80.8676,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 2955,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 3775,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 607,
+    "state": "ONTARIO (ON)",
+    "branch": "CAN AM PROCESSING CENTRE",
+    "city": "Hamilton",
+    "source": "IAAI",
+    "lat": 43.2402,
+    "lng": -79.744,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 2720,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 3540,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 608,
+    "state": "ONTARIO (ON)",
+    "branch": "HAMILTON",
+    "city": "Hamilton",
+    "source": "IAAI",
+    "lat": 43.2402,
+    "lng": -79.744,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 2720,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 3540,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 609,
+    "state": "ONTARIO (ON)",
+    "branch": "LONDON",
+    "city": "London",
+    "source": "Copart",
+    "lat": 42.9849,
+    "lng": -81.2453,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 2740,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 3560,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 610,
+    "state": "ONTARIO (ON)",
+    "branch": "LONDON",
+    "city": "London",
+    "source": "IAAI",
+    "lat": 42.9849,
+    "lng": -81.2453,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 2740,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 3560,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 611,
+    "state": "ONTARIO (ON)",
+    "branch": "TORONTO (OSHAWA)",
+    "city": "Oshawa",
+    "source": "IAAI",
+    "lat": 43.8975,
+    "lng": -78.8658,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 2720,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 3540,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 612,
+    "state": "ONTARIO (ON)",
+    "branch": "TORONTO NORTH",
+    "city": "Stouffville",
+    "source": "IAAI",
+    "lat": 43.9708,
+    "lng": -79.2502,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 2720,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 3540,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 613,
+    "state": "ONTARIO (ON)",
+    "branch": "THUNDER BAY",
+    "city": "Thunder Bay",
+    "source": "Any",
+    "lat": 48.3809,
+    "lng": -89.2477,
+    "ports": [
+      {
+        "name": "TORONTO, CANADA",
+        "ship": 3515,
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "herat": 820,
+        "total": 4335,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 614,
+    "state": "ONTARIO (ON)",
+    "branch": "OTTAWA",
+    "city": "Ottawa",
+    "source": "Copart",
+    "lat": 45.4215,
+    "lng": -75.6972,
+    "ports": [
+      {
+        "name": "MONTREAL, CANADA",
+        "ship": 2890,
+        "lat": 45.5017,
+        "lng": -73.5673,
+        "herat": 820,
+        "total": 3710,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 615,
+    "state": "ONTARIO (ON)",
+    "branch": "OTTAWA",
+    "city": "Ottawa",
+    "source": "IAAI",
+    "lat": 45.4215,
+    "lng": -75.6972,
+    "ports": [
+      {
+        "name": "MONTREAL, CANADA",
+        "ship": 2780,
+        "lat": 45.5017,
+        "lng": -73.5673,
+        "herat": 820,
+        "total": 3600,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 616,
+    "state": "ONTARIO (ON)",
+    "branch": "WINCHESTER",
+    "city": "Winchester",
+    "source": "Any",
+    "lat": 45.0918,
+    "lng": -75.3493,
+    "ports": [
+      {
+        "name": "MONTREAL, CANADA",
+        "ship": 2910,
+        "lat": 45.5017,
+        "lng": -73.5673,
+        "herat": 820,
+        "total": 3730,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 617,
+    "state": "QUEBEC (QC)",
+    "branch": "MONTREAL EAST",
+    "city": "Laval",
+    "source": "IAAI",
+    "lat": 45.6066,
+    "lng": -73.7124,
+    "ports": [
+      {
+        "name": "MONTREAL, CANADA",
+        "ship": 2665,
+        "lat": 45.5017,
+        "lng": -73.5673,
+        "herat": 820,
+        "total": 3485,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 618,
+    "state": "QUEBEC (QC)",
+    "branch": "SAINT BLAISE",
+    "city": "Saint-Blaise-sur-Richelieu",
+    "source": "Any",
+    "lat": 45.2246,
+    "lng": -73.2769,
+    "ports": [
+      {
+        "name": "MONTREAL, CANADA",
+        "ship": 2910,
+        "lat": 45.5017,
+        "lng": -73.5673,
+        "herat": 820,
+        "total": 3730,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 619,
+    "state": "QUEBEC (QC)",
+    "branch": "QUEBEC CITY",
+    "city": "St-Nicolas",
+    "source": "IAAI",
+    "lat": 46.6869,
+    "lng": -71.382,
+    "ports": [
+      {
+        "name": "MONTREAL, CANADA",
+        "ship": 2835,
+        "lat": 45.5017,
+        "lng": -73.5673,
+        "herat": 820,
+        "total": 3655,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 620,
+    "state": "QUEBEC (QC)",
+    "branch": "MONTREAL WEST",
+    "city": "St. Eustache",
+    "source": "IAAI",
+    "lat": 45.565,
+    "lng": -73.905,
+    "ports": [
+      {
+        "name": "MONTREAL, CANADA",
+        "ship": 2750,
+        "lat": 45.5017,
+        "lng": -73.5673,
+        "herat": 820,
+        "total": 3570,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 621,
+    "state": "QUEBEC (QC)",
+    "branch": "YVES QUESNEL",
+    "city": "Yves Quesnel",
+    "source": "Any",
+    "lat": 45.5,
+    "lng": -73.55,
+    "ports": [
+      {
+        "name": "MONTREAL, CANADA",
+        "ship": 2750,
+        "lat": 45.5017,
+        "lng": -73.5673,
+        "herat": 820,
+        "total": 3570,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 622,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "ICBC FRASER VALLEY",
+    "city": "Abbotsford",
+    "source": "IAAI",
+    "lat": 49.0504,
+    "lng": -122.3045,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 3370,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 4190,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 623,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "BURNS LAKE BC",
+    "city": "Burns Lake",
+    "source": "Any",
+    "lat": 54.2297,
+    "lng": -125.7609,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 4545,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 5365,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 624,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "GENELLE BC",
+    "city": "Genelle",
+    "source": "Any",
+    "lat": 49.3125,
+    "lng": -117.7181,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 4265,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 5085,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 625,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "KELOWNA",
+    "city": "Kelowna",
+    "source": "Any",
+    "lat": 49.888,
+    "lng": -119.496,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 3650,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 4470,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 626,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "MERRITT BC",
+    "city": "Merritt",
+    "source": "Any",
+    "lat": 50.1115,
+    "lng": -120.7869,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 3765,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 4585,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 627,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "ICBC NANAIMO",
+    "city": "Nanaimo",
+    "source": "IAAI",
+    "lat": 49.1659,
+    "lng": -123.9401,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 3820,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 4640,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 628,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "NELSON BC",
+    "city": "Nelson",
+    "source": "Any",
+    "lat": 49.4928,
+    "lng": -117.2948,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 4235,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 5055,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 629,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "ICBC LOWER MAINLAND",
+    "city": "New Westminster",
+    "source": "IAAI",
+    "lat": 49.2057,
+    "lng": -122.911,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 3345,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 4165,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 630,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "NORTH VANCOUVER BC",
+    "city": "North Vancouver",
+    "source": "Any",
+    "lat": 49.32,
+    "lng": -123.0724,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 3455,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 4275,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 631,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "ICBC NORTHERN INTERIOR",
+    "city": "Prince George",
+    "source": "IAAI",
+    "lat": 53.9171,
+    "lng": -122.7497,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 4185,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 5005,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 632,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "QEUSNEL BC",
+    "city": "Quesnel",
+    "source": "Any",
+    "lat": 52.9784,
+    "lng": -122.4931,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 4125,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 4945,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 633,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "QUEENSBOROUGH",
+    "city": "Queensborough",
+    "source": "Any",
+    "lat": 49.19,
+    "lng": -122.939,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 3285,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 4105,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 634,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "VANCOUVER",
+    "city": "Richmond",
+    "source": "IAAI",
+    "lat": 49.1618,
+    "lng": -123.0265,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 3285,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 4105,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 635,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "SOUTH SLOCAN",
+    "city": "South Slocan",
+    "source": "Any",
+    "lat": 49.4583,
+    "lng": -117.5214,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 4325,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 5145,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 636,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "ICBC SOUTHERN INTERIOR",
+    "city": "Vernon",
+    "source": "IAAI",
+    "lat": 50.267,
+    "lng": -119.272,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 3765,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 4585,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 637,
+    "state": "BRITISH COLUMBIA (BC)",
+    "branch": "ICBC VICTORIA",
+    "city": "Victoria",
+    "source": "IAAI",
+    "lat": 48.4284,
+    "lng": -123.3656,
+    "ports": [
+      {
+        "name": "VANCOUVER, CANADA",
+        "ship": 3735,
+        "lat": 49.2827,
+        "lng": -123.1207,
+        "herat": 820,
+        "total": 4555,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 638,
+    "state": "NEW BRUNSWICK (NB)",
+    "branch": "MONCTON",
+    "city": "Berry Mills",
+    "source": "IAAI",
+    "lat": 46.1368,
+    "lng": -64.713,
+    "ports": [
+      {
+        "name": "HALIFAX, CANADA",
+        "ship": null,
+        "lat": 44.6488,
+        "lng": -63.5752,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 639,
+    "state": "NEW BRUNSWICK (NB)",
+    "branch": "MONCTON",
+    "city": "Moncton",
+    "source": "Copart",
+    "lat": 46.0878,
+    "lng": -64.7782,
+    "ports": [
+      {
+        "name": "HALIFAX, CANADA",
+        "ship": null,
+        "lat": 44.6488,
+        "lng": -63.5752,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 640,
+    "state": "NEWFOUNDLAND AND LABRADOR (NL)",
+    "branch": "DEER LAKE",
+    "city": "Deer Lake, PI",
+    "source": "Any",
+    "lat": 49.1831,
+    "lng": -57.4262,
+    "ports": [
+      {
+        "name": "HALIFAX, CANADA",
+        "ship": null,
+        "lat": 44.6488,
+        "lng": -63.5752,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 641,
+    "state": "NEWFOUNDLAND AND LABRADOR (NL)",
+    "branch": "ST. JOHN'S",
+    "city": "Paradise",
+    "source": "IAAI",
+    "lat": 47.5305,
+    "lng": -52.8792,
+    "ports": [
+      {
+        "name": "HALIFAX, CANADA",
+        "ship": null,
+        "lat": 44.6488,
+        "lng": -63.5752,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 642,
+    "state": "NOVA SCOTIA (NS)",
+    "branch": "HALIFAX",
+    "city": "Enfield",
+    "source": "IAAI",
+    "lat": 44.8818,
+    "lng": -63.5274,
+    "ports": [
+      {
+        "name": "HALIFAX, CANADA",
+        "ship": null,
+        "lat": 44.6488,
+        "lng": -63.5752,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 643,
+    "state": "ALBERTA (AB)",
+    "branch": "EDMONTON",
+    "city": "Acheson",
+    "source": "IAAI",
+    "lat": 53.548,
+    "lng": -113.917,
+    "ports": [
+      {
+        "name": "EDMONTON, CANADA",
+        "ship": null,
+        "lat": 53.5461,
+        "lng": -113.4938,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 644,
+    "state": "ALBERTA (AB)",
+    "branch": "EDMONTON",
+    "city": "Nisku",
+    "source": "Copart",
+    "lat": 53.3355,
+    "lng": -113.5284,
+    "ports": [
+      {
+        "name": "EDMONTON, CANADA",
+        "ship": null,
+        "lat": 53.5461,
+        "lng": -113.4938,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 645,
+    "state": "ALBERTA (AB)",
+    "branch": "CALGARY",
+    "city": "Rocky View County",
+    "source": "Copart",
+    "lat": 51.1834,
+    "lng": -113.95,
+    "ports": [
+      {
+        "name": "EDMONTON, CANADA",
+        "ship": null,
+        "lat": 53.5461,
+        "lng": -113.4938,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 646,
+    "state": "ALBERTA (AB)",
+    "branch": "CALGARY",
+    "city": "Rockyview",
+    "source": "IAAI",
+    "lat": 51.1834,
+    "lng": -113.95,
+    "ports": [
+      {
+        "name": "EDMONTON, CANADA",
+        "ship": null,
+        "lat": 53.5461,
+        "lng": -113.4938,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 647,
+    "state": "SASKATCHEWAN (SK)",
+    "branch": "SGI MOOSE JAW",
+    "city": "Moose Jaw",
+    "source": "IAAI",
+    "lat": 50.3913,
+    "lng": -105.5344,
+    "ports": [
+      {
+        "name": "EDMONTON, CANADA",
+        "ship": null,
+        "lat": 53.5461,
+        "lng": -113.4938,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 648,
+    "state": "SASKATCHEWAN (SK)",
+    "branch": "SGI NORTH BATTLEFORD",
+    "city": "North Battleford",
+    "source": "IAAI",
+    "lat": 52.7575,
+    "lng": -108.2861,
+    "ports": [
+      {
+        "name": "EDMONTON, CANADA",
+        "ship": null,
+        "lat": 53.5461,
+        "lng": -113.4938,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 649,
+    "state": "SASKATCHEWAN (SK)",
+    "branch": "SGI PRINCE ALBERT",
+    "city": "Prince Albert",
+    "source": "IAAI",
+    "lat": 53.2033,
+    "lng": -105.7531,
+    "ports": [
+      {
+        "name": "EDMONTON, CANADA",
+        "ship": null,
+        "lat": 53.5461,
+        "lng": -113.4938,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 650,
+    "state": "SASKATCHEWAN (SK)",
+    "branch": "SGI REGINA",
+    "city": "Regina",
+    "source": "IAAI",
+    "lat": 50.4452,
+    "lng": -104.6189,
+    "ports": [
+      {
+        "name": "EDMONTON, CANADA",
+        "ship": null,
+        "lat": 53.5461,
+        "lng": -113.4938,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 651,
+    "state": "SASKATCHEWAN (SK)",
+    "branch": "SGI SASKATOON",
+    "city": "Saskatoon",
+    "source": "IAAI",
+    "lat": 52.1579,
+    "lng": -106.6702,
+    "ports": [
+      {
+        "name": "EDMONTON, CANADA",
+        "ship": null,
+        "lat": 53.5461,
+        "lng": -113.4938,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  },
+  {
+    "id": 652,
+    "state": "SASKATCHEWAN (SK)",
+    "branch": "SGI YORKTON",
+    "city": "Yorkton",
+    "source": "IAAI",
+    "lat": 51.2139,
+    "lng": -102.4628,
+    "ports": [
+      {
+        "name": "EDMONTON, CANADA",
+        "ship": null,
+        "lat": 53.5461,
+        "lng": -113.4938,
+        "herat": 820,
+        "total": null,
+        "country": "Canada"
+      }
+    ]
+  }
+
   ]
 }

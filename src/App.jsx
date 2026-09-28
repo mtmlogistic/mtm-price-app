@@ -558,76 +558,118 @@ function App() {
                       <div className="branch">{location.city}</div>
 
                       <div
-                        className={`location-source source-${String(location.source || 'OTHER')
-                          .trim()
-                          .toLowerCase()}`}
-                      >
-                        {String(location.source || 'OTHER').toUpperCase()}
-                      </div>
+  className={`location-source source-${String(location.source || 'OTHER')
+    .trim()
+    .toLowerCase()}`}
+>
+  {String(location.source || 'OTHER').toUpperCase()}
+
+  <span className="source-country">
+    {String(location.ports?.[0]?.country || 'USA').toLowerCase() === 'canada'
+      ? ' 🇨🇦 '
+      : ' 🇺🇸 '}
+  </span>
+</div>
                     </div>
                   </div>
 
                   {/* PORTS */}
 
-                  <div className="ports">
-                    {Array.isArray(location.ports) &&
-                      location.ports.map((port, index) => {
-                        const isPortSelected = selectedLocation?.id === location.id && selectedPort?.name === port.name;
+                 <div className="ports">
+  {Array.isArray(location.ports) &&
+    location.ports.map((port, index) => {
+      const isPortSelected =
+        selectedLocation?.id === location.id &&
+        selectedPort?.name === port.name;
 
-                        return (
-                          <div
-                            className={`port-card ${isPortSelected ? 'selected-port' : ''}`}
-                            key={`${location.id}-${index}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
+      const isUnavailable =
+        String(port?.avill).toLowerCase() === 'false';
 
-                              selectPort(location, port);
-                            }}
-                          >
-                            {/* PORT NAME */}
+      const isCanada =
+        String(port?.country).toLowerCase() === 'canada';
 
-                            <div className="port-name">🚢 {port.name}</div>
+      return (
+        <div
+          className={`port-card ${
+            isPortSelected ? 'selected-port' : ''
+          }`}
+          key={`${location.id}-${index}`}
+          onClick={(e) => {
+            e.stopPropagation();
 
-                            {/* PRICES */}
+            if (!isUnavailable) {
+              selectPort(location, port);
+            }
+          }}
+        >
+          {isUnavailable ? (
+            /* UNAVAILABLE */
+            <div
+              style={{
+                color: '#dc2626',
+                fontWeight: '700',
+                textAlign: 'center',
+                padding: '10px 5px',
+              }}
+            >
+              !انتقالات از این برنچ فعلاً در دسترس نیست
+            </div>
+          ) : (
+            <>
+              {/* PORT NAME */}
+              <div className="port-name">
+                🚢 {port.name}
+              </div>
 
-                            <div className="prices">
-                              {/* SHIP */}
+              {/* PRICES */}
+              <div className="prices">
 
-                              <div>
-                                <span>🇺🇸 → 🇹🇷</span>
+                {/* SHIP */}
+                <div>
+                  <span>
+                    {isCanada ? '🇨🇦 → 🇦🇪' : '🇺🇸 → 🇹🇷'}
+                  </span>
 
-                                <strong>${Number(port.ship || 0).toLocaleString()}</strong>
-                              </div>
+                  <strong>
+                    ${Number(port.ship || 0).toLocaleString()}
+                  </strong>
+                </div>
 
-                              {/* HERAT */}
+                {/* HERAT */}
+                <div>
+                  <span>
+                    {isCanada ? '🇦🇪 → 🇦🇫' : '🇹🇷 → 🇦🇫'}
+                  </span>
 
-                              <div>
-                                <span>🇹🇷 → 🇦🇫</span>
+                  <strong>
+                    ${Number(port.herat || 0).toLocaleString()}
+                  </strong>
+                </div>
 
-                                <strong>${Number(port.herat || 0).toLocaleString()}</strong>
-                              </div>
+                {/* TOTAL */}
+                <div
+                  className="total clickable-total"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openCalculator(location, port);
+                  }}
+                >
+                  <FaCalculator className="total-calculator-bg" />
 
-                              {/* TOTAL */}
+                  <span>Total</span>
 
-                              <div
-                                className="total clickable-total"
-                                onClick={(e) => {
-                                  e.stopPropagation();
+                  <strong>
+                    ${Number(port.total || 0).toLocaleString()}
+                  </strong>
+                </div>
 
-                                  openCalculator(location, port);
-                                }}
-                              >
-                                <FaCalculator className="total-calculator-bg" />
-
-                                <span>Total</span>
-
-                                <strong>${Number(port.total || 0).toLocaleString()}</strong>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
-                  </div>
+              </div>
+            </>
+          )}
+        </div>
+      );
+    })}
+</div>
 
                   {/* COORDINATES */}
 

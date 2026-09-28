@@ -133,36 +133,416 @@ const PORT_COORDINATES = {
 ===================================================== */
 
 const RUST_AREAS = [
+
+  /* =====================================================
+     USA — VERY HIGH RUST / SALT BELT
+     Core areas with strong winter + road-salt exposure
+  ===================================================== */
+
   {
-    name: 'Great Lakes',
-    lat: 42.5,
-    lng: -82.5,
-    radius: 450000,
+    name: 'Western New York / Great Lakes',
+    lat: 43.0,
+    lng: -78.7,
+    radius: 230000,
+    opacity: 0.22,
+  },
+
+  {
+    name: 'Northern Ohio / Lake Erie',
+    lat: 41.7,
+    lng: -81.2,
+    radius: 220000,
+    opacity: 0.22,
+  },
+
+  {
+    name: 'Southeast Michigan',
+    lat: 42.6,
+    lng: -83.2,
+    radius: 220000,
+    opacity: 0.22,
+  },
+
+  {
+    name: 'Wisconsin / Lake Michigan',
+    lat: 43.5,
+    lng: -88.2,
+    radius: 230000,
+    opacity: 0.20,
+  },
+
+  {
+    name: 'Northern Illinois / Chicago',
+    lat: 42.0,
+    lng: -88.0,
+    radius: 180000,
     opacity: 0.18,
   },
 
   {
-    name: 'Northeast',
-    lat: 41.2,
+    name: 'Western Pennsylvania',
+    lat: 41.0,
+    lng: -80.0,
+    radius: 220000,
+    opacity: 0.19,
+  },
+
+  {
+    name: 'Central / Northern Pennsylvania',
+    lat: 41.0,
+    lng: -77.5,
+    radius: 230000,
+    opacity: 0.18,
+  },
+
+  /* =====================================================
+     USA — HIGH RUST RISK
+  ===================================================== */
+
+  {
+    name: 'Minnesota',
+    lat: 45.2,
+    lng: -93.5,
+    radius: 280000,
+    opacity: 0.17,
+  },
+
+  {
+    name: 'Northern Indiana',
+    lat: 41.0,
+    lng: -86.2,
+    radius: 200000,
+    opacity: 0.16,
+  },
+
+  {
+    name: 'Iowa',
+    lat: 42.0,
+    lng: -93.5,
+    radius: 250000,
+    opacity: 0.13,
+  },
+
+  {
+    name: 'Northern New Jersey',
+    lat: 40.9,
     lng: -74.5,
-    radius: 380000,
-    opacity: 0.12,
+    radius: 150000,
+    opacity: 0.15,
   },
 
   {
-    name: 'Midwest',
-    lat: 41.5,
-    lng: -89.5,
-    radius: 420000,
-    opacity: 0.10,
+    name: 'Connecticut',
+    lat: 41.6,
+    lng: -72.7,
+    radius: 160000,
+    opacity: 0.15,
   },
 
   {
-    name: 'Northeast Coast',
-    lat: 42.5,
+    name: 'Massachusetts',
+    lat: 42.3,
+    lng: -71.8,
+    radius: 200000,
+    opacity: 0.16,
+  },
+
+  {
+    name: 'Rhode Island',
+    lat: 41.7,
     lng: -71.5,
-    radius: 300000,
+    radius: 90000,
+    opacity: 0.14,
+  },
+
+  {
+    name: 'New Hampshire',
+    lat: 43.9,
+    lng: -71.6,
+    radius: 160000,
+    opacity: 0.15,
+  },
+
+  {
+    name: 'Vermont',
+    lat: 44.0,
+    lng: -72.7,
+    radius: 160000,
+    opacity: 0.15,
+  },
+
+  {
+    name: 'Maine',
+    lat: 45.1,
+    lng: -69.0,
+    radius: 250000,
+    opacity: 0.15,
+  },
+
+  /* =====================================================
+     NEW YORK — HIGH SNOW / SALT AREAS
+  ===================================================== */
+
+  {
+    name: 'Buffalo / Rochester',
+    lat: 43.1,
+    lng: -77.6,
+    radius: 170000,
+    opacity: 0.22,
+  },
+
+  {
+    name: 'Syracuse / Central New York',
+    lat: 43.1,
+    lng: -76.1,
+    radius: 170000,
+    opacity: 0.21,
+  },
+
+  {
+    name: 'Watertown / North Country',
+    lat: 44.0,
+    lng: -75.9,
+    radius: 180000,
+    opacity: 0.20,
+  },
+
+  /* =====================================================
+     MICHIGAN — HIGH
+  ===================================================== */
+
+  {
+    name: 'West Michigan',
+    lat: 42.9,
+    lng: -85.7,
+    radius: 200000,
+    opacity: 0.19,
+  },
+
+  {
+    name: 'Central Michigan',
+    lat: 43.7,
+    lng: -84.6,
+    radius: 220000,
+    opacity: 0.18,
+  },
+
+  {
+    name: 'Northern Michigan',
+    lat: 45.2,
+    lng: -85.5,
+    radius: 230000,
+    opacity: 0.18,
+  },
+
+  /* =====================================================
+     OHIO — HIGH
+  ===================================================== */
+
+  {
+    name: 'Cleveland / Lake Erie',
+    lat: 41.5,
+    lng: -81.7,
+    radius: 170000,
+    opacity: 0.21,
+  },
+
+  {
+    name: 'Northeast Ohio',
+    lat: 41.2,
+    lng: -81.0,
+    radius: 170000,
+    opacity: 0.18,
+  },
+
+  /* =====================================================
+     MIDWEST — MODERATE / HIGH
+  ===================================================== */
+
+  {
+    name: 'Northern Missouri',
+    lat: 39.5,
+    lng: -94.5,
+    radius: 150000,
+    opacity: 0.08,
+  },
+
+  {
+    name: 'Northern Kentucky',
+    lat: 39.1,
+    lng: -84.5,
+    radius: 120000,
+    opacity: 0.07,
+  },
+
+  /* =====================================================
+     NEW ENGLAND COAST
+     Winter + salt + marine chloride
+  ===================================================== */
+
+  {
+    name: 'Maine Coast',
+    lat: 44.3,
+    lng: -69.0,
+    radius: 180000,
+    opacity: 0.17,
+  },
+
+  {
+    name: 'New Hampshire Coast',
+    lat: 43.1,
+    lng: -70.8,
+    radius: 90000,
+    opacity: 0.17,
+  },
+
+  {
+    name: 'Massachusetts Coast',
+    lat: 42.2,
+    lng: -70.8,
+    radius: 150000,
+    opacity: 0.16,
+  },
+
+  /* =====================================================
+     MID-ATLANTIC
+  ===================================================== */
+
+  {
+    name: 'Eastern Pennsylvania',
+    lat: 40.3,
+    lng: -75.3,
+    radius: 180000,
+    opacity: 0.13,
+  },
+
+  {
+    name: 'Maryland / Washington DC',
+    lat: 39.1,
+    lng: -76.8,
+    radius: 150000,
+    opacity: 0.09,
+  },
+
+  /* =====================================================
+     ALASKA
+     Winter severe, but NOT equivalent to Salt Belt
+  ===================================================== */
+
+  {
+    name: 'Southcentral Alaska',
+    lat: 61.3,
+    lng: -149.0,
+    radius: 180000,
     opacity: 0.10,
+  },
+
+  {
+    name: 'Interior Alaska',
+    lat: 64.8,
+    lng: -147.7,
+    radius: 250000,
+    opacity: 0.07,
+  },
+
+  /* =====================================================
+     CANADA — VERY HIGH
+  ===================================================== */
+
+  {
+    name: 'Southern Ontario',
+    lat: 43.7,
+    lng: -79.8,
+    radius: 280000,
+    opacity: 0.22,
+  },
+
+  {
+    name: 'Golden Horseshoe',
+    lat: 43.5,
+    lng: -79.5,
+    radius: 150000,
+    opacity: 0.23,
+  },
+
+  {
+    name: 'Southern Quebec',
+    lat: 46.5,
+    lng: -72.0,
+    radius: 280000,
+    opacity: 0.21,
+  },
+
+  /* =====================================================
+     CANADA — HIGH
+  ===================================================== */
+
+  {
+    name: 'New Brunswick',
+    lat: 46.6,
+    lng: -66.4,
+    radius: 190000,
+    opacity: 0.18,
+  },
+
+  {
+    name: 'Nova Scotia',
+    lat: 45.1,
+    lng: -63.2,
+    radius: 180000,
+    opacity: 0.18,
+  },
+
+  {
+    name: 'Prince Edward Island',
+    lat: 46.35,
+    lng: -63.2,
+    radius: 90000,
+    opacity: 0.17,
+  },
+
+  {
+    name: 'Newfoundland',
+    lat: 48.5,
+    lng: -56.0,
+    radius: 230000,
+    opacity: 0.16,
+  },
+
+  /* =====================================================
+     CANADA — MODERATE
+  ===================================================== */
+
+  {
+    name: 'Southern Manitoba',
+    lat: 49.8,
+    lng: -97.1,
+    radius: 200000,
+    opacity: 0.11,
+  },
+
+  {
+    name: 'Southern Saskatchewan',
+    lat: 50.8,
+    lng: -106.5,
+    radius: 220000,
+    opacity: 0.09,
+  },
+
+  {
+    name: 'Southern Alberta',
+    lat: 51.2,
+    lng: -114.5,
+    radius: 220000,
+    opacity: 0.08,
+  },
+
+  {
+    name: 'British Columbia Interior',
+    lat: 50.7,
+    lng: -119.0,
+    radius: 250000,
+    opacity: 0.06,
   },
 ];
 
@@ -501,184 +881,197 @@ function ClosePopups({ popupCloseKey }) {
                   PORT ICON + POPUP
               ========================================= */}
 
-              <Marker position={[destination.lat, destination.lng]} icon={isSelectedPort ? selectedPortIcon : portIcon}>
-                <Popup maxWidth={320} minWidth={280} maxHeight={420} className="port-popup">
-                  <div
-                    className="map-popup"
-                    dir="rtl"
-                    style={{
-                      width: '100%',
-                      maxHeight: '380px',
-                      overflowY: 'auto',
-                      overflowX: 'hidden',
-                      boxSizing: 'border-box',
-                      paddingLeft: '5px',
-                      direction: 'rtl',
-                      textAlign: 'right',
-                    }}
-                  >
-                    {/* =================================
-                        PORT NAME
-                    ================================= */}
+             {String(destination.port?.avill).toLowerCase() === 'false' ? (
+  <div
+    style={{
+      color: '#dc2626',
+      fontWeight: 800,
+      fontSize: '13px',
+      textAlign: 'center',
+      direction: 'rtl',
+      lineHeight: '1.8',
+      padding: '10px 5px',
+    }}
+  >
+    انتقالات در حال حاضر از این پورت قابل دسترس نیست!
+  </div>
+) : (
+  <Marker
+    position={[destination.lat, destination.lng]}
+    icon={isSelectedPort ? selectedPortIcon : portIcon}
+  >
+    <Popup
+      maxWidth={320}
+      minWidth={280}
+      maxHeight={420}
+      className="port-popup"
+    >
+      <div
+        className="map-popup"
+        dir="rtl"
+        style={{
+          width: '100%',
+          maxHeight: '380px',
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          boxSizing: 'border-box',
+          paddingLeft: '5px',
+          direction: 'rtl',
+          textAlign: 'right',
+        }}
+      >
+        {/* PORT NAME */}
+        <div
+          className="popup-title"
+          style={{
+            fontWeight: 900,
+            fontSize: '16px',
+          }}
+        >
+          {destination.name}
+        </div>
 
-                    <div
-                      className="popup-title"
-                      style={{
-                        fontWeight: 900,
-                        fontSize: '16px',
-                      }}
-                    >
-                      {destination.name}
-                    </div>
+        <div
+          className="popup-state"
+          style={{
+            textAlign: 'right',
+          }}
+        >
+          پورت مقصد
+        </div>
 
-                    <div
-                      className="popup-state"
-                      style={{
-                        textAlign: 'right',
-                      }}
-                    >
-                      پورت مقصد
-                    </div>
+        <div className="popup-divider" />
 
-                    <div className="popup-divider" />
+        {/* SHIP */}
+        <div
+          className="popup-price"
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            direction: 'rtl',
+            width: '100%',
+          }}
+        >
+          <span
+            style={{
+              textAlign: 'right',
+              fontWeight: 700,
+            }}
+          >
+            {destination.port?.country === 'Canada'
+              ? 'کرایه انتقال کانادا الی امارات'
+              : 'کرایه انتقال امریکا الی ترکیه'}
+          </span>
 
-                    {/* =================================
-                        SHIP
-                    ================================= */}
+          <strong
+            dir="ltr"
+            style={{
+              direction: 'ltr',
+              textAlign: 'left',
+              fontWeight: 900,
+            }}
+          >
+            ${Number(destination.port?.ship || 0).toLocaleString()}
+          </strong>
+        </div>
 
-                    <div
-                      className="popup-price"
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        direction: 'rtl',
-                        width: '100%',
-                      }}
-                    >
-                      <span
-                        style={{
-                          textAlign: 'right',
-                          fontWeight: 700,
-                        }}
-                      >
-                        کرایه انتقال امریکا الی ترکیه
-                      </span>
+        {/* HERAT */}
+        <div
+          className="popup-price"
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            direction: 'rtl',
+            width: '100%',
+          }}
+        >
+          <span
+            style={{
+              textAlign: 'right',
+              fontWeight: 700,
+            }}
+          >
+            {destination.port?.country === 'Canada'
+              ? 'امارات الی افغانستان (اسلام قلعه)'
+              : 'ترکیه الی افغانستان (اسلام قلعه)'}
+          </span>
 
-                      <strong
-                        dir="ltr"
-                        style={{
-                          direction: 'ltr',
-                          textAlign: 'left',
-                          fontWeight: 900,
-                        }}
-                      >
-                        ${Number(destination.port?.ship || 0).toLocaleString()}
-                      </strong>
-                    </div>
+          <strong
+            dir="ltr"
+            style={{
+              direction: 'ltr',
+              textAlign: 'left',
+              fontWeight: 900,
+            }}
+          >
+            ${Number(destination.port?.herat || 0).toLocaleString()}
+          </strong>
+        </div>
 
-                    {/* =================================
-                        HERAT
-                    ================================= */}
+        {/* TOTAL */}
+        <div
+          className="popup-total"
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            direction: 'rtl',
+            width: '100%',
+            marginTop: '5px',
+            paddingTop: '7px',
+            borderTop: '1px solid rgba(0,0,0,0.08)',
+          }}
+        >
+          <span
+            style={{
+              textAlign: 'right',
+              fontWeight: 900,
+            }}
+          >
+            مجموع
+          </span>
 
-                    <div
-                      className="popup-price"
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        direction: 'rtl',
-                        width: '100%',
-                      }}
-                    >
-                      <span
-                        style={{
-                          textAlign: 'right',
-                          fontWeight: 700,
-                        }}
-                      >
-                        ترکیه الی افغانستان (اسلام قلعه)
-                      </span>
+          <strong
+            dir="ltr"
+            style={{
+              direction: 'ltr',
+              textAlign: 'left',
+              fontWeight: 950,
+              fontSize: '15px',
+            }}
+          >
+            ${Number(destination.port?.total || 0).toLocaleString()}
+          </strong>
+        </div>
 
-                      <strong
-                        dir="ltr"
-                        style={{
-                          direction: 'ltr',
-                          textAlign: 'left',
-                          fontWeight: 900,
-                        }}
-                      >
-                        ${Number(destination.port?.herat || 0).toLocaleString()}
-                      </strong>
-                    </div>
-
-                    {/* =================================
-                        TOTAL
-                    ================================= */}
-
-                    <div
-                      className="popup-total"
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        direction: 'rtl',
-                        width: '100%',
-                        marginTop: '5px',
-                        paddingTop: '7px',
-                        borderTop: '1px solid rgba(0,0,0,0.08)',
-                      }}
-                    >
-                      <span
-                        style={{
-                          textAlign: 'right',
-                          fontWeight: 900,
-                        }}
-                      >
-                        مجموع
-                      </span>
-
-                      <strong
-                        dir="ltr"
-                        style={{
-                          direction: 'ltr',
-                          textAlign: 'left',
-                          fontWeight: 950,
-                          fontSize: '15px',
-                        }}
-                      >
-                        ${Number(destination.port?.total || 0).toLocaleString()}
-                      </strong>
-                    </div>
-
-                    {/* =================================
-                        SELECT BUTTON
-                    ================================= */}
-
-                    <button
-                      type="button"
-                      style={{
-                        width: '100%',
-                        marginTop: '10px',
-                        padding: '9px',
-                        border: 'none',
-                        borderRadius: '10px',
-                        background: '#2563eb',
-                        color: '#fff',
-                        fontWeight: 800,
-                        cursor: 'pointer',
-                      }}
-                      onClick={() => {
-                        if (onSelectPort && selectedLocation) {
-                          onSelectPort(selectedLocation, destination.port);
-                        }
-                      }}
-                    >
-                      انتخاب پورت
-                    </button>
-                  </div>
-                </Popup>
-              </Marker>
+        {/* SELECT BUTTON */}
+        <button
+          type="button"
+          style={{
+            width: '100%',
+            marginTop: '10px',
+            padding: '9px',
+            border: 'none',
+            borderRadius: '10px',
+            background: '#2563eb',
+            color: '#fff',
+            fontWeight: 800,
+            cursor: 'pointer',
+          }}
+          onClick={() => {
+            if (onSelectPort && selectedLocation) {
+              onSelectPort(selectedLocation, destination.port);
+            }
+          }}
+        >
+          انتخاب پورت
+        </button>
+      </div>
+    </Popup>
+  </Marker>
+)}
             </div>
           );
         })}
@@ -752,151 +1145,160 @@ function ClosePopups({ popupCloseKey }) {
                       {location.ports.map((port, index) => {
                         const isSelectedPort = selectedPortName && normalizePortName(port?.name) === selectedPortName;
 
-                        return (
-                          <div
-                            className="popup-port"
-                            key={`${location.id}-${index}`}
-                            style={{
-                              cursor: 'pointer',
+                       const isUnavailable =
+  String(port?.avill).toLowerCase() === 'false';
 
-                              border: isSelectedPort ? '2px solid #2563eb' : '1px solid rgba(0,0,0,0.08)',
+return isUnavailable ? (
+  <div
+    key={`${location.id}-${index}`}
+    style={{
+      color: '#dc2626',
+      fontWeight: 800,
+      fontSize: '13px',
+      textAlign: 'center',
+      direction: 'rtl',
+      padding: '8px 4px',
+      lineHeight: '1.8',
+    }}
+  >
+    انتقالات از این برنچ فعلاً در دسترس نیست!
+  </div>
+) : (
+  <div
+    className="popup-port"
+    key={`${location.id}-${index}`}
+    style={{
+      cursor: 'pointer',
+      border: isSelectedPort
+        ? '2px solid #2563eb'
+        : '1px solid rgba(0,0,0,0.08)',
+      background: isSelectedPort ? '#eff6ff' : '#ffffff',
+      borderRadius: '10px',
+      padding: '9px',
+      marginBottom: '7px',
+      direction: 'rtl',
+      textAlign: 'right',
+    }}
+    onClick={() => {
+      if (onSelectPort) {
+        onSelectPort(location, port);
+      }
+    }}
+  >
+    {/* PORT NAME */}
+    <div
+      className="popup-port-name"
+      style={{
+        color: isSelectedPort ? '#2563eb' : '#111827',
+        fontWeight: 800,
+        fontSize: '13px',
+        marginBottom: '7px',
+        textAlign: 'right',
+      }}
+    >
+      {isSelectedPort && '🔵 '}
+      🚢 {port?.name || 'پورت نامعلوم'}
+    </div>
 
-                              background: isSelectedPort ? '#eff6ff' : '#ffffff',
+    {/* SHIP */}
+    <div
+      className="popup-price"
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        direction: 'rtl',
+      }}
+    >
+      <span
+        style={{
+          textAlign: 'right',
+          fontWeight: 700,
+        }}
+      >
+        {port?.country === 'Canada'
+          ? 'کانادا ← امارات'
+          : 'آمریکا ← ترکیه'}
+      </span>
 
-                              borderRadius: '10px',
+      <strong
+        dir="ltr"
+        style={{
+          direction: 'ltr',
+          textAlign: 'left',
+        }}
+      >
+        ${Number(port?.ship || 0).toLocaleString()}
+      </strong>
+    </div>
 
-                              padding: '9px',
+    {/* HERAT */}
+    <div
+      className="popup-price"
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        direction: 'rtl',
+      }}
+    >
+      <span
+        style={{
+          textAlign: 'right',
+          fontWeight: 700,
+        }}
+      >
+        {port?.country === 'Canada'
+          ? 'امارات ← اسلام قلعه'
+          : 'ترکیه ← اسلام قلعه'}
+      </span>
 
-                              marginBottom: '7px',
+      <strong
+        dir="ltr"
+        style={{
+          direction: 'ltr',
+          textAlign: 'left',
+        }}
+      >
+        ${Number(port?.herat || 0).toLocaleString()}
+      </strong>
+    </div>
 
-                              direction: 'rtl',
+    {/* TOTAL */}
+    <div
+      className="popup-total"
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        direction: 'rtl',
+        marginTop: '5px',
+        paddingTop: '6px',
+        borderTop: '1px solid rgba(0,0,0,0.08)',
+      }}
+    >
+      <span
+        style={{
+          textAlign: 'right',
+          fontWeight: 900,
+        }}
+      >
+        مجموع
+      </span>
 
-                              textAlign: 'right',
-                            }}
-                            onClick={() => {
-                              if (onSelectPort) {
-                                onSelectPort(location, port);
-                              }
-                            }}
-                          >
-                            {/* PORT NAME */}
-
-                            <div
-                              className="popup-port-name"
-                              style={{
-                                color: isSelectedPort ? '#2563eb' : '#111827',
-
-                                fontWeight: 800,
-
-                                fontSize: '13px',
-
-                                marginBottom: '7px',
-
-                                textAlign: 'right',
-                              }}
-                            >
-                              {isSelectedPort && '🔵 '}
-                              🚢 {port?.name || 'پورت نامعلوم'}
-                            </div>
-
-                            {/* SHIP */}
-
-                            <div
-                              className="popup-price"
-                              style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                direction: 'rtl',
-                              }}
-                            >
-                              <span
-                                style={{
-                                  textAlign: 'right',
-                                  fontWeight: 700,
-                                }}
-                              >
-                                آمریکا ← ترکیه
-                              </span>
-
-                              <strong
-                                dir="ltr"
-                                style={{
-                                  direction: 'ltr',
-                                  textAlign: 'left',
-                                }}
-                              >
-                                ${Number(port?.ship || 0).toLocaleString()}
-                              </strong>
-                            </div>
-
-                            {/* HERAT */}
-
-                            <div
-                              className="popup-price"
-                              style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                direction: 'rtl',
-                              }}
-                            >
-                              <span
-                                style={{
-                                  textAlign: 'right',
-                                  fontWeight: 700,
-                                }}
-                              >
-                                ترکیه ← (اسلام قلعه)
-                              </span>
-
-                              <strong
-                                dir="ltr"
-                                style={{
-                                  direction: 'ltr',
-                                  textAlign: 'left',
-                                }}
-                              >
-                                ${Number(port?.herat || 0).toLocaleString()}
-                              </strong>
-                            </div>
-
-                            {/* TOTAL */}
-
-                            <div
-                              className="popup-total"
-                              style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                direction: 'rtl',
-                                marginTop: '5px',
-                                paddingTop: '6px',
-                                borderTop: '1px solid rgba(0,0,0,0.08)',
-                              }}
-                            >
-                              <span
-                                style={{
-                                  textAlign: 'right',
-                                  fontWeight: 900,
-                                }}
-                              >
-                                مجموع
-                              </span>
-
-                              <strong
-                                dir="ltr"
-                                style={{
-                                  direction: 'ltr',
-                                  textAlign: 'left',
-                                  fontWeight: 900,
-                                }}
-                              >
-                                ${Number(port?.total || 0).toLocaleString()}
-                              </strong>
-                            </div>
-                          </div>
-                        );
+      <strong
+        dir="ltr"
+        style={{
+          direction: 'ltr',
+          textAlign: 'left',
+          fontWeight: 900,
+        }}
+      >
+        ${Number(port?.total || 0).toLocaleString()}
+      </strong>
+    </div>
+  </div>
+);
                       })}
                     </div>
                   )}
