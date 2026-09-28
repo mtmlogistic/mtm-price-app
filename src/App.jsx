@@ -667,7 +667,7 @@ function App() {
                     }}
                   >
                     {isShipUnknown
-                      ? 'قیمت فعلاً در دسترس نیست'
+                      ? 'فعلاً در دسترس نیست'
                       : `$${shipPrice.toLocaleString()}`}
                   </strong>
                 </div>
@@ -694,7 +694,7 @@ function App() {
                     }}
                   >
                     {isHeratUnknown
-                      ? 'قیمت فعلاً در دسترس نیست'
+                      ? 'فعلاً در دسترس نیست'
                       : `$${heratPrice.toLocaleString()}`}
                   </strong>
                 </div>
@@ -739,7 +739,7 @@ function App() {
                     }}
                   >
                     {isPriceUnavailable
-                      ? 'قیمت فعلاً در دسترس نیست'
+                      ? 'فعلاً در دسترس نیست'
                       : `$${totalPrice.toLocaleString()}`}
                   </strong>
                 </div>
