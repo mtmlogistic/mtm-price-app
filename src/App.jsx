@@ -3,7 +3,7 @@ import { FaCalculator, FaCarSide, FaSearch } from 'react-icons/fa';
 import { FaSave } from 'react-icons/fa';
 import SavedCalculations from './components/SavedCalculations';
 import data from './data/data.json';
-
+import { FaDownload } from 'react-icons/fa';
 import VehicleRates from './components/VehicleRates';
 import MapView from './components/MapView';
 import Calculator from './components/Calculator';
@@ -429,6 +429,52 @@ function App() {
      RENDER
   ========================================= */
 
+
+
+  const [installPrompt, setInstallPrompt] = useState(null);
+  const [showInstallButton, setShowInstallButton] = useState(false);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (event) => {
+      event.preventDefault();
+
+      setInstallPrompt(event);
+      setShowInstallButton(true);
+    };
+
+    const handleAppInstalled = () => {
+      setInstallPrompt(null);
+      setShowInstallButton(false);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
+
+    // اگر برنامه قبلاً به صورت PWA نصب شده باشد
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+      setShowInstallButton(false);
+    }
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
+  }, []);
+
+  const handleInstallApp = async () => {
+    if (!installPrompt) return;
+
+    installPrompt.prompt();
+
+    const { outcome } = await installPrompt.userChoice;
+
+    if (outcome === 'accepted') {
+      setShowInstallButton(false);
+    }
+
+    setInstallPrompt(null);
+  };
+
   return (
     <div className="app">
       {/* =====================================
@@ -455,6 +501,12 @@ function App() {
             </button>
           </div>
         </div>
+        {showInstallButton && (
+          <button type="button" className="install-app-button" onClick={handleInstallApp} title="نصب برنامه">
+            <FaDownload />
+            <span>نصب برنامه</span>
+          </button>
+        )}
       </header>
 
       {/* =====================================

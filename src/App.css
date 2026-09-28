@@ -9352,3 +9352,40 @@ body:has(.calculator-overlay) {
 
   white-space: nowrap;
 }
+
+
+
+
+
+.install-app-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 11px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.16);
+  color: inherit;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: 0.2s ease;
+}
+
+.install-app-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.install-app-button:active {
+  transform: scale(0.96);
+}
+
+.install-app-button svg {
+  font-size: 14px;
+}
