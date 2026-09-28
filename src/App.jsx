@@ -3,7 +3,7 @@ import { FaCalculator, FaCarSide, FaSearch } from 'react-icons/fa';
 import { FaSave } from 'react-icons/fa';
 import SavedCalculations from './components/SavedCalculations';
 import data from './data/data.json';
-import { FaDownload } from 'react-icons/fa';
+import { FaDownload, FaMobileAlt, FaTimes } from 'react-icons/fa';
 import VehicleRates from './components/VehicleRates';
 import MapView from './components/MapView';
 import Calculator from './components/Calculator';
@@ -15,6 +15,94 @@ import './App.css';
 import VehicleSales from './components/VehicleSales';
 
 function App() {
+
+
+
+const [installPrompt, setInstallPrompt] = useState(null);
+const [showInstallButton, setShowInstallButton] = useState(false);
+const [showIOSGuide, setShowIOSGuide] = useState(false);
+
+useEffect(() => {
+  // آیا برنامه قبلاً نصب شده؟
+  const isStandalone =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.matchMedia('(display-mode: fullscreen)').matches ||
+    window.navigator.standalone === true;
+
+  if (isStandalone) {
+    setShowInstallButton(false);
+    return;
+  }
+
+  // Android / Chrome / Edge / Samsung Internet
+  const handleBeforeInstallPrompt = (event) => {
+    event.preventDefault();
+
+    setInstallPrompt(event);
+    setShowInstallButton(true);
+  };
+
+  // وقتی برنامه نصب شد
+  const handleAppInstalled = () => {
+    setInstallPrompt(null);
+    setShowInstallButton(false);
+    setShowIOSGuide(false);
+  };
+
+  window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+  window.addEventListener('appinstalled', handleAppInstalled);
+
+  // iPhone / iPad
+  const isIOS = /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+
+  if (isIOS && !window.navigator.standalone) {
+    setShowInstallButton(true);
+  }
+
+  return () => {
+    window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    window.removeEventListener('appinstalled', handleAppInstalled);
+  };
+}, []);
+
+const handleInstallApp = async () => {
+  // Android / Chrome / Samsung
+  if (installPrompt) {
+    installPrompt.prompt();
+
+    const { outcome } = await installPrompt.userChoice;
+
+    if (outcome === 'accepted') {
+      setShowInstallButton(false);
+    }
+
+    setInstallPrompt(null);
+    return;
+  }
+
+  // iPhone / iPad
+  const isIOS = /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+
+  if (isIOS) {
+    setShowIOSGuide(true);
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /* =========================================
      VEHICLE RATES
   ========================================= */
@@ -429,52 +517,6 @@ function App() {
      RENDER
   ========================================= */
 
-
-
-  const [installPrompt, setInstallPrompt] = useState(null);
-  const [showInstallButton, setShowInstallButton] = useState(false);
-
-  useEffect(() => {
-    const handleBeforeInstallPrompt = (event) => {
-      event.preventDefault();
-
-      setInstallPrompt(event);
-      setShowInstallButton(true);
-    };
-
-    const handleAppInstalled = () => {
-      setInstallPrompt(null);
-      setShowInstallButton(false);
-    };
-
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    window.addEventListener('appinstalled', handleAppInstalled);
-
-    // اگر برنامه قبلاً به صورت PWA نصب شده باشد
-    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-      setShowInstallButton(false);
-    }
-
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-      window.removeEventListener('appinstalled', handleAppInstalled);
-    };
-  }, []);
-
-  const handleInstallApp = async () => {
-    if (!installPrompt) return;
-
-    installPrompt.prompt();
-
-    const { outcome } = await installPrompt.userChoice;
-
-    if (outcome === 'accepted') {
-      setShowInstallButton(false);
-    }
-
-    setInstallPrompt(null);
-  };
-
   return (
     <div className="app">
       {/* =====================================
@@ -499,14 +541,14 @@ function App() {
               <span>موتر فروشی</span>
               <FaCarSide />
             </button>
+            {showInstallButton && (
+              <button type="button" className="install-app-button" onClick={handleInstallApp} title="نصب برنامه">
+                <FaDownload />
+                <span>نصب برنامه</span>
+              </button>
+            )}
           </div>
         </div>
-        {showInstallButton && (
-          <button type="button" className="install-app-button" onClick={handleInstallApp} title="نصب برنامه">
-            <FaDownload />
-            <span>نصب برنامه</span>
-          </button>
-        )}
       </header>
 
       {/* =====================================
@@ -870,6 +912,51 @@ function App() {
           />
         </div>
       )}
+
+      {showIOSGuide && (
+        <div className="ios-install-overlay">
+          <div className="ios-install-card" dir="rtl">
+            <button type="button" className="ios-install-close" onClick={() => setShowIOSGuide(false)}>
+              <FaTimes />
+            </button>
+
+            <div className="ios-install-icon">
+              <FaMobileAlt />
+            </div>
+
+            <h3>نصب برنامه</h3>
+
+            <p>برای اضافه‌کردن برنامه به صفحه اصلی آیفون:</p>
+
+            <div className="ios-install-step">
+              <span>1</span>
+              <div>
+                روی دکمه <strong>Share</strong> مرورگر بزنید.
+              </div>
+            </div>
+
+            <div className="ios-install-step">
+              <span>2</span>
+              <div>
+                گزینه <strong>Add to Home Screen</strong>
+                را انتخاب کنید.
+              </div>
+            </div>
+
+            <div className="ios-install-step">
+              <span>3</span>
+              <div>
+                روی <strong>Add</strong> بزنید.
+              </div>
+            </div>
+
+            <button type="button" className="ios-install-done" onClick={() => setShowIOSGuide(false)}>
+              فهمیدم
+            </button>
+          </div>
+        </div>
+      )}
+      
     </div>
   );
 }
