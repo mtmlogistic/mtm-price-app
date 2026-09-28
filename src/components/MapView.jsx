@@ -855,225 +855,286 @@ function ClosePopups({ popupCloseKey }) {
         {portDestinations.map((destination) => {
           const isSelectedPort = selectedPortName && normalizePortName(destination.name) === selectedPortName;
 
-          return (
-            <div key={`port-${destination.id}`}>
-              {/* =========================================
-                  COLORED PORT CIRCLE
-              ========================================= */}
+        
+return (
+  <div key={`port-${destination.id}`}>
+    {/* =========================================
+        COLORED PORT CIRCLE
+    ========================================= */}
 
-              <CircleMarker
-                center={[destination.lat, destination.lng]}
-                radius={isSelectedPort ? 13 : 10}
-                pathOptions={{
-                  color: isSelectedPort ? '#941e26' : '#2563eb',
+    <CircleMarker
+      center={[destination.lat, destination.lng]}
+      radius={isSelectedPort ? 13 : 10}
+      pathOptions={{
+        color: isSelectedPort ? '#941e26' : '#2563eb',
+        weight: isSelectedPort ? 4 : 3,
+        opacity: 1,
+        fillColor: isSelectedPort ? '#dc3838' : '#3b82f6',
+        fillOpacity: isSelectedPort ? 0.55 : 0.45,
+      }}
+    />
 
-                  weight: isSelectedPort ? 4 : 3,
+    {/* =========================================
+        PORT ICON + POPUP
+    ========================================= */}
 
-                  opacity: 1,
-
-                  fillColor: isSelectedPort ? '#dc3838' : '#3b82f6',
-
-                  fillOpacity: isSelectedPort ? 0.55 : 0.45,
-                }}
-              />
-
-              {/* =========================================
-                  PORT ICON + POPUP
-              ========================================= */}
-
-             {String(destination.port?.avill).toLowerCase() === 'false' ? (
-  <div
-    style={{
-      color: '#dc2626',
-      fontWeight: 800,
-      fontSize: '13px',
-      textAlign: 'center',
-      direction: 'rtl',
-      lineHeight: '1.8',
-      padding: '10px 5px',
-    }}
-  >
-    انتقالات در حال حاضر از این پورت قابل دسترس نیست!
-  </div>
-) : (
-  <Marker
-    position={[destination.lat, destination.lng]}
-    icon={isSelectedPort ? selectedPortIcon : portIcon}
-  >
-    <Popup
-      maxWidth={320}
-      minWidth={280}
-      maxHeight={420}
-      className="port-popup"
-    >
+    {String(destination.port?.avill).toLowerCase() === 'false' ? (
       <div
-        className="map-popup"
-        dir="rtl"
         style={{
-          width: '100%',
-          maxHeight: '380px',
-          overflowY: 'auto',
-          overflowX: 'hidden',
-          boxSizing: 'border-box',
-          paddingLeft: '5px',
+          color: '#dc2626',
+          fontWeight: 800,
+          fontSize: '13px',
+          textAlign: 'center',
           direction: 'rtl',
-          textAlign: 'right',
+          lineHeight: '1.8',
+          padding: '10px 5px',
         }}
       >
-        {/* PORT NAME */}
-        <div
-          className="popup-title"
-          style={{
-            fontWeight: 900,
-            fontSize: '16px',
-          }}
-        >
-          {destination.name}
-        </div>
-
-        <div
-          className="popup-state"
-          style={{
-            textAlign: 'right',
-          }}
-        >
-          پورت مقصد
-        </div>
-
-        <div className="popup-divider" />
-
-        {/* SHIP */}
-        <div
-          className="popup-price"
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            direction: 'rtl',
-            width: '100%',
-          }}
-        >
-          <span
-            style={{
-              textAlign: 'right',
-              fontWeight: 700,
-            }}
-          >
-            {destination.port?.country === 'Canada'
-              ? 'کرایه انتقال کانادا الی امارات'
-              : 'کرایه انتقال امریکا الی ترکیه'}
-          </span>
-
-          <strong
-            dir="ltr"
-            style={{
-              direction: 'ltr',
-              textAlign: 'left',
-              fontWeight: 900,
-            }}
-          >
-            ${Number(destination.port?.ship || 0).toLocaleString()}
-          </strong>
-        </div>
-
-        {/* HERAT */}
-        <div
-          className="popup-price"
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            direction: 'rtl',
-            width: '100%',
-          }}
-        >
-          <span
-            style={{
-              textAlign: 'right',
-              fontWeight: 700,
-            }}
-          >
-            {destination.port?.country === 'Canada'
-              ? 'امارات الی افغانستان (اسلام قلعه)'
-              : 'ترکیه الی افغانستان (اسلام قلعه)'}
-          </span>
-
-          <strong
-            dir="ltr"
-            style={{
-              direction: 'ltr',
-              textAlign: 'left',
-              fontWeight: 900,
-            }}
-          >
-            ${Number(destination.port?.herat || 0).toLocaleString()}
-          </strong>
-        </div>
-
-        {/* TOTAL */}
-        <div
-          className="popup-total"
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            direction: 'rtl',
-            width: '100%',
-            marginTop: '5px',
-            paddingTop: '7px',
-            borderTop: '1px solid rgba(0,0,0,0.08)',
-          }}
-        >
-          <span
-            style={{
-              textAlign: 'right',
-              fontWeight: 900,
-            }}
-          >
-            مجموع
-          </span>
-
-          <strong
-            dir="ltr"
-            style={{
-              direction: 'ltr',
-              textAlign: 'left',
-              fontWeight: 950,
-              fontSize: '15px',
-            }}
-          >
-            ${Number(destination.port?.total || 0).toLocaleString()}
-          </strong>
-        </div>
-
-        {/* SELECT BUTTON */}
-        <button
-          type="button"
-          style={{
-            width: '100%',
-            marginTop: '10px',
-            padding: '9px',
-            border: 'none',
-            borderRadius: '10px',
-            background: '#2563eb',
-            color: '#fff',
-            fontWeight: 800,
-            cursor: 'pointer',
-          }}
-          onClick={() => {
-            if (onSelectPort && selectedLocation) {
-              onSelectPort(selectedLocation, destination.port);
-            }
-          }}
-        >
-          انتخاب پورت
-        </button>
+        انتقالات در حال حاضر از این پورت قابل دسترس نیست!
       </div>
-    </Popup>
-  </Marker>
-)}
+    ) : (
+      <Marker
+        position={[destination.lat, destination.lng]}
+        icon={isSelectedPort ? selectedPortIcon : portIcon}
+      >
+        <Popup
+          maxWidth={320}
+          minWidth={280}
+          maxHeight={420}
+          className="port-popup"
+        >
+          <div
+            className="map-popup"
+            dir="rtl"
+            style={{
+              width: '100%',
+              maxHeight: '380px',
+              overflowY: 'auto',
+              overflowX: 'hidden',
+              boxSizing: 'border-box',
+              paddingLeft: '5px',
+              direction: 'rtl',
+              textAlign: 'right',
+            }}
+          >
+            {/* =========================================
+                PORT NAME
+            ========================================= */}
+
+            <div
+              className="popup-title"
+              style={{
+                fontWeight: 900,
+                fontSize: '16px',
+              }}
+            >
+              {destination.name}
             </div>
-          );
+
+            <div
+              className="popup-state"
+              style={{
+                textAlign: 'right',
+              }}
+            >
+              پورت مقصد
+            </div>
+
+            <div className="popup-divider" />
+
+            {/* =========================================
+                SHIP
+            ========================================= */}
+
+            <div
+              className="popup-price"
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                direction: 'rtl',
+                width: '100%',
+              }}
+            >
+              <span
+                style={{
+                  textAlign: 'right',
+                  fontWeight: 700,
+                }}
+              >
+                {destination.port?.country === 'Canada'
+                  ? 'کرایه انتقال کانادا الی امارات'
+                  : 'کرایه انتقال امریکا الی ترکیه'}
+              </span>
+
+              <strong
+                dir="ltr"
+                style={{
+                  direction: 'ltr',
+                  textAlign: 'left',
+                  fontWeight: 900,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {Number(destination.port?.ship || 0) === 0
+                  ? 'نامعلوم'
+                  : `$${Number(destination.port.ship).toLocaleString()}`}
+              </strong>
+            </div>
+
+            {/* =========================================
+                HERAT
+            ========================================= */}
+
+            <div
+              className="popup-price"
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                direction: 'rtl',
+                width: '100%',
+              }}
+            >
+              <span
+                style={{
+                  textAlign: 'right',
+                  fontWeight: 700,
+                }}
+              >
+                {destination.port?.country === 'Canada'
+                  ? 'امارات الی افغانستان (اسلام قلعه)'
+                  : 'ترکیه الی افغانستان (اسلام قلعه)'}
+              </span>
+
+              <strong
+                dir="ltr"
+                style={{
+                  direction: 'ltr',
+                  textAlign: 'left',
+                  fontWeight: 900,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {Number(destination.port?.herat || 0) === 0
+                  ? 'نامعلوم'
+                  : `$${Number(destination.port.herat).toLocaleString()}`}
+              </strong>
+            </div>
+
+            {/* =========================================
+                SUPPORT MESSAGE
+            ========================================= */}
+
+            {(Number(destination.port?.ship || 0) === 0 ||
+              Number(destination.port?.herat || 0) === 0) && (
+              <div
+                style={{
+                  marginTop: '8px',
+                  padding: '7px 8px',
+                  borderRadius: '8px',
+                  background: '#fff7ed',
+                  color: '#c2410c',
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  lineHeight: '1.7',
+                  textAlign: 'center',
+                  direction: 'rtl',
+                }}
+              >
+                یکی از کرایه‌ها نامعلوم است.
+                <br />
+                لطفاً برای دریافت قیمت با پشتیبانی تماس بگیرید.
+              </div>
+            )}
+
+            {/* =========================================
+                TOTAL
+            ========================================= */}
+
+            <div
+              className="popup-total"
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                direction: 'rtl',
+                width: '100%',
+                marginTop: '5px',
+                paddingTop: '7px',
+                borderTop: '1px solid rgba(0,0,0,0.08)',
+              }}
+            >
+              <span
+                style={{
+                  textAlign: 'right',
+                  fontWeight: 900,
+                }}
+              >
+                مجموع
+              </span>
+
+              {Number(destination.port?.ship || 0) === 0 ||
+              Number(destination.port?.herat || 0) === 0 ? (
+                <strong
+                  style={{
+                    color: '#dc2626',
+                    fontSize: '13px',
+                    fontWeight: 900,
+                    textAlign: 'left',
+                    direction: 'rtl',
+                  }}
+                >
+                  نامعلوم
+                </strong>
+              ) : (
+                <strong
+                  dir="ltr"
+                  style={{
+                    direction: 'ltr',
+                    textAlign: 'left',
+                    fontWeight: 950,
+                    fontSize: '15px',
+                  }}
+                >
+                  ${Number(destination.port?.total || 0).toLocaleString()}
+                </strong>
+              )}
+            </div>
+
+            {/* =========================================
+                SELECT BUTTON
+            ========================================= */}
+
+            <button
+              type="button"
+              style={{
+                width: '100%',
+                marginTop: '10px',
+                padding: '9px',
+                border: 'none',
+                borderRadius: '10px',
+                background: '#2563eb',
+                color: '#fff',
+                fontWeight: 800,
+                cursor: 'pointer',
+              }}
+              onClick={() => {
+                if (onSelectPort && selectedLocation) {
+                  onSelectPort(selectedLocation, destination.port);
+                }
+              }}
+            >
+              انتخاب پورت
+            </button>
+          </div>
+        </Popup>
+      </Marker>
+    )}
+  </div>
+);
+
+
         })}
 
         {/* =================================================
@@ -1090,232 +1151,344 @@ function ClosePopups({ popupCloseKey }) {
 
           const isSelected = selectedLocation && selectedLocation.id === location.id;
 
-          return (
-            <Marker
-              key={location.id}
-              position={[lat, lng]}
-              icon={isSelected ? selectedIcon : defaultIcon}
-              eventHandlers={{
-                click: (e) => {
-                  if (onSelectLocation) {
-                    onSelectLocation(location);
-                  }
+          
+return (
+  <Marker
+    key={location.id}
+    position={[lat, lng]}
+    icon={isSelected ? selectedIcon : defaultIcon}
+    eventHandlers={{
+      click: (e) => {
+        if (onSelectLocation) {
+          onSelectLocation(location);
+        }
 
-                  // Popup همین Location را باز نگه می‌داریم
-                  setTimeout(() => {
-                    e.target.openPopup();
-                  }, 50);
-                },
+        // Popup همین Location را باز نگه می‌داریم
+        setTimeout(() => {
+          e.target.openPopup();
+        }, 50);
+      },
+    }}
+  >
+    <Popup>
+      <div className="map-popup">
+        {/* =================================
+            LOCATION
+        ================================= */}
+
+        {location.branch && (
+          <div className="popup-branch">
+            <div className="popup-title">
+              {location.branch}
+            </div>
+          </div>
+        )}
+
+        <div className="popup-state">
+          {location.city || location.branch || 'Location'}
+        </div>
+
+        {location.state && (
+          <div className="popup-state">
+            {location.state}
+          </div>
+        )}
+
+        <div className="popup-divider" />
+
+        {/* =================================
+            PORTS LIST
+        ================================= */}
+
+        {Array.isArray(location.ports) &&
+          location.ports.length > 0 && (
+            <div
+              style={{
+                maxHeight: '180px',
+                overflowY: 'auto',
+                overflowX: 'hidden',
+                paddingLeft: '2px',
+                paddingRight: '1px',
+                marginTop: '8px',
+                direction: 'rtl',
               }}
             >
-              <Popup>
-                <div className="map-popup">
-                  {/* =================================
-                      LOCATION
-                  ================================= */}
+              {location.ports.map((port, index) => {
+                const isSelectedPort =
+                  selectedPortName &&
+                  normalizePortName(port?.name) === selectedPortName;
 
-                  {location.branch && (
-                    <div className="popup-branch">
-                      <div className="popup-title">{location.branch}</div>
-                    </div>
-                  )}
+                const isUnavailable =
+                  String(port?.avill).toLowerCase() === 'false';
 
-                  <div className="popup-state">{location.city || location.branch || 'Location'}</div>
+                const isCanada =
+                  String(port?.country || '').trim().toLowerCase() ===
+                  'canada';
 
-                  {location.state && <div className="popup-state">{location.state}</div>}
+                const shipPrice = Number(port?.ship || 0);
+                const heratPrice = Number(port?.herat || 0);
+                const totalPrice = Number(port?.total || 0);
 
-                  <div className="popup-divider" />
+                const isShipUnknown = shipPrice === 0;
+                const isHeratUnknown = heratPrice === 0;
+                const isTotalUnknown =
+                  isShipUnknown || isHeratUnknown;
 
-                  {/* =================================
-                      PORTS LIST
-                  ================================= */}
+                {/* =================================
+                    UNAVAILABLE PORT
+                ================================= */}
 
-                  {Array.isArray(location.ports) && location.ports.length > 0 && (
+                if (isUnavailable) {
+                  return (
                     <div
+                      key={`${location.id}-${index}`}
                       style={{
-                        maxHeight: '180px',
-                        overflowY: 'auto',
-                        overflowX: 'hidden',
-                        paddingLeft: '2px',
-                        paddingRight: '1px',
-                        marginTop: '8px',
+                        color: '#dc2626',
+                        fontWeight: 800,
+                        fontSize: '13px',
+                        textAlign: 'center',
                         direction: 'rtl',
+                        padding: '8px 4px',
+                        lineHeight: '1.8',
                       }}
                     >
-                      {location.ports.map((port, index) => {
-                        const isSelectedPort = selectedPortName && normalizePortName(port?.name) === selectedPortName;
-
-                       const isUnavailable =
-  String(port?.avill).toLowerCase() === 'false';
-
-return isUnavailable ? (
-  <div
-    key={`${location.id}-${index}`}
-    style={{
-      color: '#dc2626',
-      fontWeight: 800,
-      fontSize: '13px',
-      textAlign: 'center',
-      direction: 'rtl',
-      padding: '8px 4px',
-      lineHeight: '1.8',
-    }}
-  >
-    انتقالات از این برنچ فعلاً در دسترس نیست!
-  </div>
-) : (
-  <div
-    className="popup-port"
-    key={`${location.id}-${index}`}
-    style={{
-      cursor: 'pointer',
-      border: isSelectedPort
-        ? '2px solid #2563eb'
-        : '1px solid rgba(0,0,0,0.08)',
-      background: isSelectedPort ? '#eff6ff' : '#ffffff',
-      borderRadius: '10px',
-      padding: '9px',
-      marginBottom: '7px',
-      direction: 'rtl',
-      textAlign: 'right',
-    }}
-    onClick={() => {
-      if (onSelectPort) {
-        onSelectPort(location, port);
-      }
-    }}
-  >
-    {/* PORT NAME */}
-    <div
-      className="popup-port-name"
-      style={{
-        color: isSelectedPort ? '#2563eb' : '#111827',
-        fontWeight: 800,
-        fontSize: '13px',
-        marginBottom: '7px',
-        textAlign: 'right',
-      }}
-    >
-      {isSelectedPort && '🔵 '}
-      🚢 {port?.name || 'پورت نامعلوم'}
-    </div>
-
-    {/* SHIP */}
-    <div
-      className="popup-price"
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        direction: 'rtl',
-      }}
-    >
-      <span
-        style={{
-          textAlign: 'right',
-          fontWeight: 700,
-        }}
-      >
-        {port?.country === 'Canada'
-          ? 'کانادا ← امارات'
-          : 'آمریکا ← ترکیه'}
-      </span>
-
-      <strong
-        dir="ltr"
-        style={{
-          direction: 'ltr',
-          textAlign: 'left',
-        }}
-      >
-        ${Number(port?.ship || 0).toLocaleString()}
-      </strong>
-    </div>
-
-    {/* HERAT */}
-    <div
-      className="popup-price"
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        direction: 'rtl',
-      }}
-    >
-      <span
-        style={{
-          textAlign: 'right',
-          fontWeight: 700,
-        }}
-      >
-        {port?.country === 'Canada'
-          ? 'امارات ← اسلام قلعه'
-          : 'ترکیه ← اسلام قلعه'}
-      </span>
-
-      <strong
-        dir="ltr"
-        style={{
-          direction: 'ltr',
-          textAlign: 'left',
-        }}
-      >
-        ${Number(port?.herat || 0).toLocaleString()}
-      </strong>
-    </div>
-
-    {/* TOTAL */}
-    <div
-      className="popup-total"
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        direction: 'rtl',
-        marginTop: '5px',
-        paddingTop: '6px',
-        borderTop: '1px solid rgba(0,0,0,0.08)',
-      }}
-    >
-      <span
-        style={{
-          textAlign: 'right',
-          fontWeight: 900,
-        }}
-      >
-        مجموع
-      </span>
-
-      <strong
-        dir="ltr"
-        style={{
-          direction: 'ltr',
-          textAlign: 'left',
-          fontWeight: 900,
-        }}
-      >
-        ${Number(port?.total || 0).toLocaleString()}
-      </strong>
-    </div>
-  </div>
-);
-                      })}
+                      انتقالات از این برنچ فعلاً در دسترس نیست!
                     </div>
-                  )}
+                  );
+                }
 
-                  {/* =================================
-                      COORDINATES
-                  ================================= */}
+                {/* =================================
+                    AVAILABLE PORT
+                ================================= */}
 
-                  <div className="popup-coordinates">
-                    {Number(location.lat).toFixed(5)}
-                    {' , '}
-                    {Number(location.lng).toFixed(5)}
+                return (
+                  <div
+                    className="popup-port"
+                    key={`${location.id}-${index}`}
+                    style={{
+                      cursor: 'pointer',
+                      border: isSelectedPort
+                        ? '2px solid #2563eb'
+                        : '1px solid rgba(0,0,0,0.08)',
+                      background: isSelectedPort
+                        ? '#eff6ff'
+                        : '#ffffff',
+                      borderRadius: '10px',
+                      padding: '9px',
+                      marginBottom: '7px',
+                      direction: 'rtl',
+                      textAlign: 'right',
+                    }}
+                    onClick={() => {
+                      if (onSelectPort) {
+                        onSelectPort(location, port);
+                      }
+                    }}
+                  >
+                    {/* =================================
+                        PORT NAME
+                    ================================= */}
+
+                    <div
+                      className="popup-port-name"
+                      style={{
+                        color: isSelectedPort
+                          ? '#2563eb'
+                          : '#111827',
+                        fontWeight: 800,
+                        fontSize: '13px',
+                        marginBottom: '7px',
+                        textAlign: 'right',
+                      }}
+                    >
+                      {isSelectedPort && '🔵 '}
+                      🚢 {port?.name || 'پورت نامعلوم'}
+                    </div>
+
+                    {/* =================================
+                        SHIP
+                    ================================= */}
+
+                    <div
+                      className="popup-price"
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        direction: 'rtl',
+                        width: '100%',
+                      }}
+                    >
+                      <span
+                        style={{
+                          textAlign: 'right',
+                          fontWeight: 700,
+                        }}
+                      >
+                        {isCanada
+                          ? 'کانادا ← امارات'
+                          : 'آمریکا ← ترکیه'}
+                      </span>
+
+                      <strong
+                        style={{
+                          direction: 'ltr',
+                          textAlign: 'left',
+                          fontWeight: 900,
+                          whiteSpace: 'nowrap',
+                          color: isShipUnknown
+                            ? '#dc2626'
+                            : 'inherit',
+                        }}
+                      >
+                        {isShipUnknown
+                          ? 'نامعلوم'
+                          : `$${shipPrice.toLocaleString()}`}
+                      </strong>
+                    </div>
+
+                    {/* =================================
+                        HERAT
+                    ================================= */}
+
+                    <div
+                      className="popup-price"
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        direction: 'rtl',
+                        width: '100%',
+                      }}
+                    >
+                      <span
+                        style={{
+                          textAlign: 'right',
+                          fontWeight: 700,
+                        }}
+                      >
+                        {isCanada
+                          ? 'امارات ← اسلام قلعه'
+                          : 'ترکیه ← اسلام قلعه'}
+                      </span>
+
+                      <strong
+                        style={{
+                          direction: 'ltr',
+                          textAlign: 'left',
+                          fontWeight: 900,
+                          whiteSpace: 'nowrap',
+                          color: isHeratUnknown
+                            ? '#dc2626'
+                            : 'inherit',
+                        }}
+                      >
+                        {isHeratUnknown
+                          ? 'نامعلوم'
+                          : `$${heratPrice.toLocaleString()}`}
+                      </strong>
+                    </div>
+
+                    {/* =================================
+                        SUPPORT MESSAGE
+                    ================================= */}
+
+                    {isTotalUnknown && (
+                      <div
+                        style={{
+                          marginTop: '8px',
+                          padding: '7px 8px',
+                          borderRadius: '8px',
+                          background: '#fff7ed',
+                          color: '#c2410c',
+                          fontSize: '12px',
+                          fontWeight: 800,
+                          lineHeight: '1.7',
+                          textAlign: 'center',
+                          direction: 'rtl',
+                        }}
+                      >
+                        یکی از کرایه‌ها نامعلوم است.
+                        <br />
+                        لطفاً برای دریافت قیمت با پشتیبانی
+                        تماس بگیرید.
+                      </div>
+                    )}
+
+                    {/* =================================
+                        TOTAL
+                    ================================= */}
+
+                    <div
+                      className="popup-total"
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        direction: 'rtl',
+                        width: '100%',
+                        marginTop: '5px',
+                        paddingTop: '6px',
+                        borderTop:
+                          '1px solid rgba(0,0,0,0.08)',
+                      }}
+                    >
+                      <span
+                        style={{
+                          textAlign: 'right',
+                          fontWeight: 900,
+                        }}
+                      >
+                        مجموع
+                      </span>
+
+                      {isTotalUnknown ? (
+                        <strong
+                          style={{
+                            direction: 'rtl',
+                            textAlign: 'left',
+                            fontWeight: 900,
+                            fontSize: '13px',
+                            color: '#dc2626',
+                          }}
+                        >
+                          نامعلوم
+                        </strong>
+                      ) : (
+                        <strong
+                          dir="ltr"
+                          style={{
+                            direction: 'ltr',
+                            textAlign: 'left',
+                            fontWeight: 900,
+                            fontSize: '15px',
+                          }}
+                        >
+                          ${totalPrice.toLocaleString()}
+                        </strong>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </Popup>
-            </Marker>
-          );
+                );
+              })}
+            </div>
+          )}
+
+        {/* =================================
+            COORDINATES
+        ================================= */}
+
+        {/* <div className="popup-coordinates">
+          {Number(location.lat).toFixed(5)}
+          {' , '}
+          {Number(location.lng).toFixed(5)}
+        </div> */}
+      </div>
+    </Popup>
+  </Marker>
+);
+
+
         })}
 
         {/* =================================================

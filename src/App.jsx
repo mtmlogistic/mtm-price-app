@@ -575,7 +575,8 @@ function App() {
 
                   {/* PORTS */}
 
-                 <div className="ports">
+        
+<div className="ports">
   {Array.isArray(location.ports) &&
     location.ports.map((port, index) => {
       const isPortSelected =
@@ -586,7 +587,17 @@ function App() {
         String(port?.avill).toLowerCase() === 'false';
 
       const isCanada =
-        String(port?.country).toLowerCase() === 'canada';
+        String(port?.country || '').toLowerCase() === 'canada';
+
+      const shipPrice = Number(port?.ship || 0);
+      const heratPrice = Number(port?.herat || 0);
+      const totalPrice = Number(port?.total || 0);
+
+      const isShipUnknown = shipPrice === 0;
+      const isHeratUnknown = heratPrice === 0;
+
+      const isPriceUnavailable =
+        isShipUnknown || isHeratUnknown;
 
       return (
         <div
@@ -603,73 +614,171 @@ function App() {
           }}
         >
           {isUnavailable ? (
-            /* UNAVAILABLE */
+            /* =========================================
+               UNAVAILABLE
+            ========================================= */
+
             <div
               style={{
                 color: '#dc2626',
                 fontWeight: '700',
                 textAlign: 'center',
                 padding: '10px 5px',
+                lineHeight: '1.8',
               }}
             >
-              !انتقالات از این برنچ فعلاً در دسترس نیست
+              انتقالات از این برنچ فعلاً در دسترس نیست!
             </div>
           ) : (
             <>
-              {/* PORT NAME */}
+              {/* =========================================
+                  PORT NAME
+              ========================================= */}
+
               <div className="port-name">
-                🚢 {port.name}
+                🚢 {port?.name || 'پورت نامعلوم'}
               </div>
 
-              {/* PRICES */}
+              {/* =========================================
+                  PRICES
+              ========================================= */}
+
               <div className="prices">
 
-                {/* SHIP */}
+                {/* =====================================
+                    SHIP
+                ===================================== */}
+
                 <div>
                   <span>
-                    {isCanada ? '🇨🇦 → 🇦🇪' : '🇺🇸 → 🇹🇷'}
+                    {isCanada
+                      ? '🇨🇦 → 🇦🇪'
+                      : '🇺🇸 → 🇹🇷'}
                   </span>
 
-                  <strong>
-                    ${Number(port.ship || 0).toLocaleString()}
+                  <strong
+                    style={{
+                      color: isShipUnknown
+                        ? '#dc2626'
+                        : 'inherit',
+                      fontSize: isShipUnknown
+                        ? '11px'
+                        : undefined,
+                    }}
+                  >
+                    {isShipUnknown
+                      ? 'قیمت فعلاً در دسترس نیست'
+                      : `$${shipPrice.toLocaleString()}`}
                   </strong>
                 </div>
 
-                {/* HERAT */}
+                {/* =====================================
+                    HERAT
+                ===================================== */}
+
                 <div>
                   <span>
-                    {isCanada ? '🇦🇪 → 🇦🇫' : '🇹🇷 → 🇦🇫'}
+                    {isCanada
+                      ? '🇦🇪 → 🇦🇫'
+                      : '🇹🇷 → 🇦🇫'}
                   </span>
 
-                  <strong>
-                    ${Number(port.herat || 0).toLocaleString()}
+                  <strong
+                    style={{
+                      color: isHeratUnknown
+                        ? '#dc2626'
+                        : 'inherit',
+                      fontSize: isHeratUnknown
+                        ? '11px'
+                        : undefined,
+                    }}
+                  >
+                    {isHeratUnknown
+                      ? 'قیمت فعلاً در دسترس نیست'
+                      : `$${heratPrice.toLocaleString()}`}
                   </strong>
                 </div>
 
-                {/* TOTAL */}
+                {/* =====================================
+                    TOTAL
+                ===================================== */}
+
                 <div
-                  className="total clickable-total"
+                  className={`total ${
+                    !isPriceUnavailable
+                      ? 'clickable-total'
+                      : ''
+                  }`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    openCalculator(location, port);
+
+                    if (!isPriceUnavailable) {
+                      openCalculator(location, port);
+                    }
+                  }}
+                  style={{
+                    cursor: isPriceUnavailable
+                      ? 'default'
+                      : 'pointer',
                   }}
                 >
-                  <FaCalculator className="total-calculator-bg" />
+                  {!isPriceUnavailable && (
+                    <FaCalculator className="total-calculator-bg" />
+                  )}
 
                   <span>Total</span>
 
-                  <strong>
-                    ${Number(port.total || 0).toLocaleString()}
+                  <strong
+                    style={{
+                      color: isPriceUnavailable
+                        ? '#dc2626'
+                        : 'inherit',
+                      fontSize: isPriceUnavailable
+                        ? '11px'
+                        : undefined,
+                    }}
+                  >
+                    {isPriceUnavailable
+                      ? 'قیمت فعلاً در دسترس نیست'
+                      : `$${totalPrice.toLocaleString()}`}
                   </strong>
                 </div>
 
               </div>
+
+              {/* =========================================
+                  SUPPORT MESSAGE
+              ========================================= */}
+
+              {isPriceUnavailable && (
+                <div
+                  style={{
+                    marginTop: '8px',
+                    padding: '8px 7px',
+                    borderRadius: '8px',
+                    background: '#fff7ed',
+                    color: '#c2410c',
+                    fontSize: '12px',
+                    fontWeight: 800,
+                    lineHeight: '1.7',
+                    textAlign: 'center',
+                    direction: 'rtl',
+                  }}
+                >
+                  قیمت فعلاً در دسترس نیست.
+                  <br />
+                  برای دریافت قیمت با پشتیبانی تماس بگیرید.
+                </div>
+              )}
+
             </>
           )}
         </div>
       );
     })}
 </div>
+
+
 
                   {/* COORDINATES */}
 
