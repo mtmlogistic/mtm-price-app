@@ -52,6 +52,7 @@ button {
 
   padding: 0 12px;
 
+
   background: #fbfbfb;
   color: #000;
 
@@ -9555,4 +9556,32 @@ body:has(.calculator-overlay) {
   font-weight: 900;
 
   cursor: pointer;
+}
+
+
+
+.header {
+  position: relative;
+   overflow: visible !important;
+}
+
+.header-content {
+  position: relative;
+   overflow: visible !important;
+}
+
+.header-actions {
+  position: relative;
+   overflow: visible !important;
+}
+
+.titles-page-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 999999;
+
+  overflow-y: auto;
+
+  background: #f5f7fb;
 }

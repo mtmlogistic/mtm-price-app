@@ -7,17 +7,23 @@ import { FaDownload, FaMobileAlt, FaTimes } from 'react-icons/fa';
 import VehicleRates from './components/VehicleRates';
 import MapView from './components/MapView';
 import Calculator from './components/Calculator';
-
+import HeaderMenu from './components/HeaderMenu';
 import { getSavedData, saveData } from './utils/storage';
 import { checkForUpdate } from './utils/github';
-
+import TitlesPage from './components/TitlesPage';
+import AboutPage from './components/AboutPage';
+import ContactPage from './components/ContactPage';
 import './App.css';
 import VehicleSales from './components/VehicleSales';
 
 function App() {
 
 
-
+  
+  const [titlesPage, setTitlesPage] = useState(false);
+  const [aboutPage, setAboutPage] = useState(false);
+  const [contactPage, setContactPage] = useState(false);
+  
 const [installPrompt, setInstallPrompt] = useState(null);
 const [showInstallButton, setShowInstallButton] = useState(false);
 const [showIOSGuide, setShowIOSGuide] = useState(false);
@@ -547,6 +553,17 @@ const handleInstallApp = async () => {
                 <span>نصب برنامه</span>
               </button>
             )}
+            <HeaderMenu
+              onOpenTitles={() => {
+                setTitlesPage(true);
+              }}
+              onOpenAbout={() => {
+                setAboutPage(true);
+              }}
+              onOpenContact={() => {
+                setContactPage(true);
+              }}
+            />
           </div>
         </div>
       </header>
@@ -849,6 +866,23 @@ const handleInstallApp = async () => {
         {vehicleSalesPage && <VehicleSales onClose={() => setVehicleSalesPage(false)} />}
       </main>
 
+      {titlesPage && (
+        <div className="titles-page-overlay">
+          <TitlesPage onClose={() => setTitlesPage(false)} />
+        </div>
+      )}
+      {contactPage && (
+        <div className="titles-page-overlay">
+          <ContactPage onClose={() => setContactPage(false)} />
+        </div>
+      )}
+      {aboutPage && (
+        <div className="titles-page-overlay">
+          <AboutPage onClose={() => setAboutPage(false)} />
+        </div>
+      )}
+      
+
       {/* =====================================
           CALCULATOR
       ===================================== */}
@@ -956,7 +990,6 @@ const handleInstallApp = async () => {
           </div>
         </div>
       )}
-      
     </div>
   );
 }
