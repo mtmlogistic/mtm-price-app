@@ -1,5 +1,15 @@
 import React, { useMemo, useState } from 'react';
-import { FaSearch, FaTimes, FaFileAlt, FaCheckCircle, FaExclamationTriangle, FaClock, FaDollarSign, FaShieldAlt } from 'react-icons/fa';
+import {
+  FaSearch,
+  FaTimes,
+  FaFileAlt,
+  FaCheckCircle,
+  FaExclamationTriangle,
+  FaClock,
+  FaDollarSign,
+  FaShieldAlt,
+  FaArrowRight,
+} from 'react-icons/fa';
 
 import titlesData from '../data/titlesData';
 import './TitlesPage.css';
@@ -8,9 +18,9 @@ export default function TitlesPage({ onClose }) {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('all');
 
-  /* =========================================
+  /* =========================================================
      ALL TITLES
-  ========================================= */
+  ========================================================= */
 
   const allTitles = useMemo(() => {
     const exportable = Array.isArray(titlesData?.exportable)
@@ -29,7 +39,9 @@ export default function TitlesPage({ onClose }) {
         }))
       : [];
 
-    const permanentlyNotExportable = Array.isArray(titlesData?.permanentlyNotExportable)
+    const permanentlyNotExportable = Array.isArray(
+      titlesData?.permanentlyNotExportable
+    )
       ? titlesData.permanentlyNotExportable.map((item) => ({
           ...item,
           exportable: false,
@@ -37,38 +49,54 @@ export default function TitlesPage({ onClose }) {
         }))
       : [];
 
-    return [...exportable, ...nonExportable, ...permanentlyNotExportable];
+    return [
+      ...exportable,
+      ...nonExportable,
+      ...permanentlyNotExportable,
+    ];
   }, []);
 
-  /* =========================================
+  /* =========================================================
      FILTER
-  ========================================= */
+  ========================================================= */
 
   const filteredTitles = useMemo(() => {
     const value = search.trim().toLowerCase();
 
     return allTitles.filter((item) => {
-      /* -------------------------------
-         CATEGORY
-      -------------------------------- */
+      /* CATEGORY */
 
       if (category === 'exportable' && !item.exportable) {
         return false;
       }
 
-      if (category === 'nonExportable' && item.exportable) {
+      if (
+        category === 'nonExportable' &&
+        (item.exportable || item.permanentlyNotExportable)
+      ) {
         return false;
       }
 
-      /* -------------------------------
-         SEARCH
-      -------------------------------- */
+      if (
+        category === 'permanent' &&
+        !item.permanentlyNotExportable
+      ) {
+        return false;
+      }
+
+      /* SEARCH */
 
       if (!value) {
         return true;
       }
 
-      const searchableText = [item.titleEn, item.titleFa, item.description, item.code, item.state, item.id, item.title]
+      const searchableText = [
+        item.titleEn,
+        item.titleFa,
+        item.description,
+        item.info,
+        item.id,
+      ]
         .filter(Boolean)
         .join(' ')
         .toLowerCase();
@@ -77,52 +105,99 @@ export default function TitlesPage({ onClose }) {
     });
   }, [allTitles, search, category]);
 
-  /* =========================================
+  /* =========================================================
      COUNTS
-  ========================================= */
+  ========================================================= */
 
-  const exportableCount = allTitles.filter((item) => item.exportable).length;
+  const exportableCount = allTitles.filter(
+    (item) => item.exportable
+  ).length;
 
-  const nonExportableCount = allTitles.filter((item) => !item.exportable).length;
+  const nonExportableCount = allTitles.filter(
+    (item) =>
+      !item.exportable && !item.permanentlyNotExportable
+  ).length;
 
-  /* =========================================
+  const permanentCount = allTitles.filter(
+    (item) => item.permanentlyNotExportable
+  ).length;
+
+  /* =========================================================
+     DESCRIPTION
+  ========================================================= */
+
+  const getDescription = (item) => {
+    return (
+      item.info ||
+      item.description ||
+      'برای این تایتل معلومات ثبت نشده است.'
+    );
+  };
+
+  /* =========================================================
      RENDER
-  ========================================= */
+  ========================================================= */
 
   return (
     <div className="titles-page" dir="rtl">
-      {/* =========================================
+
+      {/* =====================================================
           HEADER
-      ========================================= */}
+      ===================================================== */}
 
       <header className="titles-page-header">
+
         <div className="titles-header-info">
+
           <div className="titles-header-icon">
             <FaFileAlt />
           </div>
 
           <div className="titles-header-text">
-            <h1>تایتل‌های موتر</h1>
 
-            <p>بررسی معلومات تایتل و شرایط صادرات موتر</p>
+            <div className="titles-header-eyebrow">
+              MTM TITLE DATABASE
+            </div>
+
+            <h1>معلومات تایتل‌های موتر</h1>
+
+            <p>
+              معلومات انواع اسناد موتر و وضعیت آن‌ها برای صادرات
+            </p>
+
           </div>
+
         </div>
 
         {onClose && (
-          <button type="button" className="titles-close-button" onClick={onClose} aria-label="بستن">
+          <button
+            type="button"
+            className="titles-close-button"
+            onClick={onClose}
+            aria-label="بستن"
+          >
             <FaTimes />
           </button>
         )}
+
       </header>
 
-      {/* =========================================
-          SEARCH + FILTER
-      ========================================= */}
+
+      {/* =====================================================
+          CONTROLS
+      ===================================================== */}
 
       <section className="titles-controls">
+
         <div className="titles-search">
-          {search && (
-            <button type="button" className="titles-search-clear" onClick={() => setSearch('')} aria-label="پاک کردن جستجو">
+
+           {search && (
+            <button
+              type="button"
+              className="titles-search-clear"
+              onClick={() => setSearch('')}
+              aria-label="پاک کردن جستجو"
+            >
               <FaTimes />
             </button>
           )}
@@ -131,346 +206,430 @@ export default function TitlesPage({ onClose }) {
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="جستجوی تایتل، ایالت یا کد..."
+            placeholder="جستجوی نام تایتل یا نوع سند..."
             style={{
               direction: 'ltr',
               textAlign: 'left',
             }}
           />
+<FaSearch className="titles-search-icon" />
+         
 
-          <FaSearch className="titles-search-icon" />
         </div>
 
+
         <div className="titles-filters">
-          <button type="button" className={category === 'all' ? 'active' : ''} onClick={() => setCategory('all')}>
+
+          <button
+            type="button"
+            className={category === 'all' ? 'active' : ''}
+            onClick={() => setCategory('all')}
+          >
             همه
           </button>
 
-          <button type="button" className={category === 'exportable' ? 'active' : ''} onClick={() => setCategory('exportable')}>
+          <button
+            type="button"
+            className={
+              category === 'exportable' ? 'active' : ''
+            }
+            onClick={() => setCategory('exportable')}
+          >
             قابل صادرات
           </button>
 
-          <button type="button" className={category === 'nonExportable' ? 'active' : ''} onClick={() => setCategory('nonExportable')}>
-            غیرقابل صادرات
+          <button
+            type="button"
+            className={
+              category === 'nonExportable' ? 'active' : ''
+            }
+            onClick={() => setCategory('nonExportable')}
+          >
+            مصرف اضافی
           </button>
+
+          <button
+            type="button"
+            className={
+              category === 'permanent' ? 'active' : ''
+            }
+            onClick={() => setCategory('permanent')}
+          >
+            غیرقابل خروج
+          </button>
+
         </div>
+
       </section>
 
-      {/* =========================================
-          RESULT BAR
-      ========================================= */}
 
-      <div className="titles-result-bar">
-        <span>
-          تعداد تایتل‌ها:
+      {/* =====================================================
+          SUMMARY
+      ===================================================== */}
+
+      <div className="titles-summary">
+
+        <div className="titles-result-count">
+          <span>نمایش</span>
           <strong>{filteredTitles.length}</strong>
-        </span>
-
-        <div className="titles-result-summary">
-          <span>
-            قابل صادرات:
-            <strong>{exportableCount}</strong>
-          </span>
-
-          <span >
-            غیرقابل صادرات:
-            <strong>{nonExportableCount}</strong>
-          </span>
+          <span>نوع تایتل</span>
         </div>
+
+
+        <div className="titles-summary-items">
+
+          <div className="titles-summary-item">
+            <span className="summary-dot summary-dot-red" />
+            <span>قابل صادرات</span>
+            <strong>{exportableCount}</strong>
+          </div>
+
+          <div className="titles-summary-item">
+            <span className="summary-dot summary-dot-dark" />
+            <span>مصرف اضافی</span>
+            <strong>{nonExportableCount}</strong>
+          </div>
+
+          <div className="titles-summary-item">
+            <span className="summary-dot summary-dot-black" />
+            <span>غیرقابل خروج</span>
+            <strong>{permanentCount}</strong>
+          </div>
+
+        </div>
+
       </div>
 
-      {/* =========================================
-          CARDS
-      ========================================= */}
+
+      {/* =====================================================
+          GRID
+      ===================================================== */}
 
       <main className="titles-grid">
+
         {filteredTitles.map((item, index) => {
-          /* =====================================
-             STATE CODE
-          ===================================== */
 
-          const stateCode = item.code || item.state || item.titleEn?.match(/^[A-Z]{2}/)?.[0] || '—';
+          const isPermanent =
+            item.permanentlyNotExportable === true;
 
-          /* =====================================
-             TITLES
-          ===================================== */
+          const isExportable =
+            item.exportable === true;
 
-          const titleEnglish = item.titleEn || item.title || 'Unknown Title';
+          const description = getDescription(item);
 
-          const titlePersian = item.titleFa || 'عنوان تایتل';
+          const urgentTime =
+            item.urgentTime ||
+            (isExportable ? '—' : '۱ هفته');
 
-          /* =====================================
-             TIMES
-          ===================================== */
+          const normalTime =
+            item.normalTime ||
+            (isExportable ? '—' : '۳ تا ۴ هفته');
 
-          const urgentTime = item.urgentTime || (item.exportable ? '—' : '۱ هفته');
+          const urgent =
+            item.urgent ??
+            (isExportable ? '$0' : '$450');
 
-          const normalTime = item.normalTime || (item.exportable ? '—' : '۳ تا ۴ هفته');
-
-          /* =====================================
-             PRICES
-          ===================================== */
-
-          const urgent = item.urgent ?? (item.exportable ? '$0' : '$450');
-
-          const normal = item.normal ?? (item.exportable ? '$0' : '$350');
-
-          /* =====================================
-             PERMANENT STATUS
-          ===================================== */
-
-          const isPermanent = item.permanentlyNotExportable === true;
-
-          /* =====================================
-             CARD CLASS
-          ===================================== */
+          const normal =
+            item.normal ??
+            (isExportable ? '$0' : '$350');
 
           const cardClass = [
             'title-card',
-            item.exportable ? 'title-card-exportable' : 'title-card-nonexportable',
-            isPermanent ? 'title-card-permanent' : '',
-          ]
-            .filter(Boolean)
-            .join(' ');
+
+            isExportable
+              ? 'title-card-exportable'
+              : isPermanent
+                ? 'title-card-permanent'
+                : 'title-card-nonexportable',
+          ].join(' ');
 
           return (
-            <article key={`${item.exportable ? 'export' : 'non'}-${item.id}-${index}`} className={cardClass}>
-              {/* =================================
-                  TOP
-              ================================= */}
+            <article
+              key={`${item.id}-${index}`}
+              className={cardClass}
+            >
 
-              <div className="title-card-top">
-                <div className="title-number">#{item.id}</div>
+              {/* =================================================
+                  CARD HEADER
+              ================================================= */}
 
-                {/* -------------------------------
-                    PERMANENTLY NOT EXPORTABLE
-                -------------------------------- */}
+              <div className="title-card-header">
 
-                {isPermanent ? (
-                  <div className="title-status title-status-danger">
-                    <div className="title-status-icon">
+                <div className="title-card-index">
+                  <span>MTM</span>
+                  <b>
+                    {String(item.id).padStart(2, '0')}
+                  </b>
+                </div>
+
+
+                <div
+                  className={
+                    isPermanent
+                      ? 'title-badge title-badge-danger'
+                      : isExportable
+                        ? 'title-badge title-badge-success'
+                        : 'title-badge title-badge-warning'
+                  }
+                >
+
+                  {isPermanent ? (
+                    <>
                       <FaExclamationTriangle />
-                    </div>
-
-                    <div className="title-status-content">
-                      <strong>اصلاً قابل خروج نیست</strong>
-
-                      <p>{item.description}</p>
-
-                      <small>پرداخت مصرف اضافی باعث قابل صادرات شدن این سند نمی‌شود.</small>
-                    </div>
-                  </div>
-                ) : item.exportable ? (
-                  /* -------------------------------
-                     EXPORTABLE
-                  -------------------------------- */
-
-                  <div className="title-status title-status-success">
-                    <div className="title-status-icon">
+                      <span>غیرقابل خروج</span>
+                    </>
+                  ) : isExportable ? (
+                    <>
                       <FaCheckCircle />
-                    </div>
-
-                    <div className="title-status-content">
-                      <strong>قابل صادرات</strong>
-
-                      <p>این تایتل در فهرست تایتل‌های قابل صادرات قرار دارد.</p>
-
-                      {/* <small>معلومات اختصاصی این تایتل در بخش پایین نمایش داده شده است.</small> */}
-                    </div>
-                  </div>
-                ) : (
-                  /* -------------------------------
-                     EXTRA COST
-                  -------------------------------- */
-
-                  <div className="title-status title-status-warning">
-                    <div className="title-status-icon">
+                      <span>قابل صادرات</span>
+                    </>
+                  ) : (
+                    <>
                       <FaDollarSign />
-                    </div>
+                      <span>مصرف اضافی</span>
+                    </>
+                  )}
 
-                    <div className="title-status-content">
-                      <strong>دارای مصرف اضافی</strong>
+                </div>
 
-                      <p>{item.description}</p>
-                    </div>
-
-                    <div className="title-prices">
-                      <div className="title-price-item">
-                        <span>عاجل</span>
-
-                        <b>{urgent}</b>
-
-                        <small>{urgentTime}</small>
-                      </div>
-
-                      <div className="title-price-item">
-                        <span>عادی</span>
-
-                        <b>{normal}</b>
-
-                        <small>{normalTime}</small>
-                      </div>
-                    </div>
-                  </div>
-                )}
               </div>
 
-              {/* =================================
-                  STATE
-              ================================= */}
 
-              <div className="title-state-row">
-                <span className="title-state-label">STATE</span>
-
-                <span className="title-state-code">{stateCode}</span>
-              </div>
-
-              {/* =================================
-                  ENGLISH + DARI TITLE
-              ================================= */}
+              {/* =================================================
+                  TITLE
+              ================================================= */}
 
               <div className="title-card-name">
-                <div className="title-english">{titleEnglish}</div>
 
-                <h2>{titlePersian}</h2>
+                <div className="title-type-label">
+                  TITLE TYPE
+                </div>
+
+                <div className="title-english">
+                  {item.titleEn || 'UNKNOWN TITLE'}
+                </div>
+
+                <h2>
+                  {item.titleFa || 'عنوان تایتل'}
+                </h2>
+
               </div>
 
-              {/* =================================
-                  TITLE INFORMATION
-              ================================= */}
+
+              {/* =================================================
+                  INFORMATION
+              ================================================= */}
 
               <div
-                className={`title-description ${
-                  isPermanent ? 'title-description-danger' : item.exportable ? 'title-description-success' : 'title-description-warning'
-                }`}
+                className={
+                  isPermanent
+                    ? 'title-description title-description-danger'
+                    : isExportable
+                      ? 'title-description title-description-success'
+                      : 'title-description title-description-warning'
+                }
               >
+
                 <div className="title-description-icon">
-                  {isPermanent ? <FaExclamationTriangle /> : item.exportable ? <FaFileAlt /> : <FaDollarSign />}
+
+                  {isPermanent ? (
+                    <FaExclamationTriangle />
+                  ) : isExportable ? (
+                    <FaFileAlt />
+                  ) : (
+                    <FaDollarSign />
+                  )}
+
                 </div>
+
 
                 <div className="title-description-content">
-                  <strong>معلومات این تایتل</strong>
 
-                  <p>{item.description || 'برای این تایتل معلومات ثبت نشده است.'}</p>
+                  <strong>
+                    معلومات تایتل
+                  </strong>
+
+                  <p>
+                    {description}
+                  </p>
+
                 </div>
+
               </div>
 
-              {/* =================================
-                  EXPORTABLE STATUS
-              ================================= */}
 
-              {item.exportable && (
+              {/* =================================================
+                  EXPORTABLE
+              ================================================= */}
+
+              {isExportable && (
                 <div className="title-clear-status">
+
                   <div className="title-clear-icon">
                     <FaShieldAlt />
                   </div>
 
                   <div className="title-clear-content">
-                    <strong>قابل صادرات — بدون مصرف اضافی</strong>
 
-                    <span>این تایتل در فهرست تایتل‌های قابل صادرات قرار دارد و برای صادرات آن مصرف اضافی در نظر گرفته نشده است.</span>
+                    <strong>
+                      قابل صادرات
+                    </strong>
+
+                    <span>
+                      طبق دسته‌بندی فعلی MTM، برای این نوع تایتل
+                      مصرف اضافی در نظر گرفته نشده است.
+                    </span>
+
                   </div>
 
-                  <div className="title-clear-check">
-                    <FaCheckCircle />
-                  </div>
+                  <FaCheckCircle className="title-clear-check" />
+
                 </div>
               )}
 
-              {/* =================================
-                  PERMANENTLY NOT EXPORTABLE
-              ================================= */}
 
-              {isPermanent && (
-                <div className="title-extra-cost title-permanent-warning">
-                  <div className="title-extra-header">
-                    <div className="title-extra-icon">
-                      <FaExclamationTriangle />
-                    </div>
+              {/* =================================================
+                  NON EXPORTABLE
+              ================================================= */}
 
-                    <div>
-                      <strong>غیرقابل خروج</strong>
-
-                      <span>برای این تایتل هیچ مصرف پردازشی نمایش داده نمی‌شود؛ پرداخت مصرف نیز وضعیت آن را تغییر نمی‌دهد.</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* =================================
-                  NORMAL NON EXPORTABLE
-              ================================= */}
-
-              {!item.exportable && !isPermanent && (
+              {!isExportable && !isPermanent && (
                 <div className="title-extra-cost">
+
                   <div className="title-extra-header">
+
                     <div className="title-extra-icon">
                       <FaDollarSign />
                     </div>
 
                     <div>
-                      <strong>دارای مصرف اضافی</strong>
 
-                      <span>برای آماده‌سازی این تایتل مصرف جداگانه در نظر گرفته شده است.</span>
+                      <strong>
+                        نیازمند پروسه اضافی
+                      </strong>
+
+                      <span>
+                        برای آماده‌سازی این نوع سند، هزینه و
+                        زمان پردازش جداگانه در نظر گرفته شده است.
+                      </span>
+
                     </div>
+
                   </div>
 
+
                   <div className="title-cost-options">
+
                     <div className="title-cost-box">
+
                       <span>
                         <FaClock />
                         عاجل
                       </span>
 
-                      <strong>{urgentTime}</strong>
+                      <strong>
+                        {urgentTime}
+                      </strong>
 
-                      <b>{urgent}</b>
+                      <b>
+                        {urgent}
+                      </b>
+
                     </div>
 
+
                     <div className="title-cost-box">
+
                       <span>
                         <FaClock />
                         عادی
                       </span>
 
-                      <strong>{normalTime}</strong>
+                      <strong>
+                        {normalTime}
+                      </strong>
 
-                      <b>{normal}</b>
+                      <b>
+                        {normal}
+                      </b>
+
                     </div>
+
                   </div>
+
                 </div>
               )}
 
-              {/* =================================
+
+              {/* =================================================
+                  PERMANENT
+              ================================================= */}
+
+              {isPermanent && (
+                <div className="title-permanent-box">
+
+                  <div className="title-permanent-icon">
+                    <FaExclamationTriangle />
+                  </div>
+
+                  <div>
+
+                    <strong>
+                      این نوع سند قابل تبدیل نیست
+                    </strong>
+
+                    <span>
+                      پرداخت هزینه اضافی وضعیت این سند را
+                      به تایتل قابل صادرات تبدیل نمی‌کند.
+                    </span>
+
+                  </div>
+
+                </div>
+              )}
+
+
+              {/* =================================================
                   FOOTER
-              ================================= */}
+              ================================================= */}
 
               <div className="title-card-footer">
+
                 <span>
                   <FaFileAlt />
-                  وضعیت سند
+                  MTM TITLE DATABASE
                 </span>
 
-                <span className="title-code">{stateCode}</span>
+                <span className="title-card-number">
+                  #{String(item.id).padStart(2, '0')}
+                </span>
+
               </div>
+
             </article>
           );
         })}
+
       </main>
 
-      {/* =========================================
+
+      {/* =====================================================
           EMPTY
-      ========================================= */}
+      ===================================================== */}
 
       {filteredTitles.length === 0 && (
         <div className="titles-empty">
+
           <div className="titles-empty-icon">
             <FaSearch />
           </div>
 
-          <h3>تایتلی پیدا نشد</h3>
+          <h3>
+            تایتلی پیدا نشد
+          </h3>
 
-          <p>نام تایتل، کد ایالت یا نوع سند را بررسی کنید.</p>
+          <p>
+            نام انگلیسی، نام فارسی یا نوع سند را بررسی کنید.
+          </p>
 
           <button
             type="button"
@@ -481,8 +640,10 @@ export default function TitlesPage({ onClose }) {
           >
             نمایش همه تایتل‌ها
           </button>
+
         </div>
       )}
+
     </div>
   );
 }

@@ -12,9 +12,11 @@ import { getSavedData, saveData } from './utils/storage';
 import { checkForUpdate } from './utils/github';
 import TitlesPage from './components/TitlesPage';
 import AboutPage from './components/AboutPage';
+import WhatsAppChannels from './components/WhatsAppChannels';
 import ContactPage from './components/ContactPage';
 import './App.css';
 import VehicleSales from './components/VehicleSales';
+
 
 function App() {
 
@@ -23,10 +25,13 @@ function App() {
   const [titlesPage, setTitlesPage] = useState(false);
   const [aboutPage, setAboutPage] = useState(false);
   const [contactPage, setContactPage] = useState(false);
+  const [whatsapppage, setWhatsapppage] = useState(false);
+
+
   
-const [installPrompt, setInstallPrompt] = useState(null);
-const [showInstallButton, setShowInstallButton] = useState(false);
-const [showIOSGuide, setShowIOSGuide] = useState(false);
+  const [installPrompt, setInstallPrompt] = useState(null);
+  const [showInstallButton, setShowInstallButton] = useState(false);
+  const [showIOSGuide, setShowIOSGuide] = useState(false);
 
 useEffect(() => {
   // آیا برنامه قبلاً نصب شده؟
@@ -563,6 +568,9 @@ const handleInstallApp = async () => {
               onOpenContact={() => {
                 setContactPage(true);
               }}
+               onOpenWhatsAppChannels={() => {
+                setWhatsapppage(true);
+              }}
             />
           </div>
         </div>
@@ -879,6 +887,11 @@ const handleInstallApp = async () => {
       {aboutPage && (
         <div className="titles-page-overlay">
           <AboutPage onClose={() => setAboutPage(false)} />
+        </div>
+      )}
+      {whatsapppage && (
+        <div className="titles-page-overlay">
+          <WhatsAppChannels onClose={() => setWhatsapppage(false)} />
         </div>
       )}
       

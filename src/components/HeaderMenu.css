@@ -1,11 +1,11 @@
 /* =========================================================
-   HEADER MENU
+   MTM HEADER MENU
+   BLACK • RED • WHITE
 ========================================================= */
 
 .header-menu-wrapper {
   position: relative;
   z-index: 9999;
-
   direction: rtl;
 }
 
@@ -15,8 +15,8 @@
 ========================================================= */
 
 .header-menu-button {
-  width: 43px;
-  height: 43px;
+  width: 45px;
+  height: 45px;
 
   display: flex;
   align-items: center;
@@ -24,53 +24,50 @@
 
   padding: 0;
 
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 13px;
 
   background:
     linear-gradient(
       145deg,
-      rgba(255, 255, 255, 0.72),
-      rgba(255, 255, 255, 0.38)
+      rgba(255, 255, 255, 0.94),
+      rgba(245, 245, 245, 0.82)
     );
 
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 
-  color: #1e293b;
+  color: #111111;
 
-  font-size: 18px;
+  font-size: 19px;
 
   cursor: pointer;
 
   box-shadow:
-    0 7px 20px rgba(15, 23, 42, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    0 8px 24px rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
 
   transition:
-    transform 0.2s ease,
     background 0.2s ease,
     color 0.2s ease,
+    border-color 0.2s ease,
     box-shadow 0.2s ease,
-    border-color 0.2s ease;
+    transform 0.2s ease;
 }
 
 
 .header-menu-button:hover {
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255, 255, 255, 0.92),
-      rgba(255, 255, 255, 0.62)
-    );
+  background: #ffffff;
 
-  border-color: rgba(255, 255, 255, 0.9);
+  color: #ff0000;
+
+  border-color: rgba(255, 0, 0, 0.35);
 
   box-shadow:
-    0 10px 26px rgba(15, 23, 42, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    0 11px 28px rgba(0, 0, 0, 0.13),
+    0 0 0 3px rgba(255, 0, 0, 0.06);
 
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 
@@ -80,19 +77,15 @@
 
 
 .header-menu-button.active {
-  background:
-    linear-gradient(
-      145deg,
-      #eff6ff,
-      #dbeafe
-    );
+  background: #111111;
 
-  border-color: #bfdbfe;
+  color: #ff0000;
 
-  color: #2563eb;
+  border-color: #111111;
 
   box-shadow:
-    0 8px 22px rgba(37, 99, 235, 0.16);
+    0 9px 25px rgba(0, 0, 0, 0.20),
+    0 0 0 3px rgba(255, 0, 0, 0.08);
 }
 
 
@@ -106,29 +99,21 @@
   top: calc(100% + 11px);
   right: 0;
 
-  width: 310px;
+  width: 325px;
 
   overflow: hidden;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255, 255, 255, 0.96),
-      rgba(248, 250, 252, 0.94)
-    );
+  background: #ffffff;
 
-  border: 1px solid rgba(255, 255, 255, 0.95);
+  border: 1px solid #e2e2e2;
   border-radius: 20px;
 
   box-shadow:
-    0 25px 65px rgba(15, 23, 42, 0.16),
-    0 8px 25px rgba(15, 23, 42, 0.07),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    0 25px 65px rgba(0, 0, 0, 0.16),
+    0 8px 25px rgba(0, 0, 0, 0.07);
 
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-
-  animation: menuDrop 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation:
+    menuDrop 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 
@@ -160,20 +145,21 @@
   align-items: center;
   justify-content: space-between;
 
-  padding: 17px 16px 16px;
+  padding: 18px 17px 17px;
 
   background:
     linear-gradient(
       135deg,
-      rgba(239, 246, 255, 0.9),
-      rgba(248, 250, 252, 0.72)
+      #111111 0%,
+      #181818 68%,
+      #990000 100%
     );
 
-  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+  border-bottom: 1px solid #222222;
 }
 
 
-/* خط بالای منو */
+/* Red top line */
 
 .menu-top::before {
   content: '';
@@ -186,13 +172,7 @@
 
   height: 3px;
 
-  background:
-    linear-gradient(
-      90deg,
-      #2563eb,
-      #06b6d4,
-      #2563eb
-    );
+  background: #ff0000;
 }
 
 
@@ -204,54 +184,63 @@
   display: flex;
   flex-direction: column;
 
-  gap: 2px;
+  gap: 3px;
 
   min-width: 0;
 }
 
 
 .menu-brand span {
-  color: #0f172a;
+  color: #ffffff;
 
-  font-size: 21px;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 22px;
+
   font-weight: 950;
 
   line-height: 1.1;
 
   letter-spacing: 1.5px;
-}
-
-
-.menu-brand small {
-  color: #64748b;
-
-  font-size: 8px;
-  font-weight: 800;
-
-  letter-spacing: 1.7px;
 
   direction: ltr;
 }
 
 
-/* نقطه برند */
+.menu-brand small {
+  color: #d0d0d0;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  direction: ltr;
+}
+
+
+/* Red brand line */
 
 .menu-brand::after {
   content: '';
 
-  width: 27px;
+  width: 34px;
   height: 3px;
 
-  margin-top: 5px;
+  margin-top: 6px;
 
   border-radius: 20px;
 
-  background:
-    linear-gradient(
-      90deg,
-      #2563eb,
-      #60a5fa
-    );
+  background: #ff0000;
 }
 
 
@@ -260,8 +249,8 @@
 ========================================================= */
 
 .menu-close {
-  width: 35px;
-  height: 35px;
+  width: 36px;
+  height: 36px;
 
   display: flex;
   align-items: center;
@@ -271,30 +260,31 @@
 
   padding: 0;
 
-  border: 1px solid rgba(148, 163, 184, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 10px;
 
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.08);
 
-  color: #64748b;
+  color: #dddddd;
 
   cursor: pointer;
 
   font-size: 14px;
 
-  box-shadow:
-    0 3px 10px rgba(15, 23, 42, 0.05);
-
   transition:
     background 0.18s ease,
     color 0.18s ease,
+    border-color 0.18s ease,
     transform 0.18s ease;
 }
 
 
 .menu-close:hover {
-  background: #fee2e2;
-  color: #dc2626;
+  background: #ff0000;
+
+  color: #ffffff;
+
+  border-color: #ff0000;
 
   transform: rotate(4deg);
 }
@@ -310,7 +300,8 @@
 ========================================================= */
 
 .menu-list {
-  padding: 9px;
+  padding: 10px;
+  background: #ffffff;
 }
 
 
@@ -328,12 +319,14 @@
 
   gap: 12px;
 
-  margin-bottom: 3px;
-  padding: 10px 9px;
+  margin-bottom: 4px;
+
+  padding: 11px 10px;
 
   box-sizing: border-box;
 
   border: 1px solid transparent;
+
   border-radius: 13px;
 
   background: transparent;
@@ -341,9 +334,10 @@
   cursor: pointer;
 
   direction: rtl;
+
   text-align: right;
 
-  color: #1e293b;
+  color: #222222;
 
   transition:
     background 0.18s ease,
@@ -362,14 +356,14 @@
   background:
     linear-gradient(
       90deg,
-      rgba(239, 246, 255, 0.9),
-      rgba(248, 250, 252, 0.8)
+      #fff5f5,
+      #ffffff
     );
 
-  border-color: rgba(191, 219, 254, 0.65);
+  border-color: #ffd0d0;
 
   box-shadow:
-    0 5px 16px rgba(37, 99, 235, 0.06);
+    0 6px 18px rgba(255, 0, 0, 0.06);
 
   transform: translateX(-2px);
 }
@@ -385,105 +379,101 @@
 ========================================================= */
 
 .menu-icon {
-  width: 39px;
-  height: 39px;
+  width: 41px;
+  height: 41px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  flex: 0 0 39px;
+  flex: 0 0 41px;
 
   border-radius: 11px;
 
-  background:
-    linear-gradient(
-      145deg,
-      #eff6ff,
-      #dbeafe
-    );
+  background: #f4f4f4;
 
-  color: #2563eb;
+  color: #222222;
 
-  font-size: 15px;
+  font-size: 16px;
 
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    inset 0 1px 0 #ffffff;
 
   transition:
     transform 0.18s ease,
     background 0.18s ease,
-    color 0.18s ease;
+    color 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 
 .menu-item:hover .menu-icon {
-  transform: scale(1.06);
+  transform: scale(1.07);
 
-  background:
-    linear-gradient(
-      145deg,
-      #2563eb,
-      #1d4ed8
-    );
+  background: #ff0000;
 
-  color: white;
+  color: #ffffff;
+
+  box-shadow:
+    0 6px 16px rgba(255, 0, 0, 0.18);
 }
 
 
 /* =========================================================
-   DIFFERENT ICON COLORS
+   INDIVIDUAL ICON COLORS
+   ALL BLACK / RED
 ========================================================= */
 
-/* تایتل */
+
+/* TITLE */
 
 .menu-item:nth-child(1) .menu-icon {
-  background: #eff6ff;
-  color: #2563eb;
+  background: #fff0f0;
+  color: #cc0000;
 }
 
 .menu-item:nth-child(1):hover .menu-icon {
-  background: #2563eb;
-  color: white;
+  background: #ff0000;
+  color: #ffffff;
 }
 
 
-/* موتر */
+/* VEHICLES */
 
 .menu-item:nth-child(2) .menu-icon {
-  background: #ecfdf5;
-  color: #059669;
+  background: #f2f2f2;
+  color: #111111;
 }
 
 .menu-item:nth-child(2):hover .menu-icon {
-  background: #059669;
-  color: white;
+  background: #111111;
+  color: #ffffff;
 }
 
 
-/* درباره ما */
+/* ABOUT */
 
 .menu-item:nth-child(3) .menu-icon {
-  background: #f5f3ff;
-  color: #7c3aed;
+  background: #f2f2f2;
+  color: #222222;
 }
 
 .menu-item:nth-child(3):hover .menu-icon {
-  background: #7c3aed;
-  color: white;
+  background: #111111;
+  color: #ffffff;
 }
 
 
-/* تماس */
+/* CONTACT */
 
 .menu-item:nth-child(4) .menu-icon {
-  background: #fff7ed;
-  color: #ea580c;
+  background: #fff0f0;
+  color: #cc0000;
 }
 
 .menu-item:nth-child(4):hover .menu-icon {
-  background: #ea580c;
-  color: white;
+  background: #ff0000;
+  color: #ffffff;
 }
 
 
@@ -496,19 +486,23 @@
 
   min-width: 0;
 
-  color: #1e293b;
+  color: #161616;
 
-  font-size: 13px;
-  font-weight: 800;
+  font-size: 14px;
 
-  line-height: 1.6;
+  font-weight: 850;
+
+  line-height: 1.7;
 
   white-space: nowrap;
+
+  transition:
+    color 0.18s ease;
 }
 
 
 .menu-item:hover .menu-title {
-  color: #0f172a;
+  color: #000000;
 }
 
 
@@ -517,8 +511,8 @@
 ========================================================= */
 
 .menu-arrow {
-  width: 25px;
-  height: 25px;
+  width: 27px;
+  height: 27px;
 
   display: flex;
   align-items: center;
@@ -526,13 +520,14 @@
 
   flex-shrink: 0;
 
-  border-radius: 7px;
+  border-radius: 8px;
 
-  background: #f8fafc;
+  background: #f4f4f4;
 
-  color: #94a3b8;
+  color: #777777;
 
-  font-size: 19px;
+  font-size: 18px;
+
   line-height: 1;
 
   transition:
@@ -543,52 +538,56 @@
 
 
 .menu-item:hover .menu-arrow {
-  background: #dbeafe;
-  color: #2563eb;
+  background: #ff0000;
+
+  color: #ffffff;
 
   transform: translateX(-2px);
 }
 
 
 /* =========================================================
-   FOOTER
+   MENU FOOTER
 ========================================================= */
 
 .menu-footer {
   position: relative;
 
-  padding: 12px 10px;
+  padding: 13px 10px;
 
   text-align: center;
 
-  color: #94a3b8;
+  color: #777777;
 
   font-size: 9px;
+
   font-weight: 700;
 
   letter-spacing: 0.3px;
 
-  background:
-    rgba(248, 250, 252, 0.72);
+  background: #fafafa;
 
-  border-top: 1px solid rgba(148, 163, 184, 0.13);
+  border-top: 1px solid #eeeeee;
 }
 
 
-/* نقطه های ظریف پایین */
+/* Red dots */
 
 .menu-footer::before {
   content: '•';
-  margin-left: 5px;
 
-  color: #60a5fa;
+  margin-left: 6px;
+
+  color: #ff0000;
 }
+
 
 .menu-footer::after {
   content: '•';
-  margin-right: 5px;
 
-  color: #60a5fa;
+  margin-right: 6px;
+
+  color: #ff0000;
 }
 
 
@@ -599,8 +598,8 @@
 @media (max-width: 600px) {
 
   .header-menu-button {
-    width: 40px;
-    height: 40px;
+    width: 41px;
+    height: 41px;
 
     border-radius: 12px;
 
@@ -612,7 +611,7 @@
     top: calc(100% + 9px);
 
     width: min(
-      310px,
+      325px,
       calc(100vw - 20px)
     );
 
@@ -621,12 +620,17 @@
 
 
   .menu-top {
-    padding: 15px 14px;
+    padding: 16px 14px;
   }
 
 
   .menu-brand span {
-    font-size: 19px;
+    font-size: 20px;
+  }
+
+
+  .menu-brand small {
+    font-size: 8px;
   }
 
 
@@ -636,22 +640,35 @@
 
 
   .menu-item {
-    padding: 10px 8px;
+    gap: 11px;
+
+    padding: 11px 8px;
   }
 
 
   .menu-icon {
-    width: 37px;
-    height: 37px;
+    width: 39px;
+    height: 39px;
 
-    flex-basis: 37px;
+    flex-basis: 39px;
+
+    font-size: 15px;
   }
 
 
   .menu-title {
-    font-size: 12px;
+    font-size: 13px;
+
+    font-weight: 850;
   }
 
+
+  .menu-arrow {
+    width: 26px;
+    height: 26px;
+
+    font-size: 17px;
+  }
 }
 
 
@@ -661,51 +678,90 @@
 
 @media (max-width: 380px) {
 
+  .header-menu-button {
+    width: 39px;
+    height: 39px;
+
+    font-size: 16px;
+  }
+
+
   .header-dropdown {
-    width: calc(100vw - 18px);
+    width: calc(100vw - 16px);
+
+    border-radius: 16px;
+  }
+
+
+  .menu-top {
+    padding: 14px 12px;
+  }
+
+
+  .menu-brand span {
+    font-size: 18px;
+  }
+
+
+  .menu-brand small {
+    font-size: 7px;
   }
 
 
   .menu-item {
     gap: 9px;
+
+    padding: 10px 7px;
   }
 
 
   .menu-icon {
-    width: 35px;
-    height: 35px;
+    width: 36px;
+    height: 36px;
 
-    flex-basis: 35px;
+    flex-basis: 36px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
   }
 
 
   .menu-title {
-    font-size: 11px;
+    font-size: 12px;
   }
 
+
+  .menu-arrow {
+    width: 24px;
+    height: 24px;
+
+    font-size: 16px;
+  }
+
+
+  .menu-footer {
+    padding: 11px 8px;
+
+    font-size: 8px;
+  }
 }
 
-.menu-arrow {
-  width: 25px;
-  height: 25px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* =========================================================
+   ACCESSIBILITY / TOUCH
+========================================================= */
 
-  flex-shrink: 0;
+.header-menu-button,
+.menu-close,
+.menu-item {
+  -webkit-tap-highlight-color: transparent;
+}
 
-  border-radius: 7px;
 
-  background: #f8fafc;
-
-  color: #94a3b8;
-
-  font-size: 19px;
-  line-height: 1;
-
-  transition:
-    background 0.18s ease,
-    color 0.18s ease,
-    transform 0.18s ease;
+.header-menu-button:focus-visible,
+.menu-close:focus-visible,
+.menu-item:focus-visible {
+  outline: 2px solid #ff0000;
+  outline-offset: 2px;
 }

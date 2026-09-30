@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { FaBars, FaTags, FaCarSide, FaInfoCircle, FaPhoneAlt, FaTimes, FaChevronLeft } from 'react-icons/fa';
-
+import { FaWhatsapp } from 'react-icons/fa6';
 import './HeaderMenu.css';
 
-export default function HeaderMenu({ onOpenTitles, onOpenAbout, onOpenContact, onOpenVehicleSales }) {
+export default function HeaderMenu({ onOpenTitles, onOpenAbout, onOpenContact, onOpenWhatsAppChannels }) {
   const [open, setOpen] = useState(false);
 
   const menuRef = useRef(null);
@@ -17,11 +17,11 @@ export default function HeaderMenu({ onOpenTitles, onOpenAbout, onOpenContact, o
       action: onOpenTitles,
     },
     {
-      id: 2,
-      title: 'موترهای فروشی',
-      icon: <FaCarSide />,
-      action: onOpenVehicleSales,
-    },
+  id: 2,
+  title: 'چینل‌های واتساپ',
+  icon: <FaWhatsapp />,
+  action: onOpenWhatsAppChannels,
+},
     {
       id: 3,
       title: 'درباره ما',
