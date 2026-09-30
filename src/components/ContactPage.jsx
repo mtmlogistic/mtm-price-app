@@ -65,24 +65,35 @@ export default function ContactPage({ onClose }) {
   };
 
   const sendEmail = () => {
-    window.location.href = 'mailto:Support@mtmGL.com';
+      window.location.href = 'mailto:matin.tamim.af@gmail.com';
   };
 
   const openMap = () => {
     window.open(
-      'https://www.google.com/maps/search/?api=1&query=12th+Street+Qala+e+Fatullah+Kabul+Afghanistan',
+      'https://www.google.com/maps/place/MTM+Logistic+Services/@34.5514982,69.1604909,17z/data=!3m1!4b1!4m6!3m5!1s0x38d16fc342ab024f:0x35da5318f28f6af4!8m2!3d34.5514982!4d69.1630658!16s%2Fg%2F11zymf_47l?entry=ttu&g_ep=EgoyMDI2MDkyNy4xIKXMDSoASAFQAw%3D%3D',
       '_blank',
       'noopener,noreferrer',
     );
   };
 
   return (
-    <div className="contact-page" dir="rtl">
+    <div className="contact-page" dir="rtl" 
+     style={{
+    paddingTop: '120px',
+  }}
+    >
       {/* =====================================================
           HEADER
       ===================================================== */}
 
-      <header className="contact-header">
+      <header className="contact-header"  style={{
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    width: '100%',
+    zIndex: 99999,
+  }}>
         <div className="contact-header-brand">
           <div className="contact-logo">
             <FaHeadset />

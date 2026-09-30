@@ -540,18 +540,18 @@ const handleInstallApp = async () => {
             <img src={`${import.meta.env.BASE_URL}LOGO.png`} alt="MTM" className="header-logo-image" />
           </div>
           <div className="header-actions">
-            {showUpdateStatus && (
+            {showUpdateStatus ? (
               <div className="update-status">
                 {updateStatus === 'updated' && '✅ اطلاعات جدید دریافت شد'}
                 {updateStatus === 'latest' && '✓ اطلاعات به‌روز است'}
                 {updateStatus === 'offline' && '📴 حالت آفلاین'}
               </div>
-            )}
-
-            <button type="button" className="vehicle-sales-header-button" onClick={() => setVehicleSalesPage(true)} title="موتر فروشی">
+            ):(<button type="button" className="vehicle-sales-header-button" onClick={() => setVehicleSalesPage(true)} title="موتر فروشی">
               <span>موتر فروشی</span>
               <FaCarSide />
-            </button>
+            </button>)}
+
+            
             {showInstallButton && (
               <button type="button" className="install-app-button" onClick={handleInstallApp} title="نصب برنامه">
                 <FaDownload />
@@ -648,8 +648,12 @@ const handleInstallApp = async () => {
             popupCloseKey={popupCloseKey}
             onClearSelectedLocation={clearSelectedLocation}
           />
+          
+         
         </div>
-
+ <div className="app-version">
+    v {appData?.version ?? 1}
+  </div>
         {/* ===================================
             LOCATIONS
         =================================== */}

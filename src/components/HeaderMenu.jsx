@@ -12,7 +12,7 @@ export default function HeaderMenu({ onOpenTitles, onOpenAbout, onOpenContact, o
   const menuItems = [
     {
       id: 1,
-      title: 'تمام تایتل‌ها',
+      title: 'تایتل‌ها',
       icon: <FaTags />,
       action: onOpenTitles,
     },

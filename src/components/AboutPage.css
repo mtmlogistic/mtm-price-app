@@ -158,8 +158,9 @@
   background:
     linear-gradient(
       135deg,
-      var(--mtm-red),
-      var(--mtm-red-dark)
+       rgba(210, 29, 62, 0.486),
+      rgba(244, 242, 242, 0.877)
+    
     );
 
   color: var(--mtm-white);
@@ -2613,8 +2614,8 @@
   }
 
   .about-logo {
-    width: 44px;
-    height: 44px;
+    width: 50px;
+    height: 50px;
 
     border-radius: 13px;
   }
@@ -3050,8 +3051,8 @@
   }
 
   .about-logo {
-    width: 42px;
-    height: 42px;
+    width: 50px;
+    height: 50px;
 
     border-radius: 12px;
   }
@@ -3245,3 +3246,9 @@
   }
 }
  
+
+.about-logo .header-logo-image {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+}

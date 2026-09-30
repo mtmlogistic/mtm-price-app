@@ -139,13 +139,22 @@ export default function TitlesPage({ onClose }) {
   ========================================================= */
 
   return (
-    <div className="titles-page" dir="rtl">
+    <div className="titles-page" dir="rtl"  style={{
+    paddingTop: '120px',
+  }}>
 
       {/* =====================================================
           HEADER
       ===================================================== */}
 
-      <header className="titles-page-header">
+      <header className="titles-page-header"  style={{
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    width: '100%',
+    zIndex: 99999,
+  }}>
 
         <div className="titles-header-info">
 

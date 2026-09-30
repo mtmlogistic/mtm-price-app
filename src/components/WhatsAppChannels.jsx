@@ -30,7 +30,7 @@ const whatsappChannels = [
       'در این چینل آخرین اخبار، تغییرات ریت شیپنگ، هزینه‌های انتقالات، وضعیت گمرکات و اطلاعیه‌های مهم مربوط به خدمات MTM منتشر می‌شود.',
     type: 'اخبار و اطلاعیه‌ها',
     icon: <FaBullhorn />,
-    link: '',
+    link: 'https://whatsapp.com/channel/0029Vb9QNB6InlqOYZHOka02',
     badge: 'MTM NEWS',
   },
 
@@ -134,13 +134,25 @@ const WhatsAppChannels = ({ onClose }) => {
     <div
       className="whatsapp-channels-page"
       dir="rtl"
+       style={{
+    paddingTop: '120px',
+  }}
     >
 
       {/* =====================================================
           HEADER
       ===================================================== */}
 
-      <header className="whatsapp-header">
+      <header className="whatsapp-header"   
+      style={{
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    width: '100%',
+    zIndex: 99999,
+  }}
+  >
 
         <div className="whatsapp-header-brand">
 
@@ -231,7 +243,7 @@ const WhatsAppChannels = ({ onClose }) => {
 
           <div className="hero-stat">
             <strong>05</strong>
-            <span>چینل مزایده</span>
+            <span>چینل موتر های اکشن/مزایده </span>
           </div>
 
           <div className="hero-stat">

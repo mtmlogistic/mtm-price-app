@@ -1001,7 +1001,7 @@ export default function MapView({
           }}
         />
 
-        <Marker position={[HORMUZ_STRAIT.lat, HORMUZ_STRAIT.lng]} icon={hormuzIcon}>
+        <Marker position={[HORMUZ_STRAIT.lat, HORMUZ_STRAIT.lng]} icon={hormuzIcon} zIndexOffset={1000}>
           <Popup maxWidth={340} minWidth={300} className="hormuz-popup">
             <div className="hormuz-popup-card" dir="rtl">
               {/* Header */}

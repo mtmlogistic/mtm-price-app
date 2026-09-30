@@ -30,15 +30,31 @@ import './AboutPage.css';
 
 export default function AboutPage({ onClose }) {
   return (
-    <div className="about-page" dir="rtl">
+    <div className="about-page" dir="rtl"
+    
+     style={{
+    paddingTop: '120px',
+  }}
+  >
       {/* =====================================================
           HEADER
       ===================================================== */}
 
-      <header className="about-header">
+      <header className="about-header"  style={{
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    width: '100%',
+    zIndex: 99999,
+  }}>
         <div className="about-header-brand">
           <div className="about-logo">
-            <span>MTM</span>
+             
+            <img src={`${import.meta.env.BASE_URL}LOGO.png`} alt="MTM" className="header-logo-image" 
+           
+            />
+           
           </div>
 
           <div className="about-header-text">
