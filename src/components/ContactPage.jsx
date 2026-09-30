@@ -282,7 +282,11 @@ export default function ContactPage({ onClose }) {
               <div className="contact-service-list">
                 <div>
                   <FaCheckCircle />
-                  <span>انتقال موتر از امریکا</span>
+                  <span>خریداری موتر از اکشن و لوکل</span>
+                </div>
+                <div>
+                  <FaCheckCircle />
+                  <span>انتقال موتر از امریکا، کانادا، امارات، ترکیه و چین</span>
                 </div>
                 <div>
                   <FaCheckCircle />

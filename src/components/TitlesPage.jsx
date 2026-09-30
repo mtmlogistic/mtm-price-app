@@ -85,7 +85,7 @@ export default function TitlesPage({ onClose }) {
 
           <div className="titles-header-text">
             <div className="titles-header-eyebrow">MTM TITLE DATABASE</div>
-            <h1>معلومات تایتل‌های موتر</h1>
+            <h1>معلومات تایتل‌ های موتر</h1>
             <p>معلومات انواع اسناد موتر و وضعیت آن‌ها برای صادرات</p>
           </div>
         </div>

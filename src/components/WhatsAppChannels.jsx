@@ -167,7 +167,7 @@ const WhatsAppChannels = ({ onClose }) => {
             </span>
 
             <h1>
-              چینل‌های واتساپ MTM
+              چینل‌ های واتساپ MTM
             </h1>
 
             <p>

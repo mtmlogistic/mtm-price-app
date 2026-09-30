@@ -1366,6 +1366,9 @@
   box-shadow:
     var(--mtm-shadow-hover);
 }
+.truck-reverse {
+  transform: scaleX(-1);
+}
 
 .mission-blue {
   background:
