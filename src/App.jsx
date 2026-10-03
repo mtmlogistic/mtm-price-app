@@ -20,7 +20,7 @@ import VehicleSales from './components/VehicleSales';
 
 function App() {
 
-
+const searchInputRef = useRef(null);
   
   const [titlesPage, setTitlesPage] = useState(false);
   const [aboutPage, setAboutPage] = useState(false);
@@ -546,12 +546,13 @@ const handleInstallApp = async () => {
                 {updateStatus === 'latest' && '✓ اطلاعات به‌روز است'}
                 {updateStatus === 'offline' && '📴 حالت آفلاین'}
               </div>
-            ):(<button type="button" className="vehicle-sales-header-button" onClick={() => setVehicleSalesPage(true)} title="موتر فروشی">
-              <span>موتر فروشی</span>
-              <FaCarSide />
-            </button>)}
+            ) : (
+              <button type="button" className="vehicle-sales-header-button" onClick={() => setVehicleSalesPage(true)} title="موتر فروشی">
+                <span>موتر فروشی</span>
+                <FaCarSide />
+              </button>
+            )}
 
-            
             {showInstallButton && (
               <button type="button" className="install-app-button" onClick={handleInstallApp} title="نصب برنامه">
                 <FaDownload />
@@ -568,7 +569,7 @@ const handleInstallApp = async () => {
               onOpenContact={() => {
                 setContactPage(true);
               }}
-               onOpenWhatsAppChannels={() => {
+              onOpenWhatsAppChannels={() => {
                 setWhatsapppage(true);
               }}
             />
@@ -589,12 +590,20 @@ const handleInstallApp = async () => {
           <FaSearch />
 
           <input
+            ref={searchInputRef}
             type="search"
             inputMode="search"
             enterKeyHint="search"
             placeholder="... جستجوی شهر، برنچ، ایالت یا پورت"
             value={search}
             onChange={(e) => handleSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                handleSearch(e.currentTarget.value);
+                e.currentTarget.blur();
+              }
+            }}
           />
 
           {search && (
@@ -648,12 +657,8 @@ const handleInstallApp = async () => {
             popupCloseKey={popupCloseKey}
             onClearSelectedLocation={clearSelectedLocation}
           />
-          
-         
         </div>
- <div className="app-version">
-    v {appData?.version ?? 1}
-  </div>
+        <div className="app-version">v {appData?.version ?? 1}</div>
         {/* ===================================
             LOCATIONS
         =================================== */}
@@ -898,7 +903,6 @@ const handleInstallApp = async () => {
           <WhatsAppChannels onClose={() => setWhatsapppage(false)} />
         </div>
       )}
-      
 
       {/* =====================================
           CALCULATOR

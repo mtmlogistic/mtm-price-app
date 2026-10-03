@@ -22,7 +22,7 @@
 .contact-page * {
   box-sizing: border-box;
 }
-.contact-header,
+
 .contact-hero,
 .contact-methods,
 .contact-main-grid,
@@ -32,24 +32,36 @@
   margin-left: auto;
   margin-right: auto;
 }
+ 
+
 .contact-header {
-  min-height: 82px;
-  margin-bottom: 16px;
-  padding: 13px 16px;
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto 18px;
+
+  padding: 15px 18px;
+
+  box-sizing: border-box;
+
   display: flex;
+
+  direction: rtl;
+
   align-items: center;
+
   justify-content: space-between;
-  gap: 16px;
-  position: sticky;
-  top: 10px;
-  z-index: 1000;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid rgba(225, 225, 225, 0.95);
-  border-radius: 19px;
+
+  gap: 15px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e5e5;
+
+  border-radius: 18px;
+
   box-shadow:
-    0 12px 35px rgba(0, 0, 0, 0.07),
-    0 2px 7px rgba(0, 0, 0, 0.03);
-  backdrop-filter: blur(18px);
+    0 8px 25px rgba(0, 0, 0, 0.06);
 }
 .contact-header-brand {
   min-width: 0;

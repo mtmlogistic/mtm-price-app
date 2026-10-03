@@ -43,7 +43,17 @@ export default function ContactPage({ onClose }) {
     );
   return (
     <div className="contact-page" dir="rtl">
-      <header className="contact-header">
+      <header
+        className="contact-header"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          width: '100%',
+          zIndex: 99999,
+        }}
+      >
         <div className="contact-header-brand">
           <div className="contact-logo">
             <FaHeadset />

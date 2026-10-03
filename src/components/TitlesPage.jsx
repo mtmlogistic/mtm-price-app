@@ -1,10 +1,12 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useRef } from 'react';
 import { FaSearch, FaTimes, FaFileAlt, FaCheckCircle, FaExclamationTriangle, FaClock, FaDollarSign, FaShieldAlt } from 'react-icons/fa';
 
 import titlesData from '../data/titlesData';
 import './TitlesPage.css';
 
 export default function TitlesPage({ onClose }) {
+
+  const searchInputRef = useRef(null);
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('all');
 
@@ -77,7 +79,17 @@ export default function TitlesPage({ onClose }) {
         paddingTop: '130px',
       }}
     >
-      <header className="titles-page-header">
+      <header
+        className="titles-page-header"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          width: '100%',
+          zIndex: 99999,
+        }}
+      >
         <div className="titles-header-info">
           <div className="titles-header-icon">
             <FaFileAlt />
@@ -111,11 +123,22 @@ export default function TitlesPage({ onClose }) {
             </button>
           )}
           <input
+            ref={searchInputRef}
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="جستجوی نام تایتل یا نوع سند..."
             aria-label="جستجوی تایتل"
+            enterKeyHint="search"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+
+                setTimeout(() => {
+                  e.currentTarget.blur();
+                }, 50);
+              }
+            }}
           />
           <FaSearch className="titles-search-icon" />
         </div>
