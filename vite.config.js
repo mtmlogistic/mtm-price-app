@@ -12,6 +12,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
 
       manifest: {
+        id: '/',
         name: 'MTM Price',
         short_name: 'MTM Price',
         description: 'MTM Price - Vehicle Transport Prices',
@@ -28,13 +29,13 @@ export default defineConfig({
 
         icons: [
           {
-            src: '/mtm-price-app/logo3.png',
+            src: '/logo3.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any maskable',
           },
           {
-            src: '/mtm-price-app/logo3.png',
+            src: '/logo3.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable',
