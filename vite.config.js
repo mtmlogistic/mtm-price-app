@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  base: '/mtm-price-app/',
+  base: '/',
 
   plugins: [
     react(),
@@ -16,8 +16,8 @@ export default defineConfig({
         short_name: 'MTM Price',
         description: 'MTM Price - Vehicle Transport Prices',
 
-        start_url: '/mtm-price-app/',
-        scope: '/mtm-price-app/',
+        start_url: '/',
+        scope: '/',
 
         display: 'standalone',
         orientation: 'portrait',
@@ -28,12 +28,12 @@ export default defineConfig({
 
         icons: [
           {
-            src: '/mtm-price-app/logo3.jpg',
+            src: '/logo3.jpg',
             sizes: '192x192',
             type: 'image/jpeg',
           },
           {
-            src: '/mtm-price-app/logo3.jpg',
+            src: '/logo3.jpg',
             sizes: '512x512',
             type: 'image/jpeg',
           },
@@ -43,7 +43,7 @@ export default defineConfig({
       workbox: {
         cleanupOutdatedCaches: true,
 
-        navigateFallback: '/mtm-price-app/index.html',
+        navigateFallback: '/index.html',
 
         runtimeCaching: [
           {
