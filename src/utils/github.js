@@ -1,4 +1,4 @@
-const DATA_URL = 'https://raw.githubusercontent.com/Ahmadi0101/mtm-price-data/main/data.json';
+const DATA_URL = 'https://raw.githubusercontent.com/mtmlogistic/mtm-price-data/main/data.json';
 
 export async function fetchRemoteData() {
   try {
