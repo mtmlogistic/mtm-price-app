@@ -123,23 +123,23 @@ export default function TitlesPage({ onClose }) {
             </button>
           )}
           <input
-            ref={searchInputRef}
-            type="search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="جستجوی نام تایتل یا نوع سند..."
-            aria-label="جستجوی تایتل"
-            enterKeyHint="search"
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
+  ref={searchInputRef}
+  type="search"
+  inputMode="search"
+  enterKeyHint="search"
+  placeholder="جستجوی نام تایتل یا نوع سند..."
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+  aria-label="جستجوی تایتل"
+  onKeyDown={(e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
 
-                setTimeout(() => {
-                  e.currentTarget.blur();
-                }, 50);
-              }
-            }}
-          />
+      setSearch(e.currentTarget.value);
+      e.currentTarget.blur();
+    }
+  }}
+/>
           <FaSearch className="titles-search-icon" />
         </div>
 
