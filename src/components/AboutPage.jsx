@@ -526,9 +526,9 @@ export default function AboutPage({ onClose }) {
 
             <div className="service-card-label">VEHICLE SOURCING</div>
 
-            <h3>خریداری موتر از امریکا و چین</h3>
+            <h3>خریداری موتر لوکل امریکا و چین</h3>
 
-            <p>پیدا کردن، خریداری و هماهنگی مراحل انتقال موتر از بازارهای امریکا و چین مطابق نیاز مشتری.</p>
+            <p>پیدا کردن، خریداری و هماهنگی مراحل انتقال موتر از بازارهای لوکل امریکا و چین مطابق نیاز مشتری.</p>
           </article>
 
           {/* 03 */}
@@ -794,7 +794,7 @@ export default function AboutPage({ onClose }) {
           <div className="premium-client-card">
             <span>03</span>
             <FaHandshake />
-            <strong>موتر فروشان</strong>
+            <strong>موتر فروشان/دیلران</strong>
             <small>Auto Dealers</small>
           </div>
 
