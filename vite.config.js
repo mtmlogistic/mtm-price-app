@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  base: '/',
+  base: '/mtm-price-app/',
 
   plugins: [
     react(),
@@ -12,13 +12,13 @@ export default defineConfig({
       registerType: 'autoUpdate',
 
       manifest: {
-        id: '/',
+        id: '/mtm-price-app/',
         name: 'MTM Price',
         short_name: 'MTM Price',
         description: 'MTM Price - Vehicle Transport Prices',
 
-        start_url: '/',
-        scope: '/',
+        start_url: '/mtm-price-app/',
+        scope: '/mtm-price-app/',
 
         display: 'standalone',
         orientation: 'portrait',
@@ -29,13 +29,13 @@ export default defineConfig({
 
         icons: [
           {
-            src: '/logo3.png',
+            src: '/mtm-price-app/logo3.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any maskable',
           },
           {
-            src: '/logo3.png',
+            src: '/mtm-price-app/logo3.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable',
@@ -46,12 +46,13 @@ export default defineConfig({
       workbox: {
         cleanupOutdatedCaches: true,
 
-        navigateFallback: '/index.html',
+        navigateFallback: '/mtm-price-app/index.html',
 
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/raw\.githubusercontent\.com\/.*/i,
             handler: 'NetworkFirst',
+
             options: {
               cacheName: 'mtm-price-data',
               networkTimeoutSeconds: 5,
