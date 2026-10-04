@@ -10,83 +10,6 @@
 }
 
 
-/* =========================================================
-   MAIN MENU BUTTON
-========================================================= */
-
-.header-menu-button {
-  width: 45px;
-  height: 45px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0;
-
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 13px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255, 255, 255, 0.94),
-      rgba(245, 245, 245, 0.82)
-    );
-
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-
-  color: #111111;
-
-  font-size: 19px;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.10),
-    inset 0 1px 0 rgba(255, 255, 255, 1);
-
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
-}
-
-
-.header-menu-button:hover {
-  background: #ffffff;
-
-  color: #ff0000;
-
-  border-color: rgba(255, 0, 0, 0.35);
-
-  box-shadow:
-    0 11px 28px rgba(0, 0, 0, 0.13),
-    0 0 0 3px rgba(255, 0, 0, 0.06);
-
-  transform: translateY(-2px);
-}
-
-
-.header-menu-button:active {
-  transform: scale(0.92);
-}
-
-
-.header-menu-button.active {
-  background: #111111;
-
-  color: #ff0000;
-
-  border-color: #111111;
-
-  box-shadow:
-    0 9px 25px rgba(0, 0, 0, 0.20),
-    0 0 0 3px rgba(255, 0, 0, 0.08);
-}
 
 
 /* =========================================================
@@ -590,6 +513,135 @@
   color: #ff0000;
 }
 
+/* /* =========================================================
+   MAIN MENU BUTTON
+========================================================= */
+
+.header-menu-button {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  margin: 0;
+
+  border: 1px solid #111111;
+  border-radius: 13px;
+
+  background: #ffffff;
+  color: #111111;
+
+  font-size: 19px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+
+  outline: none;
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.header-menu-button svg {
+  display: block;
+  width: 1em;
+  height: 1em;
+
+  color: inherit;
+  fill: currentColor;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.header-menu-button:hover {
+  background: #ffffff;
+  color: #ff0000;
+  border-color: #ff0000;
+
+  box-shadow:
+    0 11px 28px rgba(0, 0, 0, 0.13),
+    0 0 0 3px rgba(255, 0, 0, 0.06);
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   CLICK
+========================================================= */
+
+.header-menu-button:active {
+  transform: scale(0.92);
+}
+
+
+/* =========================================================
+   ACTIVE
+   منو باز است
+========================================================= */
+
+.header-menu-button.active {
+  background: #ffffff;
+  color: #ff0000;
+  border-color: #ff0000;
+
+  box-shadow:
+    0 9px 25px rgba(0, 0, 0, 0.15),
+    0 0 0 3px rgba(255, 0, 0, 0.06);
+}
+
+
+/* =========================================================
+   ACTIVE HOVER
+========================================================= */
+
+.header-menu-button.active:hover {
+  background: #ffffff;
+  color: #ff0000;
+  border-color: #ff0000;
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.header-menu-button:focus {
+  outline: none;
+}
+
+
+/* فقط فوکوس کیبورد */
+.header-menu-button:focus-visible {
+  outline: 2px solid #ff0000;
+  outline-offset: 2px;
+}
+
 
 /* =========================================================
    MOBILE
@@ -603,70 +655,104 @@
 
     border-radius: 12px;
 
-    font-size: 17px;
+    /* حالت عادی */
+    background: #ffffff !important;
+    color: #111111 !important;
+    border: 1px solid #111111 !important;
+
+    box-shadow:
+      0 7px 20px rgba(0, 0, 0, 0.10);
+
+    outline: none !important;
   }
 
+
+  /* -------------------------------------------------------
+     ACTIVE
+     سفید + قرمز
+  ------------------------------------------------------- */
+
+  .header-menu-button.active {
+    background: #ffffff !important;
+    color: #ff0000 !important;
+    border: 1px solid #ff0000 !important;
+
+    box-shadow:
+      0 8px 22px rgba(0, 0, 0, 0.12),
+      0 0 0 3px rgba(255, 0, 0, 0.05);
+  }
+
+
+  /* هنگام لمس هم رنگ‌ها تغییر نکنند */
+
+  .header-menu-button:active {
+    background: #ffffff !important;
+  }
+
+  .header-menu-button.active:active {
+    background: #ffffff !important;
+    color: #ff0000 !important;
+    border-color: #ff0000 !important;
+  }
+
+
+  /* فوکوس موبایل */
+  .header-menu-button:focus {
+    background: #ffffff !important;
+  }
+
+
+  .header-menu-button:focus-visible {
+    background: #ffffff !important;
+  }
+
+
+  /* -------------------------------------------------------
+     DROPDOWN
+  ------------------------------------------------------- */
 
   .header-dropdown {
     top: calc(100% + 9px);
-
-    width: min(
-      325px,
-      calc(100vw - 20px)
-    );
-
+    width: min(325px, calc(100vw - 20px));
     border-radius: 18px;
   }
-
 
   .menu-top {
     padding: 16px 14px;
   }
 
-
   .menu-brand span {
     font-size: 20px;
   }
-
 
   .menu-brand small {
     font-size: 8px;
   }
 
-
   .menu-list {
     padding: 8px;
   }
 
-
   .menu-item {
     gap: 11px;
-
     padding: 11px 8px;
   }
-
 
   .menu-icon {
     width: 39px;
     height: 39px;
-
     flex-basis: 39px;
-
     font-size: 15px;
   }
 
-
   .menu-title {
     font-size: 13px;
-
     font-weight: 850;
   }
-
 
   .menu-arrow {
     width: 26px;
     height: 26px;
-
     font-size: 17px;
   }
 }
@@ -681,97 +767,63 @@
   .header-menu-button {
     width: 39px;
     height: 39px;
-
     font-size: 16px;
+
+    background: #ffffff !important;
+    color: #111111 !important;
+    border-color: #111111 !important;
+  }
+
+
+  .header-menu-button.active {
+    background: #ffffff !important;
+    color: #ff0000 !important;
+    border-color: #ff0000 !important;
   }
 
 
   .header-dropdown {
     width: calc(100vw - 16px);
-
     border-radius: 16px;
   }
-
 
   .menu-top {
     padding: 14px 12px;
   }
 
-
   .menu-brand span {
     font-size: 18px;
   }
-
 
   .menu-brand small {
     font-size: 7px;
   }
 
-
   .menu-item {
     gap: 9px;
-
     padding: 10px 7px;
   }
-
 
   .menu-icon {
     width: 36px;
     height: 36px;
-
     flex-basis: 36px;
-
     border-radius: 10px;
-
     font-size: 14px;
   }
-
 
   .menu-title {
     font-size: 12px;
   }
 
-
   .menu-arrow {
     width: 24px;
     height: 24px;
-
     font-size: 16px;
   }
 
-
   .menu-footer {
     padding: 11px 8px;
-
     font-size: 8px;
-  }
-}
-
-
-/* =========================================================
-   ACCESSIBILITY / TOUCH
-========================================================= */
-
-.header-menu-button,
-.menu-close,
-.menu-item {
-  -webkit-tap-highlight-color: transparent;
-}
-
-
-.header-menu-button:focus-visible,
-.menu-close:focus-visible,
-.menu-item:focus-visible {
-  outline: 2px solid #ff0000;
-  outline-offset: 2px;
-}
-
-
-@media (max-width: 768px) {
-  .header-menu-button {
-    background: #111111;
-    color: #ff0000;
-    border-color: #111111;
-  outline-offset: 2px;
   }
 }
