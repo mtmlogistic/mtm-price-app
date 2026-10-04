@@ -759,17 +759,19 @@
 }
 
 
- 
+.header-menu-button:focus-visible,
+.menu-close:focus-visible,
+.menu-item:focus-visible {
+  outline: 2px solid #ff0000;
+  outline-offset: 2px;
+}
+
 
 @media (max-width: 768px) {
   .header-menu-button {
     background: #111111;
     color: #ff0000;
     border-color: #111111;
-    box-shadow:
-      0 9px 25px rgba(0, 0, 0, 0.20),
-      0 0 0 3px rgba(255, 0, 0, 0.08);
-      outline: 2px solid #ff0000;
   outline-offset: 2px;
   }
 }
