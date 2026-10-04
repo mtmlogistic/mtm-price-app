@@ -759,13 +759,7 @@
 }
 
 
-.header-menu-button:focus-visible,
-.menu-close:focus-visible,
-.menu-item:focus-visible {
-  outline: 2px solid #ff0000;
-  outline-offset: 2px;
-}
-
+ 
 
 @media (max-width: 768px) {
   .header-menu-button {
