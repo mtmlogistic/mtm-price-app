@@ -51,10 +51,12 @@ export default defineConfig({
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/raw\.githubusercontent\.com\/.*/i,
+
             handler: 'NetworkFirst',
 
             options: {
               cacheName: 'mtm-price-data',
+
               networkTimeoutSeconds: 5,
 
               expiration: {
