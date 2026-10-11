@@ -352,6 +352,8 @@ const handleInstallApp = async () => {
       return [];
     }
 
+   
+
     const text = search.trim().toLowerCase();
 
     let filteredLocations = appData.locations;
@@ -528,6 +530,9 @@ const handleInstallApp = async () => {
      RENDER
   ========================================= */
 
+const shipping_rates_to_herat =
+  data.shipping_rates_to_herat ?? {};
+
   return (
     <div className="app">
       {/* =====================================
@@ -655,231 +660,339 @@ const handleInstallApp = async () => {
             onSelectLocation={selectLocation}
             onSelectPort={selectPort}
             popupCloseKey={popupCloseKey}
+            shipping_rates_to_herat={shipping_rates_to_herat}
             onClearSelectedLocation={clearSelectedLocation}
           />
+   
         </div>
         <div className="app-version">v {appData?.version ?? 1}</div>
         {/* ===================================
             LOCATIONS
         =================================== */}
 
-        <div className="locations-scroll">
-          <div className="locations">
-            {locations.map((location) => {
-              const isSelected = selectedLocationId === location.id;
+     
+<div className="locations-scroll">
+  <div className="locations">
+    {locations.map((location) => {
+      const isSelected = selectedLocationId === location.id;
 
-              return (
-                <div
-                  className={`location-card ${isSelected ? 'selected-location' : ''}`}
-                  key={location.id}
-                  onClick={() => selectLocation(location)}
-                >
-                  {/* LOCATION HEADER */}
+      const isCanada =
+        String(location.country || "USA").trim().toLowerCase() ===
+        "canada";
 
-                  <div className="location-header">
-                    <div>
-                      <h2>{location.branch}</h2>
+      const isValidPrice = (value) =>
+        value !== null &&
+        value !== undefined &&
+        value !== "" &&
+        Number.isFinite(Number(value)) &&
+        Number(value) > 0;
 
-                      <span>{location.state}</span>
-                    </div>
+      const formatPrice = (value) =>
+        `$${Number(value).toLocaleString("en-US")}`;
 
-                    <div className="location-header-right">
-                      <div className="branch">{location.city}</div>
+      return (
+        <div
+          className={`location-card ${
+            isSelected ? "selected-location" : ""
+          }`}
+          key={location.id}
+          onClick={() => selectLocation(location)}
+        >
+          {/* LOCATION HEADER */}
 
+          <div className="location-header">
+            <div>
+              <h2>{location.branch || "نام برنچ نامعلوم"}</h2>
+              <span>{location.state || ""}</span>
+            </div>
+
+            <div className="location-header-right">
+              <div className="branch">{location.city || ""}</div>
+
+              <div
+                className={`location-source source-${String(
+                  location.source || "OTHER"
+                )
+                  .trim()
+                  .toLowerCase()}`}
+              >
+                {String(location.source || "OTHER").toUpperCase()}
+                <span className="source-country">
+                  {isCanada ? " 🇨🇦 " : " 🇺🇸 "}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* PORTS */}
+
+          <div className="ports">
+            {Array.isArray(location.ports) &&
+              location.ports.map((port, index) => {
+                const isPortSelected =
+                  selectedLocation?.id === location.id &&
+                  selectedPort?.name === port.name;
+
+                const isUnavailable =
+                  String(port?.avill).trim().toLowerCase() === "false";
+
+                const routes = [
+                  {
+                    id: "tr",
+                    title: "ترکیه",
+                    shippingLabel: "🇺🇸 → 🇹🇷",
+                    heratLabel: "🇹🇷 → 🇦🇫",
+                    shipping: port?.shipping_to_tr,
+                    herat: shipping_rates_to_herat?.tr,
+                  },
+                  {
+                    id: "uae",
+                    title: "امارات",
+                    shippingLabel: "🇨🇦 → 🇦🇪",
+                    heratLabel: "🇦🇪 → 🇦🇫",
+                    shipping: port?.shipping_to_uae,
+                    herat: shipping_rates_to_herat?.uae,
+                  },
+                ];
+
+                // Show routes that have a shipping price.
+                // If neither has a shipping price, show the
+                // route matching the location's country.
+                const availableRoutes = routes.filter((route) =>
+                  isValidPrice(route.shipping)
+                );
+
+                const displayedRoutes =
+                  availableRoutes.length > 0
+                    ? availableRoutes
+                    : [isCanada ? routes[1] : routes[0]];
+
+                return (
+                  <div
+                    className={`port-card ${
+                      isPortSelected ? "selected-port" : ""
+                    }`}
+                    key={`${location.id}-${port.id ?? index}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+
+                      if (!isUnavailable) {
+                        selectPort(location, port);
+                      }
+                    }}
+                  >
+                    {isUnavailable ? (
                       <div
-                        className={`location-source source-${String(location.source || 'OTHER')
-                          .trim()
-                          .toLowerCase()}`}
+                        style={{
+                          color: "#dc2626",
+                          fontWeight: 700,
+                          textAlign: "center",
+                          padding: "10px 5px",
+                          lineHeight: 1.8,
+                        }}
                       >
-                        {String(location.source || 'OTHER').toUpperCase()}
-
-                        <span className="source-country">
-                          {String(location.ports?.[0]?.country || 'USA').toLowerCase() === 'canada' ? ' 🇨🇦 ' : ' 🇺🇸 '}
-                        </span>
+                        انتقالات از این برنچ فعلاً در دسترس نیست!
                       </div>
-                    </div>
-                  </div>
+                    ) : (
+                      <>
+                        <div className="port-name">
+                          🚢 {port?.name || "پورت نامعلوم"}
+                        </div>
 
-                  {/* PORTS */}
+                        {/* HORIZONTAL ROUTES */}
 
-                  <div className="ports">
-                    {Array.isArray(location.ports) &&
-                      location.ports.map((port, index) => {
-                        const isPortSelected = selectedLocation?.id === location.id && selectedPort?.name === port.name;
+                        <div
+                          className="port-routes-horizontal"
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns:
+                              displayedRoutes.length > 1
+                                ? "repeat(2, minmax(0, 1fr))"
+                                : "minmax(0, 1fr)",
+                            gap: "10px",
+                            width: "100%",
+                            alignItems: "stretch",
+                          }}
+                        >
+                          {displayedRoutes.map((route) => {
+                            const shippingAvailable = isValidPrice(
+                              route.shipping
+                            );
 
-                        const isUnavailable = String(port?.avill).toLowerCase() === 'false';
+                            const heratAvailable = isValidPrice(
+                              route.herat
+                            );
 
-                        const isCanada = String(port?.country || '').toLowerCase() === 'canada';
+                            const totalAvailable =
+                              shippingAvailable && heratAvailable;
 
-                        const shipPrice = Number(port?.ship || 0);
-                        const heratPrice = Number(port?.herat || 0);
-                        const totalPrice = Number(port?.total || 0);
+                            const total = totalAvailable
+                              ? Number(route.shipping) + Number(route.herat)
+                              : null;
 
-                        const isShipUnknown = shipPrice === 0;
-                        const isHeratUnknown = heratPrice === 0;
-
-                        const isPriceUnavailable = isShipUnknown || isHeratUnknown;
-
-                        return (
-                          <div
-                            className={`port-card ${isPortSelected ? 'selected-port' : ''}`}
-                            key={`${location.id}-${index}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-
-                              if (!isUnavailable) {
-                                selectPort(location, port);
-                              }
-                            }}
-                          >
-                            {isUnavailable ? (
-                              /* =========================================
-               UNAVAILABLE
-            ========================================= */
-
+                            return (
                               <div
+                                className="route-column"
+                                key={route.id}
                                 style={{
-                                  color: '#dc2626',
-                                  fontWeight: '700',
-                                  textAlign: 'center',
-                                  padding: '10px 5px',
-                                  lineHeight: '1.8',
+                                  minWidth: 0,
+                                  padding: "9px 7px",
+                                  border: "1px solid var(--border-color, #e5e7eb)",
+                                  borderRadius: "10px",
+                                  boxSizing: "border-box",
                                 }}
                               >
-                                انتقالات از این برنچ فعلاً در دسترس نیست!
-                              </div>
-                            ) : (
-                              <>
-                                {/* =========================================
-                  PORT NAME
-              ========================================= */}
-
-                                <div className="port-name">🚢 {port?.name || 'پورت نامعلوم'}</div>
-
-                                {/* =========================================
-                  PRICES
-              ========================================= */}
+                                <div
+                                  style={{
+                                    fontWeight: 800,
+                                    textAlign: "center",
+                                    marginBottom: "8px",
+                                  }}
+                                >
+                                  {route.title}
+                                </div>
 
                                 <div className="prices">
-                                  {/* =====================================
-                    SHIP
-                ===================================== */}
+                                  {/* SHIPPING PRICE */}
 
                                   <div>
-                                    <span>{isCanada ? '🇨🇦 → 🇦🇪' : '🇺🇸 → 🇹🇷'}</span>
-
+                                    <span>{route.shippingLabel}</span>
                                     <strong
                                       style={{
-                                        color: isShipUnknown ? '#dc2626' : 'inherit',
-                                        fontSize: isShipUnknown ? '11px' : undefined,
+                                        color: shippingAvailable
+                                          ? "inherit"
+                                          : "#dc2626",
+                                        fontSize: shippingAvailable
+                                          ? undefined
+                                          : "11px",
                                       }}
                                     >
-                                      {isShipUnknown ? 'فعلاً در دسترس نیست' : `$${shipPrice.toLocaleString()}`}
+                                      {shippingAvailable
+                                        ? formatPrice(route.shipping)
+                                        : "ناموجود"}
                                     </strong>
                                   </div>
 
-                                  {/* =====================================
-                    HERAT
-                ===================================== */}
+                                  {/* HERAT PRICE */}
 
                                   <div>
-                                    <span>{isCanada ? '🇦🇪 → 🇦🇫' : '🇹🇷 → 🇦🇫'}</span>
-
+                                    <span>{route.heratLabel}</span>
                                     <strong
                                       style={{
-                                        color: isHeratUnknown ? '#dc2626' : 'inherit',
-                                        fontSize: isHeratUnknown ? '11px' : undefined,
+                                        color: heratAvailable
+                                          ? "inherit"
+                                          : "#dc2626",
+                                        fontSize: heratAvailable
+                                          ? undefined
+                                          : "11px",
                                       }}
                                     >
-                                      {isHeratUnknown ? 'فعلاً در دسترس نیست' : `$${heratPrice.toLocaleString()}`}
+                                      {heratAvailable
+                                        ? formatPrice(route.herat)
+                                        : "ناموجود"}
                                     </strong>
                                   </div>
 
-                                  {/* =====================================
-                    TOTAL
-                ===================================== */}
+                                  {/* TOTAL */}
 
                                   <div
-                                    className={`total ${!isPriceUnavailable ? 'clickable-total' : ''}`}
+                                    className={`total ${
+                                      totalAvailable
+                                        ? "clickable-total"
+                                        : ""
+                                    }`}
                                     onClick={(e) => {
                                       e.stopPropagation();
 
-                                      if (!isPriceUnavailable) {
-                                        openCalculator(location, port);
+                                      if (totalAvailable) {
+                                        openCalculator(location, {
+                                          ...port,
+                                          ship: Number(route.shipping),
+                                          herat: Number(route.herat),
+                                          total,
+                                          route: route.id,
+                                        });
                                       }
                                     }}
                                     style={{
-                                      cursor: isPriceUnavailable ? 'default' : 'pointer',
+                                      cursor: totalAvailable
+                                        ? "pointer"
+                                        : "default",
                                     }}
                                   >
-                                    {!isPriceUnavailable && <FaCalculator className="total-calculator-bg" />}
+                                    {totalAvailable && (
+                                      <FaCalculator className="total-calculator-bg" />
+                                    )}
 
                                     <span>Total</span>
 
                                     <strong
                                       style={{
-                                        color: isPriceUnavailable ? '#dc2626' : 'inherit',
-                                        fontSize: isPriceUnavailable ? '11px' : undefined,
+                                        color: totalAvailable
+                                          ? "inherit"
+                                          : "#dc2626",
+                                        fontSize: totalAvailable
+                                          ? undefined
+                                          : "11px",
                                       }}
                                     >
-                                      {isPriceUnavailable ? 'فعلاً در دسترس نیست' : `$${totalPrice.toLocaleString()}`}
+                                      {totalAvailable
+                                        ? formatPrice(total)
+                                        : "ناموجود"}
                                     </strong>
                                   </div>
                                 </div>
 
-                                {/* =========================================
-                  SUPPORT MESSAGE
-              ========================================= */}
-
-                                {isPriceUnavailable && (
+                                {!shippingAvailable || !heratAvailable ? (
                                   <div
                                     style={{
-                                      marginTop: '8px',
-                                      padding: '8px 7px',
-                                      borderRadius: '8px',
-                                      background: '#fff7ed',
-                                      color: '#c2410c',
-                                      fontSize: '12px',
-                                      fontWeight: 800,
-                                      lineHeight: '1.7',
-                                      textAlign: 'center',
-                                      direction: 'rtl',
+                                      marginTop: "8px",
+                                      padding: "7px 5px",
+                                      borderRadius: "7px",
+                                      background: "#fff7ed",
+                                      color: "#c2410c",
+                                      fontSize: "11px",
+                                      fontWeight: 700,
+                                      lineHeight: 1.7,
+                                      textAlign: "center",
+                                      direction: "rtl",
                                     }}
                                   >
-                                    قیمت فعلاً در دسترس نیست.
-                                    <br />
-                                    برای دریافت قیمت با پشتیبانی تماس بگیرید.
+                                    قیمت کامل این مسیر موجود نیست.
                                   </div>
-                                )}
-                              </>
-                            )}
-                          </div>
-                        );
-                      })}
+                                ) : null}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </>
+                    )}
                   </div>
+                );
+              })}
+          </div>
 
-                  {/* COORDINATES */}
+          {/* COORDINATES */}
 
-                  <div className="coordinates">
-                    📍 {location.lat}, {location.lng}
-                  </div>
-                </div>
-              );
-            })}
-
-            {/* NO RESULT */}
-
-            {locations.length === 0 && (
-              <div className="no-result">
-                <div>🔍</div>
-
-                <strong>نتیجه‌ای پیدا نشد</strong>
-
-                <span>نام شهر، برنچ، ایالت یا پورت را بررسی کنید.</span>
-              </div>
-            )}
+          <div className="coordinates">
+            📍 {location.lat}, {location.lng}
           </div>
         </div>
+      );
+    })}
+
+    {/* NO RESULT */}
+
+    {locations.length === 0 && (
+      <div className="no-result">
+        <div>🔍</div>
+        <strong>نتیجه‌ای پیدا نشد</strong>
+        <span>نام شهر، برنچ، ایالت یا پورت را بررسی کنید.</span>
+      </div>
+    )}
+  </div>
+</div>
+ 
         {vehicleSalesPage && <VehicleSales onClose={() => setVehicleSalesPage(false)} />}
       </main>
 

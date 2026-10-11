@@ -9629,3 +9629,170 @@ body:has(.calculator-overlay) {
   direction: ltr;
   margin-bottom: 20px;
 }
+
+
+
+.port-routes-horizontal {
+  display: flex !important;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.route-column {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 10px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.route-title {
+  flex: 0 0 auto;
+  font-weight: 800;
+  text-align: center;
+}
+
+.route-column .prices {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex: 1;
+  gap: 10px;
+  min-width: 0;
+}
+
+.route-column .route-price-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: 5px;
+  text-align: center;
+}
+
+.route-column .route-price-row strong {
+  font-size: 13px;
+  direction: ltr;
+  overflow-wrap: anywhere;
+}
+
+.route-column .route-total {
+  border-top: none;
+  border-right: 1px solid var(--border-color, #e5e7eb);
+  padding-right: 10px;
+}
+
+@media (max-width: 480px) {
+  .route-column {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .route-column .prices {
+    width: 100%;
+    gap: 5px;
+  }
+
+  .route-column .route-price-row strong {
+    font-size: 11px;
+  }
+}
+
+
+
+
+/* Price layout */
+.route-column .prices {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Each price item */
+.route-column .prices > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  gap: 8px;
+  text-align: center;
+  padding: 8px 5px;
+  box-sizing: border-box;
+}
+
+/* Price labels */
+.route-column .prices > div > span {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.6;
+  white-space: normal;
+}
+
+/* Price values */
+.route-column .prices > div > strong {
+  font-size: 16px !important;
+  font-weight: 800;
+  line-height: 1.5;
+  direction: ltr;
+  overflow-wrap: anywhere;
+}
+
+/* Total price */
+.route-column .prices > .total {
+  border-right: 1px solid var(--border-color, #e5e7eb);
+  padding-right: 10px;
+  border-radius: 0;
+}
+
+.route-column .prices > .total > span {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.route-column .prices > .total > strong {
+  font-size: 17px !important;
+  font-weight: 900;
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  .route-column .prices {
+    gap: 4px;
+  }
+
+  .route-column .prices > div {
+    padding: 8px 2px;
+    gap: 6px;
+  }
+
+  .route-column .prices > div > span {
+    font-size: 12px;
+  }
+
+  .route-column .prices > div > strong {
+    font-size: 14px !important;
+  }
+
+  .route-column .prices > .total {
+    padding-right: 5px;
+  }
+
+  .route-column .prices > .total > strong {
+    font-size: 15px !important;
+  }
+}
