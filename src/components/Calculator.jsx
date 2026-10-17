@@ -1,244 +1,165 @@
 import { useEffect, useMemo, useState } from 'react';
-import { FaCalculator, FaTimes } from 'react-icons/fa';
+import { FaCalculator, FaTimes, FaPlus, FaTrashAlt, FaSave, FaMapMarkerAlt, FaShip } from 'react-icons/fa';
+import './Calculator.css';
+
+const isValidPrice = (value) =>
+  value !== null &&
+  value !== undefined &&
+  value !== '' &&
+  Number.isFinite(Number(value)) &&
+  Number(value) > 0;
+
+const formatPrice = (value) =>
+  Math.round(Number(value || 0)).toLocaleString('en-US');
 
 export default function Calculator({
   location,
   port,
   onClose,
-
   selectedVehicle = null,
   selectedVehiclePriceUsd = 0,
-
   onOpenVehicleRates,
   onRemoveVehicle,
+  shipping_rates_to_herat = {},
 }) {
-  // ==========================================
-  // PORTS
-  // ==========================================
+  const routeId =
+    port?.route === 'uae' || port?.route === 'tr'
+      ? port.route
+      : isValidPrice(port?.shipping_to_uae) && !isValidPrice(port?.shipping_to_tr)
+        ? 'uae'
+        : 'tr';
 
-  const ports = Array.isArray(location?.ports) ? location.ports : [];
+  const routeInfo = routeId === 'uae'
+    ? {
+        title: 'امارات',
+        firstLabel: 'انتقال الی امارات',
+        firstRoute: 'USA / Canada  →  UAE',
+        secondLabel: 'انتقال امارات الی هرات',
+        secondRoute: 'UAE  →  Herat',
+        rawShipping: port?.shipping_to_uae,
+        rawHerat: shipping_rates_to_herat?.uae,
+        flag: '🇦🇪',
+      }
+    : {
+        title: 'ترکیه',
+        firstLabel: 'انتقال الی ترکیه / مرسن',
+        firstRoute: 'USA / Canada  →  Turkey',
+        secondLabel: 'انتقال ترکیه الی هرات',
+        secondRoute: 'Turkey  →  Herat',
+        rawShipping: port?.shipping_to_tr,
+        rawHerat: shipping_rates_to_herat?.tr,
+        flag: '🇹🇷',
+      };
 
-  const [selectedPortIndex, setSelectedPortIndex] = useState(() => {
-    const index = ports.findIndex((item) => item === port);
+  const shipValue = port?.ship ?? routeInfo.rawShipping;
+  const heratValue = port?.herat ?? routeInfo.rawHerat;
+  const shipAvailable = isValidPrice(shipValue);
+  const heratAvailable = isValidPrice(heratValue);
+  const ship = shipAvailable ? Number(shipValue) : null;
+  const herat = heratAvailable ? Number(heratValue) : null;
 
-    return index >= 0 ? index : 0;
-  });
+  const totalAvailable =
+    isValidPrice(port?.total) || (shipAvailable && heratAvailable);
+  const originalTotal = totalAvailable
+    ? isValidPrice(port?.total)
+      ? Number(port.total)
+      : Number(ship) + Number(herat)
+    : null;
 
-  const selectedPort = ports[selectedPortIndex] || port || {};
-
-  // ==========================================
-  // CUSTOMS PRICE
-  // ==========================================
-
-  const customsVehiclePrice = Math.round(Number(selectedVehiclePriceUsd || selectedVehicle?.price_usd || 0));
-
-  // ==========================================
-  // EXTRA COSTS
-  // ==========================================
+  const customsVehiclePrice = Math.round(
+    Number(selectedVehiclePriceUsd || selectedVehicle?.price_usd || 0),
+  );
 
   const [extraCosts, setExtraCosts] = useState([]);
-
-  // ==========================================
-  // وقتی موتر انتخاب / حذف می‌شود
-  // ==========================================
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    setExtraCosts((prev) => {
-      // اگر موتر انتخاب نشده، ردیف گمرک حذف شود
+    setExtraCosts((previous) => {
       if (!selectedVehicle || customsVehiclePrice <= 0) {
-        return prev.filter((item) => item.type !== 'customs');
+        return previous.filter((item) => item.type !== 'customs');
       }
 
-      const customsIndex = prev.findIndex((item) => item.type === 'customs');
-
-      // اگر ردیف گمرک وجود ندارد، ایجاد شود
+      const customsIndex = previous.findIndex((item) => item.type === 'customs');
       if (customsIndex === -1) {
-        return [
-          {
-            id: 'customs-product',
-            name: 'محصول گمرک',
-            value: customsVehiclePrice,
-            type: 'customs',
-            vehicleId: selectedVehicle.id,
-          },
-          ...prev,
-        ];
+        return [{
+          id: 'customs-product',
+          name: 'محصول گمرک',
+          value: customsVehiclePrice,
+          type: 'customs',
+          vehicleId: selectedVehicle.id,
+        }, ...previous];
       }
 
-      // اگر موتر جدید انتخاب شده، قیمت و مشخصات اولیه ردیف گمرک آپدیت شود
-      const currentCustoms = prev[customsIndex];
-
-      if (currentCustoms.vehicleId !== selectedVehicle.id) {
-        const updated = [...prev];
-
+      const current = previous[customsIndex];
+      if (
+        current.vehicleId !== selectedVehicle.id ||
+        Number(current.value) !== customsVehiclePrice
+      ) {
+        const updated = [...previous];
         updated[customsIndex] = {
-          ...currentCustoms,
+          ...current,
           name: 'محصول گمرک',
           value: customsVehiclePrice,
           vehicleId: selectedVehicle.id,
         };
-
         return updated;
       }
 
-      return prev;
+      return previous;
     });
-  }, [selectedVehicle, selectedVehiclePriceUsd]);
-
-  // ==========================================
-  // SAVED
-  // ==========================================
-
-  const [saved, setSaved] = useState(false);
-
-  // ==========================================
-  // ADD NORMAL COST
-  // ==========================================
+  }, [selectedVehicle, customsVehiclePrice]);
 
   const addCost = () => {
-    setExtraCosts((prev) => [
-      ...prev,
-      {
-        id: Date.now() + Math.random(),
-        name: '',
-        value: '',
-        type: 'extra',
-      },
+    setExtraCosts((previous) => [
+      ...previous,
+      { id: `${Date.now()}-${Math.random()}`, name: '', value: '', type: 'extra' },
     ]);
   };
 
-  // ==========================================
-  // REMOVE COST
-  // ==========================================
-
   const removeCost = (id) => {
     const item = extraCosts.find((cost) => cost.id === id);
-
-    // --------------------------------------
-    // اگر محصول گمرک حذف شد
-    // selectedVehicle را هم پاک کن
-    // --------------------------------------
-
     if (item?.type === 'customs' && typeof onRemoveVehicle === 'function') {
       onRemoveVehicle();
     }
-
-    setExtraCosts((prev) => prev.filter((cost) => cost.id !== id));
+    setExtraCosts((previous) => previous.filter((cost) => cost.id !== id));
   };
 
-  // ==========================================
-  // UPDATE COST
-  // ==========================================
-
   const updateCost = (id, field, value) => {
-    setExtraCosts((prev) =>
-      prev.map((item) => {
-        if (item.id !== id) {
-          return item;
-        }
-
-        // --------------------------------------
-        // نام
-        // --------------------------------------
-
-        if (field === 'name') {
-          return {
-            ...item,
-            name: value,
-          };
-        }
-
-        // --------------------------------------
-        // قیمت
-        //
-        // اگر خالی شد، خالی نگه دار
-        // --------------------------------------
-
+    setExtraCosts((previous) =>
+      previous.map((item) => {
+        if (item.id !== id) return item;
+        if (field === 'name') return { ...item, name: value };
         if (field === 'value') {
-          return {
-            ...item,
-            value: value === '' ? '' : Number(value) || 0,
-          };
+          return { ...item, value: value === '' ? '' : Math.max(0, Number(value) || 0) };
         }
-
-        return {
-          ...item,
-          [field]: value,
-        };
+        return { ...item, [field]: value };
       }),
     );
   };
 
-  // ==========================================
-  // TRANSFER PRICES
-  // ==========================================
-
-  const ship = Number(selectedPort?.ship || 0);
-
-  const herat = Number(selectedPort?.herat || 0);
-
-  const originalTotal = Number(selectedPort?.total || 0);
-
-  // ==========================================
-  // EXTRA TOTAL
-  // ==========================================
-
-  const extraTotal = useMemo(() => {
-    return extraCosts.reduce((sum, item) => sum + Number(item.value || 0), 0);
-  }, [extraCosts]);
-
-  // ==========================================
-  // GRAND TOTAL
-  // ==========================================
-
-  const grandTotal = originalTotal + extraTotal;
-
-  // ==========================================
-  // FORMAT PRICE
-  // ==========================================
-
-  // const formatPrice = (value) => {
-  //   return Number(value || 0).toLocaleString('en-US');
-  // };
-   const formatPrice = (value) => {
-     return Math.round(Number(value || 0)).toLocaleString('en-US');
-   };
-
-  // ==========================================
-  // SAVE CALCULATION
-  // ==========================================
+  const extraTotal = useMemo(
+    () => extraCosts.reduce((sum, item) => sum + Number(item.value || 0), 0),
+    [extraCosts],
+  );
+  const grandTotal = originalTotal === null ? null : originalTotal + extraTotal;
 
   const saveCalculation = () => {
     const calculation = {
       id: Date.now(),
-
       date: new Date().toISOString(),
-
-      // --------------------------------------
-      // LOCATION
-      // --------------------------------------
-
       location: {
         state: location?.state || '',
         branch: location?.branch || '',
         city: location?.city || '',
       },
-
-      // --------------------------------------
-      // PORT
-      // --------------------------------------
-
       port: {
-        name: selectedPort?.name || '',
-        ship,
-        herat,
+        name: port?.name || '',
+        route: routeId,
+        routeTitle: routeInfo.title,
+        ship: ship ?? null,
+        herat: herat ?? null,
         total: originalTotal,
       },
-
-      // --------------------------------------
-      // VEHICLE
-      // --------------------------------------
-
       customsVehicle: selectedVehicle
         ? {
             id: selectedVehicle.id,
@@ -249,11 +170,6 @@ export default function Calculator({
             dollar_rate: Number(selectedVehicle.dollar_rate || 0),
           }
         : null,
-
-      // --------------------------------------
-      // EXTRA COSTS
-      // --------------------------------------
-
       extraCosts: extraCosts
         .filter((item) => item.name.trim() !== '' || Number(item.value || 0) > 0)
         .map((item) => ({
@@ -261,298 +177,213 @@ export default function Calculator({
           value: Number(item.value || 0),
           type: item.type || 'extra',
         })),
-
       extraTotal,
-
       grandTotal,
     };
 
-    // ========================================
-    // OLD CALCULATIONS
-    // ========================================
-
-    let oldCalculations = [];
-
     try {
-      oldCalculations = JSON.parse(localStorage.getItem('mtm_calculations') || '[]');
-
-      if (!Array.isArray(oldCalculations)) {
-        oldCalculations = [];
-      }
-    } catch {
-      oldCalculations = [];
+      const parsed = JSON.parse(localStorage.getItem('mtm_calculations') || '[]');
+      const oldCalculations = Array.isArray(parsed) ? parsed : [];
+      localStorage.setItem(
+        'mtm_calculations',
+        JSON.stringify([calculation, ...oldCalculations]),
+      );
+      setSaved(true);
+      window.setTimeout(() => setSaved(false), 2500);
+    } catch (error) {
+      console.error('ذخیره محاسبه موفق نشد:', error);
     }
-
-    // ========================================
-    // SAVE
-    // ========================================
-
-    localStorage.setItem('mtm_calculations', JSON.stringify([calculation, ...oldCalculations]));
-
-    // ========================================
-    // SUCCESS
-    // ========================================
-
-    setSaved(true);
-
-    setTimeout(() => {
-      setSaved(false);
-    }, 2500);
   };
 
-  // ==========================================
-  // UI →  ←
-  // ==========================================
- 
   return (
     <div className="calculator-overlay" onClick={onClose}>
-      <div className="calculator" onClick={(e) => e.stopPropagation()}>
-        <div className="calculator-header">
+      <section
+        className="calculator"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="calculator-title"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <header className="calculator-header">
           <div className="calculator-header-info">
-            <div className="calculator-title-icon">
-              <FaCalculator />
-            </div>
-
-            <div>
-              <h2>محاسبه قیمت انتقال</h2>
-
-              <p>
-                {location?.city || '-'}
-                <span> → </span>
-                {selectedPort?.name || '-'}
-              </p>
+            <div className="calculator-title-icon"><FaCalculator /></div>
+            <div className="calculator-heading-copy">
+              <span className="calculator-eyebrow">MTM LOGISTICS</span>
+              <h2 id="calculator-title">محاسبه هزینه انتقال</h2>
+              <p>{location?.city || 'موقعیت نامشخص'} <span>←</span> {port?.name || 'پورت نامشخص'}</p>
             </div>
           </div>
-
-          <button type="button" className="close-button" onClick={onClose}>
+          <button type="button" className="calculator-close" onClick={onClose} aria-label="بستن">
             <FaTimes />
           </button>
-        </div>
+        </header>
+
         <div className="calculator-content">
-          {/* ======================================
-            HEADER
-        ====================================== */}
+          <section className="calculator-route-banner">
+            <div className="route-banner-icon"><FaMapMarkerAlt /></div>
+            <div className="route-banner-copy">
+              <span>مسیر انتخاب‌شده</span>
+              <strong>{routeInfo.title}</strong>
+            </div>
+            <span className="route-country-badge">{routeInfo.flag} {routeInfo.title}</span>
+          </section>
 
-          {/* ======================================
-            LOCATION
-        ====================================== */}
-
-          <div className="calculator-location">
+          <section className="calculator-location" aria-label="جزئیات موقعیت">
             <div className="location-item">
               <span>ایالت</span>
-
-              <strong>{location?.state || '-'}</strong>
+              <strong>{location?.state || '—'}</strong>
             </div>
-
             <div className="location-item">
               <span>برنچ</span>
-
-              <strong>{location?.branch || '-'}</strong>
+              <strong>{location?.branch || '—'}</strong>
             </div>
-
             <div className="location-item">
               <span>شهر</span>
-
-              <strong>{location?.city || '-'}</strong>
+              <strong>{location?.city || '—'}</strong>
             </div>
-          </div>
+          </section>
 
-          {/* ======================================
-            PORT SELECTOR
-        ====================================== */}
-
-          {ports.length > 1 && (
-            <div className="port-selector">
-              <label>پورت مقصد</label>
-
-              <select value={selectedPortIndex} onChange={(e) => setSelectedPortIndex(Number(e.target.value))}>
-                {ports.map((item, index) => (
-                  <option key={`${item.name}-${index}`} value={index}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
+          <section className="calculator-section">
+            <div className="calculator-section-heading">
+              <div>
+                <h3>جزئیات هزینه انتقال</h3>
+                <p>هزینه‌ها بر اساس مسیر انتخاب‌شده محاسبه می‌شود.</p>
+              </div>
+              <span className="section-heading-icon"><FaShip /></span>
             </div>
-          )}
 
-          {/* ======================================
-            SELECTED PORT
-        ====================================== */}
-
-          <div className="selected-port-info">
-            <div className="selected-port-info-div">
-              <span className="selected-port-info-span">پورت انتخاب‌شده</span>
-
-              <strong>{selectedPort?.name || '-'}</strong>
-            </div>
-          </div>
-
-          {/* ======================================
-            PRICE DETAILS
-        ====================================== */}
-
-          <div className="price-card">
-            <div className="price-row">
-              <div className="price-label">
-                <span className="price-icon">🚢</span>
-
-                <div>
-                  <strong>هزینه انتقال الی مرسن</strong>
-
-                  <small>USA TO TR</small>
+            <div className="price-card">
+              <div className="price-row">
+                <div className="price-label">
+                  <span className="price-icon">🚢</span>
+                  <div>
+                    <strong>{routeInfo.firstLabel}</strong>
+                    <small>{routeInfo.firstRoute}</small>
+                  </div>
                 </div>
+                <strong className={`price-value ${shipAvailable ? '' : 'price-unavailable'}`}>
+                  {shipAvailable ? `$${formatPrice(ship)}` : 'ناموجود'}
+                </strong>
               </div>
 
-              <strong className="price-value">${formatPrice(ship)}</strong>
-            </div>
-
-            <div className="price-row">
-              <div className="price-label">
-                <span className="price-icon">🇦🇫</span>
-
-                <div>
-                  <strong>هزینه انتقال الی اسلام قلعه</strong>
-
-                  <small>TR TO AF</small>
+              <div className="price-row">
+                <div className="price-label">
+                  <span className="price-icon">{routeInfo.flag}</span>
+                  <div>
+                    <strong>{routeInfo.secondLabel}</strong>
+                    <small>{routeInfo.secondRoute}</small>
+                  </div>
                 </div>
+                <strong className={`price-value ${heratAvailable ? '' : 'price-unavailable'}`}>
+                  {heratAvailable ? `$${formatPrice(herat)}` : 'ناموجود'}
+                </strong>
               </div>
-
-              <strong className="price-value">${formatPrice(herat)}</strong>
-            </div>
-          </div>
-
-          {/* ======================================
-            BASE TOTAL
-        ====================================== */}
-
-          <div className="base-total">
-            <div>
-              <span>مجموع انتقال</span>
-
-              <small>هزینه اصلی انتقال موتر</small>
             </div>
 
-            <strong>${formatPrice(originalTotal)}</strong>
-          </div>
+            <div className={`base-total ${!totalAvailable ? 'total-unavailable' : ''}`}>
+              <div>
+                <span>مجموع هزینه انتقال</span>
+                <small>
+                  {totalAvailable
+                    ? `مجموع مسیر ${routeInfo.title} الی هرات`
+                    : 'به دلیل نبود نرخ یکی از بخش‌ها، مجموع قابل محاسبه نیست.'}
+                </small>
+              </div>
+              <strong>{totalAvailable ? `$${formatPrice(originalTotal)}` : 'ناموجود'}</strong>
+            </div>
+          </section>
 
-          {/* ======================================
-            EXTRA COSTS
-        ====================================== */}
-
-          <div className="extra-section">
-            {/* ------------------------------------
-              TITLE
-          ------------------------------------ */}
-
-            <div className="section-title">
+          <section className="calculator-section extra-section">
+            <div className="calculator-section-heading">
               <div>
                 <h3>مصارف اضافی</h3>
-
-                <p>اگر هزینه دیگری دارید، اینجا اضافه کنید</p>
+                <p>محصول گمرک و سایر هزینه‌ها را مدیریت کنید.</p>
               </div>
-
-              <div className="section-actions">
-                {/* --------------------------------
-                  NORMAL COST
-              -------------------------------- */}
-
-                <button type="button" className="add-cost-small" onClick={addCost}>
-                  + افزودن
-                </button>
-              </div>
+              <button type="button" className="add-cost-button" onClick={addCost}>
+                <FaPlus /> <span>افزودن مصرف</span>
+              </button>
             </div>
 
-            {/* ====================================
-              COST LIST
-          ==================================== */}
-
-            <div className="extra-costs-list">
-              {extraCosts.map((cost, index) => (
-                <div className="extra-cost" key={cost.id}>
-                  {/* NUMBER */}
-
-                  <div className="extra-number">{index + 1}</div>
-
-                  {/* NAME */}
-
-                  <input
-                    type="text"
-                    placeholder="نام مصرف"
-                    value={cost.name}
-                    onChange={(e) => updateCost(cost.id, 'name', e.target.value)}
-                  />
-
-                  {/* PRICE */}
-
-                  <div className="extra-price-input">
-                    <span>$</span>
-
-                    <input
-                      type="number"
-                      inputMode="numeric"
-                      min="0"
-                      placeholder="0"
-                      value={cost.value === 0 ? '' : cost.value}
-                      onChange={(e) => updateCost(cost.id, 'value', e.target.value)}
-                    />
+            {extraCosts.length === 0 ? (
+              <div className="empty-costs">
+                <span className="empty-costs-icon">＋</span>
+                <p>تا هنوز مصرف اضافی اضافه نشده است.</p>
+                <span>برای افزودن هزینه جدید، روی «افزودن مصرف» کلیک کنید.</span>
+              </div>
+            ) : (
+              <div className="extra-costs-list">
+                {extraCosts.map((cost, index) => (
+                  <div className="extra-cost" key={cost.id}>
+                    <span className="extra-number">{String(index + 1).padStart(2, '0')}</span>
+                    <label className="extra-name-field">
+                      <span>نام مصرف</span>
+                      <input
+                        type="text"
+                        placeholder="نام مصرف"
+                        value={cost.name}
+                        onChange={(event) => updateCost(cost.id, 'name', event.target.value)}
+                      />
+                    </label>
+                    <label className="extra-price-field">
+                      <span>قیمت (دالر)</span>
+                      <div className="extra-price-input">
+                        <span>$</span>
+                        <input
+                          type="number"
+                          inputMode="decimal"
+                          min="0"
+                          placeholder="0"
+                          value={cost.value === 0 ? '' : cost.value}
+                          onChange={(event) => updateCost(cost.id, 'value', event.target.value)}
+                        />
+                      </div>
+                    </label>
+                    <button
+                      type="button"
+                      className="remove-cost"
+                      onClick={() => removeCost(cost.id)}
+                      title={cost.type === 'customs' ? 'حذف محصول گمرک' : 'حذف مصرف'}
+                      aria-label={cost.type === 'customs' ? 'حذف محصول گمرک' : 'حذف مصرف'}
+                    >
+                      <FaTrashAlt />
+                    </button>
                   </div>
-
-                  {/* REMOVE */}
-
-                  <button
-                    type="button"
-                    className="remove-cost"
-                    onClick={() => removeCost(cost.id)}
-                    title={cost.type === 'customs' ? 'حذف محصول گمرک' : 'حذف مصرف'}
-                  >
-                    ×
-                  </button>
-                </div>
-              ))}
-            </div>
-
-            {/* ====================================
-              EXTRA TOTAL
-          ==================================== */}
+                ))}
+              </div>
+            )}
 
             <div className="extra-total">
               <span>مجموع مصارف اضافی</span>
-
               <strong>${formatPrice(extraTotal)}</strong>
             </div>
-          </div>
+          </section>
 
-          {/* ======================================
-            GRAND TOTAL
-        ====================================== */}
-
-          <div className="grand-total">
-            <div>
+          <section className="grand-total">
+            <div className="grand-total-copy">
               <span>مجموع نهایی</span>
-
-              <small>انتقال + مصارف اضافی</small>
+              <small>هزینه انتقال + تمام مصارف اضافی</small>
             </div>
+            <strong>{grandTotal === null ? 'ناموجود' : `$${formatPrice(grandTotal)}`}</strong>
+          </section>
 
-            <strong>${formatPrice(grandTotal)}</strong>
-          </div>
-
-          {/* ======================================
-            SAVE
-        ====================================== */}
-
-          {/* <button type="button" className={`save-calculation ${saved ? 'saved' : ''}`} onClick={saveCalculation}>
-          {saved ? '✓ محاسبه ذخیره شد' : 'ذخیره محاسبه'}
-        </button> */}
-
-          {/* ======================================
-            CLOSE
-        ====================================== */}
-
-          <button type="button" className="calculator-done" onClick={onClose}>
-            بستن
-          </button>
+          <footer className="calculator-actions">
+            {/* <button
+              type="button"
+              className={`save-calculation ${saved ? 'saved' : ''}`}
+              onClick={saveCalculation}
+              disabled={!totalAvailable}
+            >
+              <FaSave /> {saved ? 'محاسبه ذخیره شد' : 'ذخیره محاسبه'}
+            </button>
+            {typeof onOpenVehicleRates === 'function' && (
+              <button type="button" className="vehicle-rates-button" onClick={onOpenVehicleRates}>
+                نرخ گمرک موتر
+              </button>
+            )} */}
+            <button type="button" className="calculator-done" onClick={onClose}>بستن</button>
+          </footer>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

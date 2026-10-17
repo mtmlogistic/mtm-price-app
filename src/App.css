@@ -9796,3 +9796,37 @@ body:has(.calculator-overlay) {
     font-size: 15px !important;
   }
 }
+
+
+.nf {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: rtl;
+}
+
+.nf-country {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 55px;
+  text-align: center;
+}
+
+.nf-country img {
+  display: block;
+  width: 34px;
+  height: 23px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.nf-country span {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #334155;
+}

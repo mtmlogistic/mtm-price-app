@@ -849,7 +849,29 @@ const shipping_rates_to_herat =
                                     marginBottom: "8px",
                                   }}
                                 >
-                                  {route.title}
+<div className="nf">
+  <div className="nf-country">
+    {(
+      route.title?.includes("ترکیه") ||
+      /turkey|turkiye/i.test(route.title || "")
+    ) ? (
+      <>
+        <img src="https://flagcdn.com/w40/tr.png" alt="Turkey" />
+        <span>ترکیه</span>
+      </>
+    ) : (
+      /امارات|uae|emirates/i.test(route.title || "") ? (
+        <>
+          <img src="https://flagcdn.com/w40/ae.png" alt="UAE" />
+          <span>امارات</span>
+        </>
+      ) : (
+        <span>{route.title}</span>
+      )
+    )}
+  </div>
+</div>
+                                  
                                 </div>
 
                                 <div className="prices">
