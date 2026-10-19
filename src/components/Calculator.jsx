@@ -27,7 +27,7 @@ const formatPrice = (value) =>
 const DEFAULT_SETTINGS = {
   auction: 'copart',
   bidType: 'online',
-  bidPay: 'unsecured',
+  bidPay: 'secured',
   bidVehicle: 'standard',
   volume: 'high',
 };
@@ -121,7 +121,7 @@ export default function Calculator({
           next.bidPay = 'unsecured';
           next.bidVehicle = 'standard';
         } else {
-          next.bidPay = 'high';
+          next.bidPay = 'standard';
           next.bidVehicle = 'licensed';
         }
       }
