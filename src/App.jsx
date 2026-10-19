@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { FaCalculator, FaCarSide, FaSearch } from 'react-icons/fa';
-import { FaSave } from 'react-icons/fa';
+import { FaCalculator, FaCarSide, FaSearch, FaDownload, FaMobileAlt, FaTimes } from 'react-icons/fa';
 import SavedCalculations from './components/SavedCalculations';
 import data from './data/data.json';
-import { FaDownload, FaMobileAlt, FaTimes } from 'react-icons/fa';
 import VehicleRates from './components/VehicleRates';
 import MapView from './components/MapView';
 import Calculator from './components/Calculator';
@@ -102,18 +100,6 @@ const handleInstallApp = async () => {
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   /* =========================================
      VEHICLE RATES
   ========================================= */
@@ -157,24 +143,49 @@ const handleInstallApp = async () => {
     }
   }, [updateStatus]);
 
+  const isValidAppData = (value) =>
+    Boolean(
+      value &&
+      Number.isFinite(Number(value.version)) &&
+      Array.isArray(value.locations) &&
+      Array.isArray(value.vehicles) &&
+      value.price_usd !== undefined &&
+      value.shipping_rates_to_herat &&
+      typeof value.shipping_rates_to_herat === 'object'
+    );
+
   const [appData, setAppData] = useState(() => {
     const saved = getSavedData();
+    const bundled = data;
 
-    if (saved && Array.isArray(saved.locations) && Array.isArray(saved.vehicles) && typeof saved.price_usd !== 'undefined') {
-      console.log('💾 اطلاعات کامل از حافظه محلی دریافت شد');
-      console.log('🚗 تعداد Vehicle:', saved.vehicles.length);
-      console.log('💵 نرخ دالر:', saved.price_usd);
+    if (!isValidAppData(bundled)) {
+      console.error('❌ ساختار data.json معتبر نیست.');
+      return isValidAppData(saved) ? saved : bundled;
+    }
 
+    if (!isValidAppData(saved)) {
+      console.log('📦 اطلاعات ذخیره‌شده ناقص است؛ data.json انتخاب شد.');
+      return bundled;
+    }
+
+    const savedVersion = Number(saved.version);
+    const bundledVersion = Number(bundled.version);
+
+    // اطلاعات محلی فقط وقتی استفاده شود که از نسخهٔ همراه برنامه جدیدتر باشد.
+    if (savedVersion > bundledVersion) {
+      console.log(`💾 نسخهٔ محلی جدیدتر است: ${savedVersion}`);
       return saved;
     }
 
-    console.log('⚠️ حافظه محلی قدیمی یا ناقص است؛ data.json استفاده می‌شود');
+    if (savedVersion < bundledVersion) {
+      console.log(`🔄 نسخهٔ محلی ${savedVersion} با data.json نسخهٔ ${bundledVersion} جایگزین شد.`);
+      return bundled;
+    }
 
-    return data;
-
-    console.log('📦 اطلاعات اولیه data.json استفاده شد');
-
-    return data;
+    // در نسخه‌های برابر، data.json همراه همین build مرجع است؛
+    // تا دادهٔ قدیمیِ ذخیره‌شده با همان شماره نسخه باقی نماند.
+    console.log(`📦 نسخه‌ها برابرند (${bundledVersion})؛ data.json همین build انتخاب شد.`);
+    return bundled;
   });
 
   /* =========================================
@@ -295,7 +306,9 @@ const handleInstallApp = async () => {
           /*
            * تعداد Vehicle
            */
-          const vehicleCount = Array.isArray(appData?.vehicles) ? appData.vehicles.length : 0;
+          const vehicleCount = Array.isArray(result.data?.vehicles)
+            ? result.data.vehicles.length
+            : 0;
 
           console.log('🚗 تعداد Vehicle:', vehicleCount);
 
@@ -530,8 +543,16 @@ const handleInstallApp = async () => {
      RENDER
   ========================================= */
 
-const shipping_rates_to_herat =
-  data.shipping_rates_to_herat ?? {};
+// همیشه نرخ‌ها را از دادهٔ فعال برنامه بگیر؛ نه از data.json ثابت.
+  const shipping_rates_to_herat =
+    appData?.shipping_rates_to_herat ?? {};
+
+  console.log('📊 MTM data active:', {
+    version: appData?.version,
+    dollarRate: appData?.price_usd,
+    turkeyToHerat: shipping_rates_to_herat?.tr,
+    uaeToHerat: shipping_rates_to_herat?.uae,
+  });
 
   return (
     <div className="app">
