@@ -1149,3 +1149,272 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Readable, simplified calculator refresh */
+.calculator {
+  width: min(100%, 820px);
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.2);
+}
+.calculator-header {
+  background: #174b7d;
+  padding: 22px 26px;
+}
+.calculator-header::after { display: none; }
+.calculator-header h2 { font-size: clamp(23px, 2.7vw, 29px); }
+.calculator-header p { font-size: 14px; }
+.calculator-content { padding: 22px 26px 26px; }
+.calculator-section { margin-top: 24px; }
+.calculator-section-heading h3 { font-size: 19px; }
+.calculator-section-heading p { font-size: 14px; color: #596579; }
+.route-banner-copy span,
+.location-item span,
+.selected-port-info-span { font-size: 13px; }
+.route-banner-copy strong { font-size: 18px; }
+.price-label strong { font-size: 16px; }
+.price-label small { font-size: 12px; }
+.price-value { font-size: 20px; }
+.base-total { background: #174b7d; }
+.base-total span { font-size: 16px; }
+.base-total small { font-size: 13px; }
+.base-total > strong { font-size: 25px; }
+.extra-section, .auction-section { padding: 22px; border-radius: 14px; }
+.extra-name-field > span,
+.extra-price-field > span { font-size: 13px; color: #475569; }
+.extra-name-field input,
+.extra-price-input input { font-size: 15px; }
+.extra-price-input input, .extra-name-field input { height: 46px; }
+.extra-price-input input { height: 44px; }
+.auction-fields { gap: 16px; margin: 20px 0; }
+.auction-field > span,
+.auction-settings label > span { font-size: 15px; color: #334155; }
+.auction-input-wrap { height: 54px; border-radius: 10px; background: #fff; }
+.auction-input-wrap input { font-size: 19px; }
+.auction-fee-display { gap: 8px; padding: 0 8px; background: #f8fafc; }
+.auction-fee-display input { text-align: center; font-size: 20px; font-weight: 800; }
+.auction-fee-adjust {
+  display: grid;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  background: #1764a1;
+  cursor: pointer;
+  font-size: 15px;
+}
+.auction-fee-adjust:hover:not(:disabled) { background: #104d80; }
+.auction-fee-adjust:disabled { opacity: .35; cursor: not-allowed; }
+.auction-settings { gap: 15px; }
+.auction-settings select { height: 48px; font-size: 15px; }
+.auction-success { padding: 18px; }
+.auction-success span { font-size: 15px; }
+.auction-success strong { font-size: 23px; }
+.auction-status, .auction-error { font-size: 14px; }
+.calculator-actions button { min-height: 48px; font-size: 15px; }
+.add-cost-button { font-size: 14px; }
+.grand-total { background: #173e69; box-shadow: none; }
+.grand-total-copy > span { font-size: 19px; }
+.grand-total-copy > small { font-size: 13px; }
+.grand-total > strong { font-size: clamp(25px, 4vw, 32px); }
+
+@media (max-width: 640px) {
+  .calculator-header { padding: 17px; }
+  .calculator-header h2 { font-size: 22px; }
+  .calculator-header p { font-size: 13px; }
+  .calculator-content { padding: 16px 14px 20px; }
+  .calculator-section-heading h3 { font-size: 18px; }
+  .calculator-section-heading p { font-size: 13px; }
+  .price-label strong { font-size: 14px; }
+  .price-label small { font-size: 11px; }
+  .price-value { font-size: 17px; }
+  .auction-fields { grid-template-columns: 1fr; }
+  .auction-settings { grid-template-columns: 1fr 1fr; }
+  .extra-section, .auction-section { padding: 15px 12px; }
+  .auction-field > span, .auction-settings label > span { font-size: 14px; }
+  .auction-input-wrap input { font-size: 18px; }
+  .auction-fee-adjust { flex-basis: 38px; width: 38px; height: 38px; }
+}
+
+
+ 
+.auction-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.auction-input-wrap input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 2px 2px 2px 2px !important;
+  direction: ltr;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* دکمه‌ها در گوشه بالای سمت راست */
+.bid-price-controls {
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 2;
+}
+
+.bid-price-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 17px;
+  padding: 0;
+  border: 1px solid #dbe4f0;
+  border-radius: 4px;
+  background: #f1f5f9;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.bid-price-btn:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+.auction-currency {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  font-weight: 700;
+  color: #64748b;
+  pointer-events: none;
+}
+ 
+
+
+ 
+.auction-settings-container {
+  width: 100%;
+  margin-top: 8px;
+}
+
+
+/* دکمه کوچک و ظریف */
+.auction-settings-toggle {
+  display: flex;
+  margin-bottom: 5px;
+  align-items: center;
+  justify-content: end;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  color: #64748b;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auction-settings-toggle:hover,
+.auction-settings-toggle.active {
+  color: #2563eb;
+  border-color: #bfdbfe;
+  background: #eff6ff;
+}
+
+.settings-icon {
+  font-size: 13px;
+}
+
+.settings-arrow {
+  display: inline-block;
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.settings-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* بخش تنظیمات */
+.auction-settings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+  box-sizing: border-box;
+  animation: auctionSettingsOpen 0.2s ease;
+}
+
+.auction-settings label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.auction-settings label > span {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.auction-settings select {
+  width: 100%;
+  min-height: 34px;
+  padding: 6px 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+  background: #fff;
+  color: #1e293b;
+  font-family: inherit;
+  font-size: 12px;
+  outline: none;
+}
+
+.auction-settings select:focus {
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 2px rgb(59 130 246 / 10%);
+}
+
+@keyframes auctionSettingsOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .auction-settings {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 10px;
+  }
+}
+

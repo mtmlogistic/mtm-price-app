@@ -4,6 +4,7 @@ import {
   FaCalculator,
   FaTimes,
   FaPlus,
+  FaMinus,
   FaTrashAlt,
   FaMapMarkerAlt,
   FaShip,
@@ -100,11 +101,17 @@ export default function Calculator({
     useState(DEFAULT_SETTINGS);
 
   const [auctionFee, setAuctionFee] = useState(null);
+  const [auctionFeeAdjustment, setAuctionFeeAdjustment] = useState(0);
+  const adjustedAuctionFee = auctionFee === null
+    ? null
+    : Math.max(0, Number(auctionFee) + auctionFeeAdjustment);
   const [auctionFeeStatus, setAuctionFeeStatus] = useState('idle');
   const [auctionFeeError, setAuctionFeeError] = useState('');
 
   const [extraCosts, setExtraCosts] = useState([]);
   const [saved, setSaved] = useState(false);
+
+  const [showAuctionSettings, setShowAuctionSettings] = useState(false);
 
   const bidNumber =
     bidAmount !== '' && isValidPrice(bidAmount)
@@ -144,6 +151,7 @@ export default function Calculator({
     setAuctionFeeStatus('loading');
     setAuctionFeeError('');
     setAuctionFee(null);
+    setAuctionFeeAdjustment(0);
 
     const timer = window.setTimeout(async () => {
       try {
@@ -359,7 +367,7 @@ const fee =
   // has successfully returned the fee for the current bid.
   const auctionTotal =
     bidNumber > 0 && auctionFeeStatus === 'success'
-      ? bidNumber + Number(auctionFee)
+      ? bidNumber + Number(adjustedAuctionFee)
       : null;
 
   const grandTotal =
@@ -393,7 +401,7 @@ const fee =
         bidAmount: bidNumber,
         settings: auctionSettings,
         auctionFee:
-          auctionFeeStatus === 'success' ? auctionFee : null,
+          auctionFeeStatus === 'success' ? adjustedAuctionFee : null,
         auctionTotal,
       },
 
@@ -459,24 +467,17 @@ const fee =
             </div>
 
             <div className="calculator-heading-copy">
-              <span className="calculator-eyebrow">
-                MTM LOGISTICS
-              </span>
+              <span className="calculator-eyebrow">MTM LOGISTICS</span>
               <h2 id="calculator-title">محاسبه هزینه موتر</h2>
               <p>
                 {location?.city || 'موقعیت نامشخص'}
-                {' ← '}
+                {' → '}
                 {port?.name || 'پورت نامشخص'}
               </p>
             </div>
           </div>
 
-          <button
-            type="button"
-            className="calculator-close"
-            onClick={onClose}
-            aria-label="بستن"
-          >
+          <button type="button" className="calculator-close" onClick={onClose} aria-label="بستن">
             <FaTimes />
           </button>
         </header>
@@ -492,21 +493,15 @@ const fee =
               <strong>{routeInfo.title}</strong>
             </div>
 
-            <span className="route-country-badge">
-              {routeInfo.flag} {routeInfo.title}
-            </span>
+            <span className="route-country-badge">{routeInfo.flag}</span>
           </section>
-
-         
 
           {/* Shipping */}
           <section className="calculator-section">
             <div className="calculator-section-heading">
               <div>
                 <h3>جزئیات هزینه انتقال</h3>
-                <p>
-                  هزینه‌ها بر اساس مسیر انتخاب‌شده محاسبه می‌شود.
-                </p>
+                <p>هزینه‌ها بر اساس مسیر انتخاب‌شده محاسبه می‌شود.</p>
               </div>
               <span className="section-heading-icon">
                 <FaShip />
@@ -523,14 +518,8 @@ const fee =
                   </div>
                 </div>
 
-                <strong
-                  className={`price-value ${
-                    shipAvailable ? '' : 'price-unavailable'
-                  }`}
-                >
-                  {shipAvailable
-                    ? `$${formatPrice(ship)}`
-                    : 'ناموجود'}
+                <strong className={`price-value ${shipAvailable ? '' : 'price-unavailable'}`}>
+                  {shipAvailable ? `$${formatPrice(ship)}` : 'ناموجود'}
                 </strong>
               </div>
 
@@ -543,37 +532,21 @@ const fee =
                   </div>
                 </div>
 
-                <strong
-                  className={`price-value ${
-                    heratAvailable ? '' : 'price-unavailable'
-                  }`}
-                >
-                  {heratAvailable
-                    ? `$${formatPrice(herat)}`
-                    : 'ناموجود'}
+                <strong className={`price-value ${heratAvailable ? '' : 'price-unavailable'}`}>
+                  {heratAvailable ? `$${formatPrice(herat)}` : 'ناموجود'}
                 </strong>
               </div>
             </div>
 
-            <div
-              className={`base-total ${
-                !totalAvailable ? 'total-unavailable' : ''
-              }`}
-            >
+            <div className={`base-total ${!totalAvailable ? 'total-unavailable' : ''}`}>
               <div>
                 <span>مجموع هزینه انتقال</span>
                 <small>
-                  {totalAvailable
-                    ? `مجموع مسیر ${routeInfo.title} الی هرات`
-                    : 'به دلیل نبود نرخ یکی از بخش‌ها، مجموع قابل محاسبه نیست.'}
+                  {totalAvailable ? `مجموع مسیر ${routeInfo.title} الی هرات` : 'به دلیل نبود نرخ یکی از بخش‌ها، مجموع قابل محاسبه نیست.'}
                 </small>
               </div>
 
-              <strong>
-                {totalAvailable
-                  ? `$${formatPrice(originalTotal)}`
-                  : 'ناموجود'}
-              </strong>
+              <strong>{totalAvailable ? `$${formatPrice(originalTotal)}` : 'ناموجود'}</strong>
             </div>
           </section>
 
@@ -585,11 +558,7 @@ const fee =
                 <p>محصول گمرک و سایر هزینه‌ها را مدیریت کنید.</p>
               </div>
 
-              <button
-                type="button"
-                className="add-cost-button"
-                onClick={addCost}
-              >
+              <button type="button" className="add-cost-button" onClick={addCost}>
                 <FaPlus /> <span>افزودن مصرف</span>
               </button>
             </div>
@@ -598,17 +567,13 @@ const fee =
               <div className="empty-costs">
                 <span className="empty-costs-icon">＋</span>
                 <p>تا هنوز مصرف اضافی اضافه نشده است.</p>
-                <span>
-                  برای افزودن هزینه جدید، روی «افزودن مصرف» کلیک کنید.
-                </span>
+                <span>برای افزودن هزینه جدید، روی «افزودن مصرف» کلیک کنید.</span>
               </div>
             ) : (
               <div className="extra-costs-list">
                 {extraCosts.map((cost, index) => (
                   <div className="extra-cost" key={cost.id}>
-                    <span className="extra-number">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
+                    <span className="extra-number">{String(index + 1).padStart(2, '0')}</span>
 
                     <label className="extra-name-field">
                       <span>نام مصرف</span>
@@ -616,9 +581,7 @@ const fee =
                         type="text"
                         placeholder="نام مصرف"
                         value={cost.name}
-                        onChange={(event) =>
-                          updateCost(cost.id, 'name', event.target.value)
-                        }
+                        onChange={(event) => updateCost(cost.id, 'name', event.target.value)}
                       />
                     </label>
 
@@ -632,9 +595,7 @@ const fee =
                           min="0"
                           placeholder="0"
                           value={cost.value === 0 ? '' : cost.value}
-                          onChange={(event) =>
-                            updateCost(cost.id, 'value', event.target.value)
-                          }
+                          onChange={(event) => updateCost(cost.id, 'value', event.target.value)}
                         />
                       </div>
                     </label>
@@ -643,16 +604,8 @@ const fee =
                       type="button"
                       className="remove-cost"
                       onClick={() => removeCost(cost.id)}
-                      title={
-                        cost.type === 'customs'
-                          ? 'حذف محصول گمرک'
-                          : 'حذف مصرف'
-                      }
-                      aria-label={
-                        cost.type === 'customs'
-                          ? 'حذف محصول گمرک'
-                          : 'حذف مصرف'
-                      }
+                      title={cost.type === 'customs' ? 'حذف محصول گمرک' : 'حذف مصرف'}
+                      aria-label={cost.type === 'customs' ? 'حذف محصول گمرک' : 'حذف مصرف'}
                     >
                       <FaTrashAlt />
                     </button>
@@ -671,57 +624,69 @@ const fee =
           <section className="grand-total">
             <div className="grand-total-copy">
               <span>مجموع نهایی</span>
-              <small>
-                {`انتقال + مصارف اضافی${
-                  bidNumber > 0
-                    ? ' + قیمت بیت و فیس اکشن'
-                    : ''
-                }`}
-              </small>
+              <small>{`انتقال + مصارف اضافی${bidNumber > 0 ? ' + قیمت بیت و فیس اکشن' : ''}`}</small>
             </div>
 
-            <strong>
-              {grandTotal === null
-                ? 'ناموجود'
-                : `$${formatPrice(grandTotal)}`}
-            </strong>
+            <strong>{grandTotal === null ? 'ناموجود' : `$${formatPrice(grandTotal)}`}</strong>
           </section>
 
- {/* Auction Fees API */}
+          {/* Auction Fees API */}
           <section className="calculator-section auction-section">
             <div className="calculator-section-heading">
               <div>
                 <h3>قیمت بیت و فیس اکشن</h3>
-                <p>
-                  مبلغ بیت را وارد کنید تا فیس اکشن به‌صورت خودکار
-                  از API دریافت شود.
-                </p>
+                <p>مبلغ بیت را وارد کنید تا فیس اکشن به‌صورت خودکار محاسبه شود.</p>
               </div>
-              <span className="section-heading-icon">🔨</span>
+              <span className="section-heading-icon">
+                <FaCalculator />
+              </span>
             </div>
-
             <div className="auction-fields">
               <label className="auction-field">
                 <span>مبلغ بیت (دالر)</span>
+
                 <div className="auction-input-wrap">
-                  <span>$</span>
+                  <div className="bid-price-controls">
+                    <button
+                      type="button"
+                      className="bid-price-btn"
+                      title="کاهش ۵۰ دالر"
+                      aria-label="کاهش مبلغ بیت"
+                      onClick={() => {
+                        setBidAmount((prev) => Math.max(0, (Number(prev) || 0) - 50));
+                      }}
+                    >
+                      −
+                    </button>
+
+                    <button
+                      type="button"
+                      className="bid-price-btn"
+                      title="افزایش ۵۰ دالر"
+                      aria-label="افزایش مبلغ بیت"
+                      onClick={() => {
+                        setBidAmount((prev) => (Number(prev) || 0) + 50);
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
+
                   <input
                     type="number"
                     min="0"
-                      step="50"
+                    step="50"
                     inputMode="decimal"
                     placeholder="مثلاً 2500"
                     value={bidAmount}
                     onChange={(event) => {
                       const value = event.target.value;
 
-                      setBidAmount(
-                        value === ''
-                          ? ''
-                          : Math.max(0, Number(value) || 0),
-                      );
+                      setBidAmount(value === '' ? '' : Math.max(0, Number(value) || 0));
                     }}
                   />
+
+                  <span className="auction-currency">$</span>
                 </div>
               </label>
 
@@ -734,177 +699,124 @@ const fee =
                     readOnly
                     value={
                       auctionFeeStatus === 'success'
-                        ? formatPrice(auctionFee)
-                        : auctionFeeStatus === 'loading' ||
-                            auctionFeeStatus === 'retry'
-                          ? 'در حال محاسبه...'
+                        ? formatPrice(adjustedAuctionFee)
+                        : auctionFeeStatus === 'loading' || auctionFeeStatus === 'retry'
+                          ? '...در حال محاسبه'
                           : auctionFeeStatus === 'error'
                             ? 'خطا'
                             : '—'
                     }
-                    aria-label="فیس اکشن دریافت‌شده از API"
+                    aria-label="فیس اکشن قابل تنظیم"
                   />
-                  {auctionFeeStatus === 'loading' && (
-                    <FaSyncAlt className="auction-loading-icon" />
-                  )}
+
+                  {auctionFeeStatus === 'loading' && <FaSyncAlt className="auction-loading-icon" />}
                 </div>
               </label>
             </div>
 
-            <div className="auction-settings">
-              <label>
-                <span>نوع اکشن</span>
-                <select
-                  value={auctionSettings.auction}
-                  onChange={(event) =>
-                    updateAuctionSetting('auction', event.target.value)
-                  }
-                >
-                  <option value="copart">Copart</option>
-                  <option value="iaai">IAAI</option>
-                </select>
-              </label>
+            <div className="auction-settings-container">
+              <button
+                type="button"
+                className={`auction-settings-toggle ${showAuctionSettings ? 'active' : ''}`}
+                onClick={() => setShowAuctionSettings((prev) => !prev)}
+                aria-expanded={showAuctionSettings}
+              >
+                <span className="settings-icon">⚙</span>
+                <span>تنظیمات اکشن</span>
+                <span className={`settings-arrow ${showAuctionSettings ? 'open' : ''}`}>▾</span>
+              </button>
 
-              <label>
-                <span>نوع بیت</span>
-                <select
-                  value={auctionSettings.bidType}
-                  onChange={(event) =>
-                    updateAuctionSetting('bidType', event.target.value)
-                  }
-                >
-                  <option value="online">Online</option>
-                  <option value="kiosk">Kiosk</option>
-                  <option value="non-kiosk">Non-Kiosk</option>
-                </select>
-              </label>
+              {showAuctionSettings && (
+                <div className="auction-settings">
+                  <label>
+                    <span>نوع اکشن</span>
+                    <select value={auctionSettings.auction} onChange={(event) => updateAuctionSetting('auction', event.target.value)}>
+                      <option value="copart">Copart</option>
+                      <option value="iaai">IAAI</option>
+                    </select>
+                  </label>
 
-              <label>
-                <span>نوع پرداخت</span>
-                <select
-                  value={auctionSettings.bidPay}
-                  onChange={(event) =>
-                    updateAuctionSetting('bidPay', event.target.value)
-                  }
-                >
-                  {auctionSettings.auction === 'copart' ? (
-                    <>
-                      <option value="unsecured">Unsecured</option>
-                      <option value="secured">Secured</option>
-                    </>
-                  ) : (
-                    <>
-                      <option value="high">High</option>
-                      <option value="standard">Standard</option>
-                    </>
+                  <label>
+                    <span>نوع بیت</span>
+                    <select value={auctionSettings.bidType} onChange={(event) => updateAuctionSetting('bidType', event.target.value)}>
+                      <option value="online">Online</option>
+                      <option value="kiosk">Kiosk</option>
+                      <option value="non-kiosk">Non-Kiosk</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    <span>نوع پرداخت</span>
+                    <select value={auctionSettings.bidPay} onChange={(event) => updateAuctionSetting('bidPay', event.target.value)}>
+                      {auctionSettings.auction === 'copart' ? (
+                        <>
+                          <option value="unsecured">Unsecured</option>
+                          <option value="secured">Secured</option>
+                        </>
+                      ) : (
+                        <>
+                          <option value="high">High</option>
+                          <option value="standard">Standard</option>
+                        </>
+                      )}
+                    </select>
+                  </label>
+
+                  <label>
+                    <span>نوع موتر</span>
+                    <select value={auctionSettings.bidVehicle} onChange={(event) => updateAuctionSetting('bidVehicle', event.target.value)}>
+                      {auctionSettings.auction === 'copart' ? (
+                        <>
+                          <option value="standard">Standard</option>
+                          <option value="heavy">Heavy</option>
+                          <option value="crashedToys">Crashed Toys</option>
+                        </>
+                      ) : (
+                        <>
+                          <option value="licensed">Licensed</option>
+                          <option value="non-licensed">Non-Licensed</option>
+                          <option value="recRides">Rec Rides</option>
+                          <option value="heavy">Heavy</option>
+                        </>
+                      )}
+                    </select>
+                  </label>
+
+                  {auctionSettings.auction === 'copart' && (
+                    <label>
+                      <span>حجم خرید (Volume)</span>
+                      <select value={auctionSettings.volume} onChange={(event) => updateAuctionSetting('volume', event.target.value)}>
+                        <option value="low">Low</option>
+                        <option value="high">High</option>
+                      </select>
+                    </label>
                   )}
-                </select>
-              </label>
-
-              <label>
-                <span>نوع موتر</span>
-                <select
-                  value={auctionSettings.bidVehicle}
-                  onChange={(event) =>
-                    updateAuctionSetting(
-                      'bidVehicle',
-                      event.target.value,
-                    )
-                  }
-                >
-                  {auctionSettings.auction === 'copart' ? (
-                    <>
-                      <option value="standard">Standard</option>
-                      <option value="heavy">Heavy</option>
-                      <option value="crashedToys">Crashed Toys</option>
-                    </>
-                  ) : (
-                    <>
-                      <option value="licensed">Licensed</option>
-                      <option value="non-licensed">Non-Licensed</option>
-                      <option value="recRides">Rec Rides</option>
-                      <option value="heavy">Heavy</option>
-                    </>
-                  )}
-                </select>
-              </label>
-
-              {auctionSettings.auction === 'copart' && (
-                <label>
-                  <span>حجم خرید (Volume)</span>
-                  <select
-                    value={auctionSettings.volume}
-                    onChange={(event) =>
-                      updateAuctionSetting('volume', event.target.value)
-                    }
-                  >
-                    <option value="low">Low</option>
-                    <option value="high">High</option>
-                  </select>
-                </label>
+                </div>
               )}
             </div>
 
-            {auctionFeeStatus === 'loading' && (
-              <p className="auction-status auction-status-loading">
-                در حال دریافت فیس اکشن...
-              </p>
-            )}
-
+            {auctionFeeStatus === 'loading' && <p className="auction-status auction-status-loading">در حال دریافت فیس اکشن...</p>}
             {auctionFeeStatus === 'error' && (
               <div className="auction-error">
                 <p>{auctionFeeError}</p>
-                <button
-                  type="button"
-                  onClick={retryAuctionFee}
-                >
+                <button type="button" onClick={retryAuctionFee}>
                   تلاش دوباره
                 </button>
               </div>
             )}
-
             {auctionFeeStatus === 'success' && (
               <div className="auction-success">
                 <span>مجموع قیمت بیت و فیس اکشن</span>
                 <strong>${formatPrice(auctionTotal)}</strong>
               </div>
             )}
-
             {bidNumber > 0 && auctionFeeStatus !== 'success' && (
-              <p className="auction-status">
-                تا دریافت فیس اکشن، مجموع اکشن محاسبه نشده است.
-              </p>
+              <p className="auction-status">تا دریافت فیس اکشن، مجموع اکشن محاسبه نشده است.</p>
             )}
           </section>
 
           <footer className="calculator-actions">
-            <button
-              type="button"
-              className={`save-calculation ${saved ? 'saved' : ''}`}
-              onClick={saveCalculation}
-              disabled={
-                !totalAvailable ||
-                (bidNumber > 0 && auctionFeeStatus !== 'success')
-              }
-            >
-              {saved ? 'محاسبه ذخیره شد' : 'ذخیره محاسبه'}
-            </button>
-
-            {typeof onOpenVehicleRates === 'function' && (
-              <button
-                type="button"
-                className="vehicle-rates-button"
-                onClick={onOpenVehicleRates}
-              >
-                نرخ گمرک موتر
-              </button>
-            )}
-
-            <button
-              type="button"
-              className="calculator-done"
-              onClick={onClose}
-            >
+            <button type="button" className="calculator-done" onClick={onClose}>
               بستن
             </button>
           </footer>
