@@ -182,7 +182,24 @@ export default function Calculator({
 
         const data = await response.json();
 
-        const fee = data?.quote?.auctionFees?.auctionFee;
+        const apiFee = data?.quote?.auctionFees?.auctionFee;
+
+if (
+  apiFee === null ||
+  apiFee === undefined ||
+  apiFee === '' ||
+  !Number.isFinite(Number(apiFee)) ||
+  Number(apiFee) < 0
+) {
+  throw new Error(
+    'مبلغ فیس اکشن در پاسخ API موجود نیست.',
+  );
+}
+
+// برای IAAI مبلغ 20 دالر اضافه می‌شود.
+const fee =
+  Number(apiFee) +
+  (auctionSettings.auction === 'iaai' ? 20 : 0);
 
         if (!Number.isFinite(Number(fee)) || Number(fee) < 0) {
           throw new Error(
