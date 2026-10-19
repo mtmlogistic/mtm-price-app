@@ -68,7 +68,9 @@
   gap: 15px;
   min-width: 0;
 }
-
+#calculator-title{
+  color: whitesmoke;
+}
 .calculator-title-icon {
   display: grid;
   flex: 0 0 54px;
@@ -76,7 +78,8 @@
   height: 54px;
   place-items: center;
   color: #fff;
-  background: rgba(255, 255, 255, 0.14);
+  background: 
+  rgba(255, 255, 255, 0.14);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   font-size: 23px;
@@ -934,5 +937,215 @@
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+}
+
+
+/* Auction Fees API section */
+
+.auction-section {
+  border: 1px solid #dbe4f0;
+  border-radius: 16px;
+  padding: 18px;
+  background: #fff;
+}
+
+.auction-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.auction-field,
+.auction-settings label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.auction-field > span,
+.auction-settings label > span {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.auction-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  height: 48px;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 11px;
+  background: #f8fafc;
+  direction: ltr;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.auction-input-wrap:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 10%);
+}
+
+.auction-input-wrap > span {
+  color: #64748b;
+  font-weight: 800;
+}
+
+.auction-input-wrap input {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #0f172a;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.auction-fee-display {
+  background: #f1f5f9;
+}
+
+.auction-fee-display input {
+  font-size: 14px;
+}
+
+.auction-loading-icon {
+  flex-shrink: 0;
+  color: #2563eb;
+  animation: auction-spin 1s linear infinite;
+}
+
+@keyframes auction-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.auction-settings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  margin-bottom: 16px;
+}
+
+.auction-settings select {
+  width: 100%;
+  min-width: 0;
+  height: 43px;
+  padding: 0 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: #fff;
+  color: #1e293b;
+  font-size: 13px;
+  outline: none;
+}
+
+.auction-settings select:focus {
+  border-color: #2563eb;
+}
+
+.auction-success {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px;
+  border: 1px solid #bfdbfe;
+  border-radius: 11px;
+  background: #eff6ff;
+  color: #1e40af;
+}
+
+.auction-success span {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.auction-success strong {
+  direction: ltr;
+  font-size: 20px;
+  white-space: nowrap;
+}
+
+.auction-status {
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.auction-status-loading {
+  color: #2563eb;
+}
+
+.auction-error {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.auction-error p {
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.auction-error button {
+  padding: 8px 13px;
+  border: 0;
+  border-radius: 8px;
+  background: #b91c1c;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.calculator-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 520px) {
+  .auction-section {
+    padding: 13px;
+  }
+
+  .auction-fields {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .auction-settings {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .auction-success {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .auction-success strong {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 350px) {
+  .auction-settings {
+    grid-template-columns: 1fr;
   }
 }
